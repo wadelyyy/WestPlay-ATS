@@ -20,6 +20,7 @@ export const SCREEN_LAYOUT_IDS = [
   'setra-516',
   'setra-531',
   'man-lions-coach',
+  'ford-f150-2023',
 ] as const
 
 export type ScreenLayoutId = (typeof SCREEN_LAYOUT_IDS)[number]
@@ -150,6 +151,8 @@ const PROFILES: readonly ProfileEntry[] = [
   { layout: 'setra-516', profile: { name: 'Setra S 516 HD/2', oemStrip: null, scale: 1 } },
   { layout: 'setra-531', profile: { name: 'Setra S 531 DT', oemStrip: null, scale: 1 } },
   { layout: 'man-lions-coach', profile: { name: "MAN Lion's Coach", oemStrip: null, scale: 1 } },
+  // The Ford DLC uses its own GPS surface, separate from the instrument cluster.
+  { layout: 'ford-f150-2023', profile: { name: 'Ford F-150 (2023)', oemStrip: null, scale: 1 } },
 ]
 
 /** Screens not tuned yet: CarPlay on the whole screen, its layout adapting to the space (responsive). */

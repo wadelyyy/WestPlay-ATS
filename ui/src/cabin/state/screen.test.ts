@@ -40,6 +40,17 @@ describe('screenProfile', () => {
     expect(screenProfile('daf-2021', truck('daf', 'daf.2021'))).toBe(screenProfile('daf-2021', dafXg))
   })
 
+  it('recognises the dedicated Ford DLC screen without adopting a truck information strip', () => {
+    const ford = truck('ford', 'vehicle.ford.f150_23')
+    expect(isScreenLayoutId('ford-f150-2023')).toBe(true)
+    expect(screenProfile('ford-f150-2023', ford)).toMatchObject({
+      name: 'Ford F-150 (2023)',
+      oemStrip: null,
+      scale: 1,
+    })
+    expect(screenProfile('generic', ford)).toBe(FALLBACK_PROFILE)
+  })
+
   it('falls back for screens not tuned yet, and before any screen was drawn', () => {
     expect(screenProfile('renault-t-2024', truck('renault', 'vehicle.renault.t_2024'))).toBe(FALLBACK_PROFILE)
     expect(screenProfile(null, dafXg)).toBe(FALLBACK_PROFILE)

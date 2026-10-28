@@ -6,7 +6,7 @@ export const words: Words = {
   continue: 'Tiếp tục',
   welcome: {
     title: 'CarPlay trong cabin của bạn',
-    sub: 'WestPlay đưa CarPlay lên màn hình xe tải của bạn trong Euro Truck Simulator 2. Thiết lập chỉ mất vài phút.',
+    sub: 'WestPlay đưa CarPlay lên màn hình xe tải của bạn trong American Truck Simulator. Thiết lập chỉ mất vài phút.',
     start: 'Bắt đầu',
   },
   summary: {
@@ -20,19 +20,19 @@ export const words: Words = {
   game: {
     title: 'Trò chơi của bạn',
     titleMissing: 'Trò chơi của bạn ở đâu?',
-    found: 'WestPlay đã tìm thấy Euro Truck Simulator 2 trên máy tính này.',
-    foundMany: 'Euro Truck Simulator 2 được cài ở nhiều nơi. Hãy chọn bản bạn đang chơi.',
+    found: 'WestPlay đã tìm thấy American Truck Simulator trên máy tính này.',
+    foundMany: 'American Truck Simulator được cài ở nhiều nơi. Hãy chọn bản bạn đang chơi.',
     missing:
-      'WestPlay không tìm thấy Euro Truck Simulator 2. Hãy chọn thư mục bạn đã cài trò chơi, thư mục có chứa base.scs.',
+      'WestPlay không tìm thấy American Truck Simulator. Hãy chọn thư mục bạn đã cài trò chơi, thư mục có chứa base.scs.',
     chooseAnother: 'Dùng thư mục khác…',
     chooseFolder: 'Chọn thư mục…',
-    picker: 'Chọn thư mục Euro Truck Simulator 2 của bạn',
+    picker: 'Chọn thư mục American Truck Simulator của bạn',
     bannerMissing: 'Chọn thư mục của trò chơi để tiếp tục',
-    notTheGame: 'Thư mục này không chứa Euro Truck Simulator 2. Hãy chọn thư mục có base.scs.',
+    notTheGame: 'Thư mục này không chứa American Truck Simulator. Hãy chọn thư mục có base.scs.',
     gameGone: 'Trò chơi không còn ở thư mục này nữa.',
     closeToGoOn: {
       title: 'Vui lòng đóng trò chơi.',
-      text: 'WestPlay chỉ có thể thiết lập khi Euro Truck Simulator 2 không chạy.',
+      text: 'WestPlay chỉ có thể thiết lập khi American Truck Simulator không chạy.',
     },
   },
   check: {
@@ -88,7 +88,7 @@ export const words: Words = {
     },
     closeToInstall: {
       title: 'Vui lòng đóng trò chơi.',
-      text: 'Không thể cài WestPlay khi Euro Truck Simulator 2 đang chạy.',
+      text: 'Không thể cài WestPlay khi American Truck Simulator đang chạy.',
     },
     inUse: {
       title: 'Vui lòng đóng trò chơi.',

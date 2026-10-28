@@ -405,7 +405,7 @@ pub fn latest_of(documents: &Path, steam_userdata: Option<&Path>, profile: impl 
     let mut profile_dirs = vec![documents.join("profiles"), documents.join("steam_profiles")];
     if let Some(userdata) = steam_userdata {
         for user in std::fs::read_dir(userdata).into_iter().flatten().flatten() {
-            profile_dirs.push(user.path().join("227300/remote/profiles"));
+            profile_dirs.push(user.path().join(westplay_shared::GAME_STEAM_APP).join("remote/profiles"));
         }
     }
     let saves = profile_dirs
@@ -458,6 +458,33 @@ mod tests {
         assert_eq!(latest_of(&documents, None, |folder| folder == "4572656E"), Some(eren));
         assert_eq!(latest_of(&documents, None, |folder| folder == "00"), None);
         let _ = std::fs::remove_dir_all(&root);
+    }
+
+    #[test]
+    fn ats_cloud_saves_do_not_pick_up_a_newer_ets2_profile_with_the_same_name() {
+        let root = crate::test_dir::TempDir::new();
+        let documents = root.path.join("American Truck Simulator");
+        let userdata = root.path.join("userdata");
+        let save = |app: &str, profile: &str, written: u64| {
+            let folder = userdata.join("111").join(app).join("remote/profiles").join(profile).join("save/autosave");
+            std::fs::create_dir_all(&folder).unwrap();
+            let path = folder.join("game.sii");
+            std::fs::File::create(&path)
+                .unwrap()
+                .set_times(
+                    std::fs::FileTimes::new()
+                        .set_modified(std::time::UNIX_EPOCH + std::time::Duration::from_secs(written)),
+                )
+                .unwrap();
+            path
+        };
+        let selected = save("270880", "57", 100);
+        let other_ats = save("270880", "58", 200);
+        let _other_game = save("227300", "57", 300);
+        assert_eq!(latest(&documents, Some(&userdata)), Some(other_ats));
+        assert_eq!(latest_of(&documents, Some(&userdata), |name| name == "57"), Some(selected.clone()));
+        let options = profile_of(&selected).unwrap().parent().unwrap().join("config.cfg");
+        assert_eq!(options, userdata.join("111/270880/remote/profiles/57/config.cfg"));
     }
     use crate::token::string_to_token;
 

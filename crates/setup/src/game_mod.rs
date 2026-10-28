@@ -576,7 +576,7 @@ pub fn install(bytes: &[u8], mod_dir: &Path) -> std::io::Result<PathBuf> {
     let path = mod_dir.join(FILE_NAME);
     let partial = mod_dir.join(format!("{FILE_NAME}.partial"));
     std::fs::write(&partial, bytes).map_err(step("writing", &partial))?;
-    std::fs::rename(&partial, &path).map_err(step("moving it over", &path))?;
+    westplay_shared::fs::replace_file(&partial, &path).map_err(step("moving it over", &path))?;
     Ok(path)
 }
 

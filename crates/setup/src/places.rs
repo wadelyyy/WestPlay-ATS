@@ -37,7 +37,7 @@ pub fn roaming() -> Option<PathBuf> {
 }
 
 /// The game's folder's name in Documents.
-const GAME_FOLDER: &str = "Euro Truck Simulator 2";
+const GAME_FOLDER: &str = "American Truck Simulator";
 
 /// Every folder that may be the player's Documents, Windows' first: Windows' own (wherever it's moved, to
 /// OneDrive say), the user's `Documents`, and each OneDrive's folders (OneDrive names Documents in the
@@ -113,13 +113,24 @@ fn homedir(options: &str) -> Option<PathBuf> {
 /// WestPlay's own folder in Documents (in Windows' Documents, as the plugin finds it): its logs, and its
 /// screens mod, which the plugin mounts into the game itself (`game_mod`).
 pub fn westplay_documents() -> Option<PathBuf> {
-    Some(documents()?.join("WestPlay"))
+    Some(documents()?.join("WestPlay ATS"))
 }
 
 /// The game's own folder in Documents: its profiles, mods and settings. Of the folders that may be Documents
 /// ([`documents_folders`]), the one the game wrote its settings in last; Windows' Documents' if it has none
 /// yet (a game never started).
 pub fn game_documents() -> Option<PathBuf> {
+    // An explicit test home takes precedence over the player's personal saves. This is the exact
+    // game home containing config.cfg/profiles, not the parent passed to ATS's -homedir option.
+    if let Some(home) = std::env::var_os("WESTPLAY_ATS_GAME_HOME") {
+        return Some(PathBuf::from(home));
+    }
+    if let Some(home) = roaming()
+        .map(|root| crate::record::Record::load(&root.join("app.westplay.ats")))
+        .and_then(|record| record.game_home)
+    {
+        return Some(home);
+    }
     choose_game_documents(&documents_folders()).or_else(|| Some(documents()?.join(GAME_FOLDER)))
 }
 
@@ -302,12 +313,17 @@ mod tests {
 
     #[test]
     fn names_a_folder_as_windows_does() {
+        // Use a folder whose spelling this test owns: SystemRoot's environment value may be
+        // C:\WINDOWS even when the directory on disk is named C:\Windows.
+        let temporary = plain(&std::fs::canonicalize(std::env::temp_dir()).unwrap());
+        let folder = temporary.join(format!("WestPlay-MixedCase-{}", std::process::id()));
+        std::fs::create_dir_all(&folder).unwrap();
         // Written as Steam writes its own folder: lowercase, forward slashes.
-        let windows = std::env::var("SystemRoot").unwrap();
-        let as_steam_writes = windows.to_lowercase().replace('\\', "/");
-        assert_eq!(windows_name(Path::new(&as_steam_writes)), Path::new(&windows));
+        let as_steam_writes = folder.to_string_lossy().to_lowercase().replace('\\', "/");
+        assert_eq!(windows_name(Path::new(&as_steam_writes)), folder);
         // A folder that isn't there stays as given.
         assert_eq!(windows_name(Path::new("q:/not/there")), Path::new("q:/not/there"));
+        std::fs::remove_dir_all(&folder).unwrap();
     }
 
     #[test]
@@ -335,7 +351,7 @@ mod tests {
             } } } } }"#,
         )
         .unwrap();
-        assert_eq!(launch_options(&config).and_then(homedir), Some(PathBuf::from(r"D:\My Games\ETS2")));
+        assert_eq!(launch_options(&config).and_then(homedir), Some(PathBuf::from(r"E:\ATS")));
     }
 
     #[test]

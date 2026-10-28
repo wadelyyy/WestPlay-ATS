@@ -1,4 +1,4 @@
-//! File logging to `Documents\WestPlay\logs`. The SCS log callback may only be used on the game's main
+//! File logging to `Documents\WestPlay ATS\logs`. The SCS log callback may only be used on the game's main
 //! thread during SDK callbacks, so everything else (render-thread hooks) goes through this file logger.
 //!
 //! The game's threads never touch the disk: a line logged is queued, and a thread of the plugin's own
@@ -132,7 +132,7 @@ fn queue(job: Job) -> Result<(), Job> {
 }
 
 pub fn log_dir() -> &'static PathBuf {
-    LOG_DIR.get_or_init(|| documents_dir().join("WestPlay").join("logs"))
+    LOG_DIR.get_or_init(|| documents_dir().join("WestPlay ATS").join("logs"))
 }
 
 /// The player's Documents folder (Windows' own, wherever it's moved).

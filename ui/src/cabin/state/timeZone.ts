@@ -3,13 +3,13 @@ import { loadMapData, onMapChange } from '../maps/mapData'
 import { useLive } from './store'
 
 /**
- * The clock where the truck is (owner 2026-10-21: an hour early in Finland), while the player's profile has
- * the game's time zones on (Options › Gameplay › Time zones, its `g_time_zones`; owner 2026-10-22). Off, the
- * game's clock is the SDK's game time, as the truck's own screen shows. On, the game's clock adds the time
- * zone of the country the truck is in; the SDK's game time is central Europe's. The map export says which
- * country each square of the map is in and each country's time zone (crates/mapdata countries.rs,
- * `countries.json` beside the tiles); the cab's clock is shifted by the truck's country's zone less central
- * Europe's (the store's `clockShift`, which every clock shown adds: shared/host.ts `cabClock`).
+ * The clock where the truck is, while the player's profile has the game's time zones on
+ * (Options › Gameplay › Time zones, its `g_time_zones`). Off, no geographic shift is applied. On, the
+ * country's time zone is compared with the mounted economy's `default_time_zone`; ATS and ETS2 use
+ * different reference zones, and mods may replace them. Both zones come from the map export
+ * (`countries.json` beside the tiles). Every cab clock adds the resulting `clockShift` through
+ * shared/host.ts `cabClock`, separately from the Convoy server's time offset.
+ * Country secondary timezone rectangles are not represented by this grid yet.
  */
 
 /** Each grid (by its file's address), loaded once. */

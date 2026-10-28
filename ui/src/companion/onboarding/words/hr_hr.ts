@@ -6,7 +6,7 @@ export const words: Words = {
   continue: 'Nastavi',
   welcome: {
     title: 'CarPlay u vašoj kabini',
-    sub: 'WestPlay donosi CarPlay na zaslon vašeg kamiona u igri Euro Truck Simulator 2. Postavljanje traje samo nekoliko minuta.',
+    sub: 'WestPlay donosi CarPlay na zaslon vašeg kamiona u igri American Truck Simulator. Postavljanje traje samo nekoliko minuta.',
     start: 'Započni',
   },
   summary: {
@@ -20,19 +20,19 @@ export const words: Words = {
   game: {
     title: 'Vaša igra',
     titleMissing: 'Gdje je vaša igra?',
-    found: 'WestPlay je pronašao Euro Truck Simulator 2 na ovom računalu.',
-    foundMany: 'Euro Truck Simulator 2 instaliran je na više mjesta. Odaberite onaj koji igrate.',
+    found: 'WestPlay je pronašao American Truck Simulator na ovom računalu.',
+    foundMany: 'American Truck Simulator instaliran je na više mjesta. Odaberite onaj koji igrate.',
     missing:
-      'WestPlay nije pronašao Euro Truck Simulator 2. Odaberite mapu u koju ste ga instalirali – onu s datotekom base.scs.',
+      'WestPlay nije pronašao American Truck Simulator. Odaberite mapu u koju ste ga instalirali – onu s datotekom base.scs.',
     chooseAnother: 'Upotrijebi drugu mapu…',
     chooseFolder: 'Odaberi mapu…',
-    picker: 'Odaberite mapu igre Euro Truck Simulator 2',
+    picker: 'Odaberite mapu igre American Truck Simulator',
     bannerMissing: 'Za nastavak odaberite njezinu mapu',
-    notTheGame: 'Ova mapa ne sadrži Euro Truck Simulator 2. Odaberite onu s datotekom base.scs.',
+    notTheGame: 'Ova mapa ne sadrži American Truck Simulator. Odaberite onu s datotekom base.scs.',
     gameGone: 'Igra više nije u ovoj mapi.',
     closeToGoOn: {
       title: 'Zatvorite igru.',
-      text: 'WestPlay se može postaviti samo dok Euro Truck Simulator 2 nije pokrenut.',
+      text: 'WestPlay se može postaviti samo dok American Truck Simulator nije pokrenut.',
     },
   },
   check: {
@@ -91,7 +91,7 @@ export const words: Words = {
     },
     closeToInstall: {
       title: 'Zatvorite igru.',
-      text: 'WestPlay se ne može instalirati dok je Euro Truck Simulator 2 pokrenut.',
+      text: 'WestPlay se ne može instalirati dok je American Truck Simulator pokrenut.',
     },
     inUse: {
       title: 'Zatvorite igru.',

@@ -6,7 +6,7 @@ export const words: Words = {
   continue: 'Tęsti',
   welcome: {
     title: 'CarPlay tavo kabinoje',
-    sub: 'WestPlay perkelia CarPlay į tavo sunkvežimio ekraną žaidime Euro Truck Simulator 2. Sąranka užtrunka vos kelias minutes.',
+    sub: 'WestPlay perkelia CarPlay į tavo sunkvežimio ekraną žaidime American Truck Simulator. Sąranka užtrunka vos kelias minutes.',
     start: 'Pradėti',
   },
   summary: {
@@ -20,18 +20,19 @@ export const words: Words = {
   game: {
     title: 'Tavo žaidimas',
     titleMissing: 'Kur tavo žaidimas?',
-    found: 'WestPlay rado Euro Truck Simulator 2 šiame kompiuteryje.',
-    foundMany: 'Euro Truck Simulator 2 įdiegtas keliose vietose. Pasirink tą, kurį žaidi.',
-    missing: 'WestPlay nerado Euro Truck Simulator 2. Pasirink aplanką, į kurį jį įdiegei, – tą, kuriame yra base.scs.',
+    found: 'WestPlay rado American Truck Simulator šiame kompiuteryje.',
+    foundMany: 'American Truck Simulator įdiegtas keliose vietose. Pasirink tą, kurį žaidi.',
+    missing:
+      'WestPlay nerado American Truck Simulator. Pasirink aplanką, į kurį jį įdiegei, – tą, kuriame yra base.scs.',
     chooseAnother: 'Naudoti kitą aplanką…',
     chooseFolder: 'Pasirinkti aplanką…',
-    picker: 'Pasirink Euro Truck Simulator 2 aplanką',
+    picker: 'Pasirink American Truck Simulator aplanką',
     bannerMissing: 'Norėdamas tęsti, pasirink jo aplanką',
-    notTheGame: 'Šiame aplanke nėra Euro Truck Simulator 2. Pasirink tą, kuriame yra base.scs.',
+    notTheGame: 'Šiame aplanke nėra American Truck Simulator. Pasirink tą, kuriame yra base.scs.',
     gameGone: 'Žaidimo šiame aplanke nebėra.',
     closeToGoOn: {
       title: 'Uždaryk žaidimą.',
-      text: 'WestPlay gali būti nustatytas tik tada, kai Euro Truck Simulator 2 neveikia.',
+      text: 'WestPlay gali būti nustatytas tik tada, kai American Truck Simulator neveikia.',
     },
   },
   check: {
@@ -91,7 +92,7 @@ export const words: Words = {
     },
     closeToInstall: {
       title: 'Uždaryk žaidimą.',
-      text: 'WestPlay negalima įdiegti, kol veikia Euro Truck Simulator 2.',
+      text: 'WestPlay negalima įdiegti, kol veikia American Truck Simulator.',
     },
     inUse: {
       title: 'Uždaryk žaidimą.',

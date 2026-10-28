@@ -44,7 +44,7 @@ export const words: CompanionWords = {
     subs: {
       starting: 'WestPlay đang chuẩn bị.',
       stopped: 'Lõi của WestPlay đã dừng. Chi tiết có trong mục Giới thiệu.',
-      noGame: 'Mở Euro Truck Simulator 2, và WestPlay sẽ kết nối với nó.',
+      noGame: 'Mở American Truck Simulator, và WestPlay sẽ kết nối với nó.',
       unsupported:
         'WestPlay không hiển thị trên màn hình của xe tải này. Hãy lắp máy tính bảng WestPlay vào xe tải của bạn, WestPlay sẽ hiển thị trên đó.',
       notInCab: 'Trò chơi đã kết nối. Ngồi vào cabin và bật điện, WestPlay sẽ hiện lên màn hình.',
@@ -57,7 +57,7 @@ export const words: CompanionWords = {
     engine: 'Lõi WestPlay',
     engineRunning: 'Đang chạy',
     engineStarting: 'Đang khởi động…',
-    game: 'Euro Truck Simulator 2',
+    game: 'American Truck Simulator',
     gameConnected: 'Đã kết nối',
     gameNotRunning: 'Chưa chạy',
     truckScreen: 'Màn hình xe tải',
@@ -71,7 +71,7 @@ export const words: CompanionWords = {
     banners: {
       live: { title: 'Đã kết nối', text: 'WestPlay đang ở trên màn hình xe tải của bạn' },
       original: { title: 'Màn hình gốc của xe tải', text: 'WestPlay chỉ cách một chạm' },
-      noGame: { title: 'Đang chờ trò chơi', text: 'Mở Euro Truck Simulator 2' },
+      noGame: { title: 'Đang chờ trò chơi', text: 'Mở American Truck Simulator' },
       unsupported: { title: 'Xe tải không được hỗ trợ', text: 'Lắp máy tính bảng WestPlay' },
       notInCab: { title: 'Trò chơi đã kết nối', text: 'Lên xe tải của bạn' },
     },

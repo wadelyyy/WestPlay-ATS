@@ -85,7 +85,7 @@ pub fn profile(dir: &Path, packs: &[PathBuf]) -> Profile {
         dir: dir.to_path_buf(),
         cloud: false,
         last_saved: None,
-        map: "europe".into(),
+        map: crate::profiles::BASE_MAP.into(),
         mods: packs
             .iter()
             .map(|pack| {
@@ -162,7 +162,7 @@ mod tests {
     fn makes_truckersmp_a_profile_of_the_base_map_with_its_packs_in_order() {
         let packs = [PathBuf::from(r"C:\nowhere\data2.mp"), PathBuf::from(r"C:\nowhere\hq_final.mp")];
         let profile = profile(Path::new(r"C:\nowhere"), &packs);
-        assert_eq!(profile.map, "europe");
+        assert_eq!(profile.map, "usa");
         assert_eq!(profile.mods.iter().map(|m| m.package.as_str()).collect::<Vec<_>>(), ["data2", "hq_final"]);
         // A pack that can't be read says so (and brings nothing to the map).
         assert!(profile.mods.iter().all(|m| m.problem.is_some()));

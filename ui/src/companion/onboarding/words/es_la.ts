@@ -8,10 +8,10 @@ export const words: Words = {
   locale: 'es-419',
   game: {
     ...spain.game,
-    found: 'WestPlay encontró Euro Truck Simulator 2 en esta computadora.',
-    foundMany: 'Euro Truck Simulator 2 está instalado en más de un lugar. Elige el que usas para jugar.',
+    found: 'WestPlay encontró American Truck Simulator en esta computadora.',
+    foundMany: 'American Truck Simulator está instalado en más de un lugar. Elige el que usas para jugar.',
     missing:
-      'WestPlay no encontró Euro Truck Simulator 2. Elige la carpeta donde lo instalaste, la que contiene base.scs.',
+      'WestPlay no encontró American Truck Simulator. Elige la carpeta donde lo instalaste, la que contiene base.scs.',
   },
   check: {
     ...spain.check,

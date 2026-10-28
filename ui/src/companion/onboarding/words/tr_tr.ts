@@ -6,7 +6,7 @@ export const words: Words = {
   continue: 'Devam',
   welcome: {
     title: 'Kabininde CarPlay',
-    sub: 'WestPlay, Euro Truck Simulator 2’de CarPlay’i kamyonunun ekranına getirir. Kurulum yalnızca birkaç dakika sürer.',
+    sub: 'WestPlay, American Truck Simulator’de CarPlay’i kamyonunun ekranına getirir. Kurulum yalnızca birkaç dakika sürer.',
     start: 'Başla',
   },
   summary: {
@@ -20,18 +20,18 @@ export const words: Words = {
   game: {
     title: 'Oyununu seç',
     titleMissing: 'Oyunun nerede?',
-    found: 'WestPlay, Euro Truck Simulator 2’yi bu bilgisayarda buldu.',
-    foundMany: 'Euro Truck Simulator 2 birden fazla yerde kurulu. Oynadığın kurulumu seç.',
-    missing: 'WestPlay, Euro Truck Simulator 2’yi bulamadı. Oyunu kurduğun klasörü, yani içinde base.scs olanı seç.',
+    found: 'WestPlay, American Truck Simulator’yi bu bilgisayarda buldu.',
+    foundMany: 'American Truck Simulator birden fazla yerde kurulu. Oynadığın kurulumu seç.',
+    missing: 'WestPlay, American Truck Simulator’yi bulamadı. Oyunu kurduğun klasörü, yani içinde base.scs olanı seç.',
     chooseAnother: 'Başka bir klasör kullan…',
     chooseFolder: 'Klasör seç…',
-    picker: 'Euro Truck Simulator 2 klasörünü seç',
+    picker: 'American Truck Simulator klasörünü seç',
     bannerMissing: 'Devam etmek için klasörünü seç',
-    notTheGame: 'Bu klasörde Euro Truck Simulator 2 yok. İçinde base.scs olan klasörü seç.',
+    notTheGame: 'Bu klasörde American Truck Simulator yok. İçinde base.scs olan klasörü seç.',
     gameGone: 'Oyun artık bu klasörde değil.',
     closeToGoOn: {
       title: 'Lütfen oyunu kapat.',
-      text: 'WestPlay, ancak Euro Truck Simulator 2 kapalıyken kurulabilir.',
+      text: 'WestPlay, ancak American Truck Simulator kapalıyken kurulabilir.',
     },
   },
   check: {
@@ -90,7 +90,7 @@ export const words: Words = {
     },
     closeToInstall: {
       title: 'Lütfen oyunu kapat.',
-      text: 'Euro Truck Simulator 2 açıkken WestPlay kurulamaz.',
+      text: 'American Truck Simulator açıkken WestPlay kurulamaz.',
     },
     inUse: {
       title: 'Lütfen oyunu kapat.',

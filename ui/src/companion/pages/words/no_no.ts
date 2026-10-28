@@ -44,7 +44,7 @@ export const words: CompanionWords = {
     subs: {
       starting: 'WestPlay gjør seg klar.',
       stopped: 'WestPlays motor har stoppet. Detaljene står under Om.',
-      noGame: 'Start Euro Truck Simulator 2, så kobler WestPlay seg til det.',
+      noGame: 'Start American Truck Simulator, så kobler WestPlay seg til det.',
       unsupported:
         'WestPlay vises ikke på skjermen i denne lastebilen. Monter WestPlay-nettbrettet i lastebilen, så vises WestPlay på det.',
       notInCab: 'Spillet er tilkoblet. Sett deg i førerhuset med strømmen på, så dukker WestPlay opp på skjermen.',
@@ -57,7 +57,7 @@ export const words: CompanionWords = {
     engine: 'WestPlays motor',
     engineRunning: 'Kjører',
     engineStarting: 'Starter …',
-    game: 'Euro Truck Simulator 2',
+    game: 'American Truck Simulator',
     gameConnected: 'Tilkoblet',
     gameNotRunning: 'Kjører ikke',
     truckScreen: 'Lastebilskjerm',
@@ -71,7 +71,7 @@ export const words: CompanionWords = {
     banners: {
       live: { title: 'Tilkoblet', text: 'WestPlay er på skjermen i lastebilen din' },
       original: { title: 'Lastebilens egen skjerm', text: 'WestPlay er ett trykk unna' },
-      noGame: { title: 'Venter på spillet', text: 'Start Euro Truck Simulator 2' },
+      noGame: { title: 'Venter på spillet', text: 'Start American Truck Simulator' },
       unsupported: { title: 'Lastebilen støttes ikke', text: 'Monter WestPlay-nettbrettet' },
       notInCab: { title: 'Spillet er tilkoblet', text: 'Sett deg i lastebilen' },
     },

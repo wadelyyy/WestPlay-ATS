@@ -6,7 +6,7 @@ export const words: Words = {
   continue: 'Συνέχεια',
   welcome: {
     title: 'CarPlay στην καμπίνα σου',
-    sub: 'Το WestPlay φέρνει το CarPlay στην οθόνη του φορτηγού σου στο Euro Truck Simulator 2. Η ρύθμιση διαρκεί μόνο λίγα λεπτά.',
+    sub: 'Το WestPlay φέρνει το CarPlay στην οθόνη του φορτηγού σου στο American Truck Simulator. Η ρύθμιση διαρκεί μόνο λίγα λεπτά.',
     start: 'Ξεκίνα',
   },
   summary: {
@@ -20,19 +20,20 @@ export const words: Words = {
   game: {
     title: 'Το παιχνίδι σου',
     titleMissing: 'Πού είναι το παιχνίδι σου;',
-    found: 'Το WestPlay βρήκε το Euro Truck Simulator 2 σε αυτόν τον υπολογιστή.',
-    foundMany: 'Το Euro Truck Simulator 2 είναι εγκατεστημένο σε περισσότερα από ένα σημεία. Διάλεξε αυτό που παίζεις.',
+    found: 'Το WestPlay βρήκε το American Truck Simulator σε αυτόν τον υπολογιστή.',
+    foundMany:
+      'Το American Truck Simulator είναι εγκατεστημένο σε περισσότερα από ένα σημεία. Διάλεξε αυτό που παίζεις.',
     missing:
-      'Το WestPlay δεν βρήκε το Euro Truck Simulator 2. Διάλεξε τον φάκελο όπου το εγκατέστησες, αυτόν που περιέχει το base.scs.',
+      'Το WestPlay δεν βρήκε το American Truck Simulator. Διάλεξε τον φάκελο όπου το εγκατέστησες, αυτόν που περιέχει το base.scs.',
     chooseAnother: 'Χρήση άλλου φακέλου…',
     chooseFolder: 'Επιλογή φακέλου…',
-    picker: 'Διάλεξε τον φάκελο του Euro Truck Simulator 2',
+    picker: 'Διάλεξε τον φάκελο του American Truck Simulator',
     bannerMissing: 'Διάλεξε τον φάκελό του για να συνεχίσεις',
-    notTheGame: 'Αυτός ο φάκελος δεν περιέχει το Euro Truck Simulator 2. Διάλεξε αυτόν με το base.scs.',
+    notTheGame: 'Αυτός ο φάκελος δεν περιέχει το American Truck Simulator. Διάλεξε αυτόν με το base.scs.',
     gameGone: 'Το παιχνίδι δεν βρίσκεται πια σε αυτόν τον φάκελο.',
     closeToGoOn: {
       title: 'Κλείσε το παιχνίδι.',
-      text: 'Το WestPlay μπορεί να ρυθμιστεί μόνο όταν το Euro Truck Simulator 2 δεν εκτελείται.',
+      text: 'Το WestPlay μπορεί να ρυθμιστεί μόνο όταν το American Truck Simulator δεν εκτελείται.',
     },
   },
   check: {
@@ -91,7 +92,7 @@ export const words: Words = {
     },
     closeToInstall: {
       title: 'Κλείσε το παιχνίδι.',
-      text: 'Το WestPlay δεν μπορεί να εγκατασταθεί όσο εκτελείται το Euro Truck Simulator 2.',
+      text: 'Το WestPlay δεν μπορεί να εγκατασταθεί όσο εκτελείται το American Truck Simulator.',
     },
     inUse: {
       title: 'Κλείσε το παιχνίδι.',

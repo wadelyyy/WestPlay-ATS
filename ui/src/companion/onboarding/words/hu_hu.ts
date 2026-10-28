@@ -6,7 +6,7 @@ export const words: Words = {
   continue: 'Tovább',
   welcome: {
     title: 'CarPlay a fülkédben',
-    sub: 'A WestPlay a CarPlayt a kamionod képernyőjére hozza az Euro Truck Simulator 2-ben. A beállítás csak pár percet vesz igénybe.',
+    sub: 'A WestPlay a CarPlayt a kamionod képernyőjére hozza az American Truck Simulator-ben. A beállítás csak pár percet vesz igénybe.',
     start: 'Kezdjük',
   },
   summary: {
@@ -20,19 +20,19 @@ export const words: Words = {
   game: {
     title: 'A játékod',
     titleMissing: 'Hol a játékod?',
-    found: 'A WestPlay megtalálta az Euro Truck Simulator 2-t ezen a gépen.',
-    foundMany: 'Az Euro Truck Simulator 2 több helyre is telepítve van. Válaszd ki azt, amelyikkel játszol.',
+    found: 'A WestPlay megtalálta az American Truck Simulator-t ezen a gépen.',
+    foundMany: 'Az American Truck Simulator több helyre is telepítve van. Válaszd ki azt, amelyikkel játszol.',
     missing:
-      'A WestPlay nem találta az Euro Truck Simulator 2-t. Válaszd ki a mappát, ahová telepítetted – azt, amelyikben a base.scs van.',
+      'A WestPlay nem találta az American Truck Simulator-t. Válaszd ki a mappát, ahová telepítetted – azt, amelyikben a base.scs van.',
     chooseAnother: 'Másik mappa használata…',
     chooseFolder: 'Mappa kiválasztása…',
-    picker: 'Válaszd ki az Euro Truck Simulator 2 mappáját',
+    picker: 'Válaszd ki az American Truck Simulator mappáját',
     bannerMissing: 'A folytatáshoz válaszd ki a mappáját',
-    notTheGame: 'Ebben a mappában nincs Euro Truck Simulator 2. Válaszd azt, amelyikben a base.scs van.',
+    notTheGame: 'Ebben a mappában nincs American Truck Simulator. Válaszd azt, amelyikben a base.scs van.',
     gameGone: 'A játék már nincs ebben a mappában.',
     closeToGoOn: {
       title: 'Zárd be a játékot.',
-      text: 'A WestPlay csak akkor tud beállni, amikor az Euro Truck Simulator 2 nem fut.',
+      text: 'A WestPlay csak akkor tud beállni, amikor az American Truck Simulator nem fut.',
     },
   },
   check: {
@@ -91,7 +91,7 @@ export const words: Words = {
     },
     closeToInstall: {
       title: 'Zárd be a játékot.',
-      text: 'A WestPlay nem telepíthető, amíg az Euro Truck Simulator 2 fut.',
+      text: 'A WestPlay nem telepíthető, amíg az American Truck Simulator fut.',
     },
     inUse: {
       title: 'Zárd be a játékot.',

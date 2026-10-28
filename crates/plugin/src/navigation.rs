@@ -127,6 +127,7 @@ unsafe fn change(game: &Game, action: RouteAction, uid: u64, vias: &[u64]) -> Ro
             return RouteAnswer::Unexpected;
         };
         let mode = (navigator.add(MODE) as *const u32).read();
+        log!("route: navigator mode {mode}, {} ordered targets, {} waypoints", route.len(), waypoints.len());
         let planned = match action {
             RouteAction::Follow => follow(mode, &through, node),
             _ => {
@@ -186,6 +187,11 @@ fn plan(
     place: &dyn Fn(&Target) -> [f32; 2],
     truck: [f32; 2],
 ) -> Result<Planned, RouteAnswer> {
+    // A newer job type must never be mistaken for free navigation: that would
+    // replace its destination with a custom waypoint route. Diagnose it first.
+    if mode > 7 {
+        return Err(RouteAnswer::Unsupported);
+    }
     let job = matches!(mode, 1..=4 | 6 | 7);
     // On a job the route is its waypoints and then the job's destination; anything else is a misread.
     let destination = match (job, route.split_last()) {
@@ -257,6 +263,9 @@ fn least_detour(
 /// The route to `node` through `vias` (in order), each a waypoint the game's map shows, as the route the
 /// player picked in WestPlay: not on a job (whose destination the game keeps).
 fn follow(mode: u32, vias: &[Target], node: Option<Target>) -> Result<Planned, RouteAnswer> {
+    if mode > 7 {
+        return Err(RouteAnswer::Unsupported);
+    }
     if matches!(mode, 1..=4 | 6 | 7) {
         return Err(RouteAnswer::OnJob);
     }
@@ -626,6 +635,17 @@ mod tests {
         assert_eq!(plan(RouteAction::AddStop, 5, &ten, &ten, Some(new)), Err(RouteAnswer::Full));
         // A job's route not its stops and then its destination: misread, so nothing is done.
         assert_eq!(plan(RouteAction::AddStop, 1, &[a], &[a], Some(new)), Err(RouteAnswer::Unexpected));
+    }
+
+    #[test]
+    fn an_unknown_job_mode_cannot_be_replaced_by_a_free_navigation_route() {
+        let destination = target(0xd0);
+        for mode in [8, 9, u32::MAX] {
+            for action in [RouteAction::Go, RouteAction::AddStop, RouteAction::End] {
+                assert_eq!(plan(action, mode, &[destination], &[], Some(target(0xe0))), Err(RouteAnswer::Unsupported));
+            }
+            assert_eq!(follow(mode, &[], Some(target(0xe0))), Err(RouteAnswer::Unsupported));
+        }
     }
 
     #[test]

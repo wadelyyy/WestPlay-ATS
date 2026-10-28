@@ -44,7 +44,7 @@ export const words: CompanionWords = {
     subs: {
       starting: 'WestPlay valmistautuu.',
       stopped: 'WestPlayn ydin pysähtyi. Tiedot löytyvät kohdasta Tietoja.',
-      noGame: 'Käynnistä Euro Truck Simulator 2, niin WestPlay yhdistää siihen.',
+      noGame: 'Käynnistä American Truck Simulator, niin WestPlay yhdistää siihen.',
       unsupported:
         'WestPlay ei näy tämän rekan näytöllä. Asenna WestPlay-tabletti rekkaasi, niin WestPlay näkyy siinä.',
       notInCab: 'Peli on yhdistetty. Istu ohjaamoon sähköt päällä, niin WestPlay ilmestyy näytölle.',
@@ -57,7 +57,7 @@ export const words: CompanionWords = {
     engine: 'WestPlayn ydin',
     engineRunning: 'Käynnissä',
     engineStarting: 'Käynnistyy…',
-    game: 'Euro Truck Simulator 2',
+    game: 'American Truck Simulator',
     gameConnected: 'Yhdistetty',
     gameNotRunning: 'Ei käynnissä',
     truckScreen: 'Rekan näyttö',
@@ -71,7 +71,7 @@ export const words: CompanionWords = {
     banners: {
       live: { title: 'Yhdistetty', text: 'WestPlay on rekkasi näytöllä' },
       original: { title: 'Rekan oma näyttö', text: 'WestPlay on yhden napautuksen päässä' },
-      noGame: { title: 'Odotetaan peliä', text: 'Käynnistä Euro Truck Simulator 2' },
+      noGame: { title: 'Odotetaan peliä', text: 'Käynnistä American Truck Simulator' },
       unsupported: { title: 'Rekkaa ei tueta', text: 'Asenna WestPlay-tabletti' },
       notInCab: { title: 'Peli yhdistetty', text: 'Nouse rekkaasi' },
     },

@@ -6,7 +6,7 @@ export const words: Words = {
   continue: 'Jätka',
   welcome: {
     title: 'CarPlay sinu kabiinis',
-    sub: 'WestPlay toob CarPlay sinu veoki ekraanile mängus Euro Truck Simulator 2. Seadistamine võtab vaid mõne minuti.',
+    sub: 'WestPlay toob CarPlay sinu veoki ekraanile mängus American Truck Simulator. Seadistamine võtab vaid mõne minuti.',
     start: 'Alustame',
   },
   summary: {
@@ -20,19 +20,19 @@ export const words: Words = {
   game: {
     title: 'Sinu mäng',
     titleMissing: 'Kus su mäng on?',
-    found: 'WestPlay leidis selles arvutis mängu Euro Truck Simulator 2.',
-    foundMany: 'Euro Truck Simulator 2 on paigaldatud mitmesse kohta. Vali see, mida mängid.',
+    found: 'WestPlay leidis selles arvutis mängu American Truck Simulator.',
+    foundMany: 'American Truck Simulator on paigaldatud mitmesse kohta. Vali see, mida mängid.',
     missing:
-      'WestPlay ei leidnud mängu Euro Truck Simulator 2. Vali kaust, kuhu selle paigaldasid – see, kus on base.scs.',
+      'WestPlay ei leidnud mängu American Truck Simulator. Vali kaust, kuhu selle paigaldasid – see, kus on base.scs.',
     chooseAnother: 'Kasuta teist kausta…',
     chooseFolder: 'Vali kaust…',
-    picker: 'Vali Euro Truck Simulator 2 kaust',
+    picker: 'Vali American Truck Simulator kaust',
     bannerMissing: 'Jätkamiseks vali selle kaust',
-    notTheGame: 'Selles kaustas pole mängu Euro Truck Simulator 2. Vali see, kus on base.scs.',
+    notTheGame: 'Selles kaustas pole mängu American Truck Simulator. Vali see, kus on base.scs.',
     gameGone: 'Mängu pole enam selles kaustas.',
     closeToGoOn: {
       title: 'Sulge mäng.',
-      text: 'WestPlay saab end seadistada ainult siis, kui Euro Truck Simulator 2 ei tööta.',
+      text: 'WestPlay saab end seadistada ainult siis, kui American Truck Simulator ei tööta.',
     },
   },
   check: {
@@ -90,7 +90,7 @@ export const words: Words = {
     },
     closeToInstall: {
       title: 'Sulge mäng.',
-      text: 'WestPlayd ei saa paigaldada, kui Euro Truck Simulator 2 töötab.',
+      text: 'WestPlayd ei saa paigaldada, kui American Truck Simulator töötab.',
     },
     inUse: {
       title: 'Sulge mäng.',

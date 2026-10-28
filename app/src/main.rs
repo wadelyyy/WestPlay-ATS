@@ -3,7 +3,9 @@
 // No console window in release builds.
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
+mod ats;
 mod customize;
+mod host_restart;
 mod maps;
 mod setup;
 mod update;
@@ -14,12 +16,13 @@ use std::sync::atomic::{AtomicBool, Ordering};
 use std::thread::JoinHandle;
 use std::time::{Duration, Instant};
 
+use host_restart::{Ended, MAX_RESTARTS, Next, RESTART_DELAY, RESTART_WINDOW, RestartPolicy};
 use setup::SetupStore;
 use tauri::{AppHandle, Emitter, Manager, RunEvent, State, WebviewWindow};
 use westplay_host::maps::SetUpGame;
 use westplay_host::settings::{Settings, SettingsFile, SharedSettings};
 use westplay_host::{
-    AccountAction, AccountRequests, BrowserGone, Config, Content, OpenRequest, SCREEN_HEIGHT, SCREEN_WIDTH, Status,
+    AccountAction, AccountRequests, Config, Content, OpenRequest, SCREEN_HEIGHT, SCREEN_WIDTH, Status,
 };
 
 struct Host {
@@ -114,16 +117,6 @@ fn apple_music_check(accounts: State<Accounts>) {
     accounts.0.apple_music.request(AccountAction::Check);
 }
 
-/// The maker's Kreosus page, where players support WestPlay's development.
-const SUPPORT_PAGE: &str = "https://kreosus.com/enes-less";
-
-/// Opens the support page (Support me) in the player's browser. The address is fixed here, so the companion
-/// can't open any other.
-#[tauri::command]
-fn open_support_page() {
-    westplay_host::browser::open(SUPPORT_PAGE);
-}
-
 /// Where this run's `app.log` is (the About page): Documents\WestPlay\logs, or WestPlay's own data folder where
 /// Documents refused it; `None` if it couldn't be made.
 #[tauri::command]
@@ -156,13 +149,18 @@ fn update_settings(settings: Settings, store: State<SettingsStore>, app: AppHand
 fn main() {
     // Started as administrator only to copy the plugin into the game (setup asked for it): that, and done.
     let args: Vec<String> = std::env::args().collect();
+    let launch_ats = args.iter().any(|argument| argument == "--launch-ats");
     if let Some(code) = westplay_setup::plugin::run_as_administrator_copy(&args) {
         std::process::exit(code);
     }
     // One WestPlay at a time: a second only says so (held until the app ends). Before the log starts: a second
     // making the log anew would empty the running one's.
     let Some(_instance) = westplay_host::Instance::claim() else {
-        westplay_host::tell_already_running();
+        if launch_ats {
+            let _ = ats::request_launch();
+        } else {
+            westplay_host::tell_already_running();
+        }
         return;
     };
     westplay_host::log::init();
@@ -170,13 +168,17 @@ fn main() {
     let open_request = Arc::new(OpenRequest::default());
     let accounts = Arc::new(AccountRequests::default());
     let app = tauri::Builder::default()
-        .plugin(tauri_plugin_updater::Builder::new().build())
+        .manage(ats::LaunchState::default())
         .manage(update::Updates::default())
         .manage(WestplayOpen(open_request.clone()))
         .manage(Accounts(accounts.clone()))
         .register_asynchronous_uri_scheme_protocol(maps::SCHEME, maps::serve)
         .register_asynchronous_uri_scheme_protocol(maps::CUSTOMIZE_SCHEME, maps::serve_customize)
         .invoke_handler(tauri::generate_handler![
+            ats::ats_launch_game,
+            ats::ats_diagnostics,
+            ats::ats_repair,
+            ats::ats_open_logs,
             companion_ready,
             set_westplay_open,
             youtube_sign_in,
@@ -188,7 +190,6 @@ fn main() {
             apple_music_sign_in,
             apple_music_sign_out,
             apple_music_check,
-            open_support_page,
             app_log_place,
             customize::customize_list,
             customize::add_wallpapers,
@@ -228,6 +229,9 @@ fn main() {
             let file = SettingsFile::in_dir(&config_dir);
             let shared = Arc::new(SharedSettings::new(file.load()));
             let setup = SetupStore::load(&config_dir, app.handle());
+            if launch_ats && setup.ready_to_launch() {
+                ats::queue_launch(app.handle());
+            }
             setup::watch_installed_mods(&setup);
             let customize = customize::Customize {
                 dir: app.path().app_local_data_dir()?.join(westplay_host::customize::FOLDER),
@@ -244,6 +248,7 @@ fn main() {
             app.manage(customize);
             app.manage(SettingsStore { file, shared });
             app.manage(setup);
+            ats::watch_launch_requests(app.handle());
             app.manage(std::sync::Mutex::new(host));
             update::watch(app.handle());
             Ok(())
@@ -277,19 +282,6 @@ struct Looks {
     customize_changed: Arc<std::sync::atomic::AtomicU64>,
 }
 
-/// How a run of the host ended.
-enum Ended {
-    Stopped,
-    BrowserGone,
-    /// To draw the cab on another GPU (westplay_host::graphics).
-    GpuChanged,
-    Failed(String),
-}
-
-/// The host is started again after its browser fails at most this often within the window, after a pause.
-const MAX_RESTARTS: usize = 5;
-const RESTART_WINDOW: Duration = Duration::from_secs(60);
-const RESTART_DELAY: Duration = Duration::from_secs(1);
 /// How long WebView2's browsers are waited for to go before the host starts on another GPU.
 const BROWSERS_GOING: Duration = Duration::from_secs(10);
 
@@ -307,12 +299,15 @@ fn start_host(
 
     let events = app.clone();
     let thread_stop = stop.clone();
-    // The host runs on a thread of its own, started again (on a new thread) if WebView2's browser process
-    // exits under it (westplay_host::BrowserGone): the cabin page comes back rather than staying blank. Not
-    // endlessly: a browser failing again and again is reported instead.
+    // Browser exits, host errors and panics all restart the host on a fresh thread, within one bounded
+    // recovery budget. A persistent failure is reported instead of restarting endlessly.
     let thread = std::thread::Builder::new().name("westplay-host-supervisor".into()).spawn(move || {
-        let mut restarts: Vec<Instant> = Vec::new();
+        let mut restarts = RestartPolicy::default();
         loop {
+            // A stop requested during the retry delay or GPU migration must not start another host.
+            if thread_stop.load(Ordering::Relaxed) {
+                return;
+            }
             let (content, data_dir) = (content.clone(), data_dir.clone());
             let (open_request, settings, stop) = (open_request.clone(), settings.clone(), thread_stop.clone());
             let (accounts, game) = (accounts.clone(), game.clone());
@@ -330,6 +325,7 @@ fn start_host(
                     settings,
                     game,
                     on_status: Box::new(move |status| {
+                        ats::host_status(&status_events, status);
                         let _ = status_events.emit("host-status", status);
                     }),
                     // The cab's own Settings changed one (its wallpaper): kept, and the companion told.
@@ -343,7 +339,6 @@ fn start_host(
                 };
                 match westplay_host::run(config, stop) {
                     Ok(()) => Ended::Stopped,
-                    Err(e) if e.is::<BrowserGone>() => Ended::BrowserGone,
                     Err(e) if e.is::<westplay_host::graphics::GpuChanged>() => Ended::GpuChanged,
                     Err(e) => Ended::Failed(e.to_string()),
                 }
@@ -353,28 +348,31 @@ fn start_host(
                 Ok(Err(_)) => Ended::Failed("it crashed".into()),
                 Err(e) => Ended::Failed(e.to_string()),
             };
-            let error = match ended {
-                Ended::Stopped => return,
-                Ended::BrowserGone | Ended::GpuChanged if thread_stop.load(Ordering::Relaxed) => return,
+            let error = match restarts.after_run(ended, thread_stop.load(Ordering::Relaxed), Instant::now()) {
+                Next::Stop => return,
                 // Started again on the other GPU once the browsers have gone (one still running would refuse
                 // the new arguments). Not counted as a failure.
-                Ended::GpuChanged => {
+                Next::GpuChanged => {
                     westplay_host::wait_for_browsers(BROWSERS_GOING);
                     continue;
                 }
-                Ended::BrowserGone => {
-                    let now = Instant::now();
-                    restarts.retain(|&at| now.duration_since(at) < RESTART_WINDOW);
-                    restarts.push(now);
-                    if restarts.len() <= MAX_RESTARTS {
-                        std::thread::sleep(RESTART_DELAY);
-                        continue;
-                    }
-                    BrowserGone.to_string()
+                Next::Restart { attempt, error } => {
+                    westplay_host::log!(
+                        "[host] {error}; restarting {attempt}/{MAX_RESTARTS} within {}s after {}s",
+                        RESTART_WINDOW.as_secs(),
+                        RESTART_DELAY.as_secs()
+                    );
+                    std::thread::sleep(RESTART_DELAY);
+                    continue;
                 }
-                Ended::Failed(error) => error,
+                Next::Exhausted { error } => format!(
+                    "WestPlay engine stopped after {MAX_RESTARTS} restarts within {}s: {error}",
+                    RESTART_WINDOW.as_secs()
+                ),
             };
-            let status = Status { error: Some(format!("WestPlay engine stopped: {error}")), ..Default::default() };
+            westplay_host::log!("[host] {error}");
+            let status = Status { error: Some(error), ..Default::default() };
+            ats::host_status(&events, &status);
             let _ = events.emit("host-status", &status);
             return;
         }

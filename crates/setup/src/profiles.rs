@@ -106,7 +106,7 @@ impl Profile {
             dir: PathBuf::new(),
             cloud: false,
             last_saved: None,
-            map: "europe".into(),
+            map: BASE_MAP.into(),
             mods: vec![],
         }
     }
@@ -123,12 +123,12 @@ impl Profile {
     }
 }
 
-/// The map a profile plays, from its `map_path` (`/map/hvtmap.mbd` → `hvtmap`); `europe` without one.
+/// The map a profile plays, from its `map_path` (`/map/hvtmap.mbd` → `hvtmap`); `usa` without one.
 pub fn map_of(map_path: Option<&str>) -> String {
     map_path
         .and_then(|path| path.trim().strip_prefix("/map/")?.strip_suffix(".mbd").map(str::to_owned))
         .filter(|name| !name.is_empty() && !name.contains('/'))
-        .unwrap_or_else(|| "europe".to_owned())
+        .unwrap_or_else(|| BASE_MAP.to_owned())
 }
 
 /// Every profile, from the game's Documents folder (`game_documents`) and Steam Cloud's (under Steam's
@@ -336,7 +336,7 @@ enum ModFiles {
 /// Definitions the map is drawn from: in `def/` (`city.sii`, `city.<mod>.sii`…) and `def/world/`.
 const MAP_DEFINITIONS: [&str; 3] = ["city", "country", "company"];
 /// The base game's map.
-const BASE_MAP: &str = "europe";
+pub const BASE_MAP: &str = "usa";
 const WORLD_DEFINITIONS: [&str; 4] = ["road_look", "prefab", "terrain_material", "terrain_profile"];
 
 impl ModFiles {
@@ -436,7 +436,7 @@ mod tests {
         let game = crate::places::steam()
             .into_iter()
             .flat_map(|steam| crate::places::steam_libraries(&steam))
-            .map(|library| library.join("steamapps").join("common").join("Euro Truck Simulator 2"))
+            .map(|library| library.join("steamapps").join("common").join("American Truck Simulator"))
             .find_map(|dir| Game::recognise(&dir));
         for named in installed(&documents, game.as_ref()) {
             println!("{named}");
@@ -530,8 +530,9 @@ mod tests {
     fn knows_the_map_a_profile_plays() {
         assert_eq!(map_of(Some("/map/hvtmap.mbd")), "hvtmap");
         assert_eq!(map_of(Some("/map/europe.mbd")), "europe");
-        assert_eq!(map_of(None), "europe");
-        assert_eq!(map_of(Some("/somewhere/else.txt")), "europe");
+        assert_eq!(map_of(Some("/map/usa.mbd")), "usa");
+        assert_eq!(map_of(None), "usa");
+        assert_eq!(map_of(Some("/somewhere/else.txt")), "usa");
     }
 
     /// A mod folder holding `files` (path, contents).

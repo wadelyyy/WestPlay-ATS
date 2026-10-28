@@ -112,6 +112,22 @@ impl GameFiles {
         &self.mounts
     }
 
+    /// Keep only the DLC archives known to the selected game session. A file present on disk is not
+    /// proof that the game mounted it; for example Steam may leave files after a subscription ends.
+    pub fn retain_dlcs(&mut self, allowed: &[String]) {
+        self.mounts.retain(|mount| {
+            let name = mount.name().file_stem().and_then(|name| name.to_str()).unwrap_or_default();
+            !name.starts_with("dlc_") || allowed.iter().any(|dlc| dlc == name)
+        });
+    }
+
+    /// The installed game's base map, as named by its map descriptor. Both games
+    /// use the same sector format, but ATS sectors live under `map/usa`, not
+    /// `map/europe`. Explicit profile map selections should still take precedence.
+    pub fn base_map(&self) -> &'static str {
+        if self.source("map/usa.mbd").is_some() { "usa" } else { "europe" }
+    }
+
     /// Where a game path is read from (the latest mount that has it: an archive's path, or a folder's), so a
     /// file that can't be understood names the mod it came from.
     pub fn source(&self, path: &str) -> Option<&Path> {
@@ -232,6 +248,17 @@ fn file_error(path: &str, mount: &Mount, error: ArchiveError) -> FileError {
 mod tests {
     use super::*;
     use crate::test_dir::TempDir;
+
+    #[test]
+    fn an_ats_install_selects_usa_without_changing_european_installs() {
+        let game = TempDir::new();
+        std::fs::create_dir_all(game.path.join("map")).unwrap();
+        std::fs::write(game.path.join("map/europe.mbd"), b"descriptor").unwrap();
+        let files = GameFiles::new(vec![Mount::Folder(game.path.clone())]);
+        assert_eq!(files.base_map(), "europe");
+        std::fs::write(game.path.join("map/usa.mbd"), b"descriptor").unwrap();
+        assert_eq!(files.base_map(), "usa");
+    }
 
     #[test]
     fn names_the_mount_a_path_is_read_from() {

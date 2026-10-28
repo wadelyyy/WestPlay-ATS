@@ -6,7 +6,7 @@ export const words: Words = {
   continue: 'Pokračovat',
   welcome: {
     title: 'CarPlay ve vaší kabině',
-    sub: 'WestPlay přináší CarPlay na obrazovku vašeho kamionu v Euro Truck Simulator 2. Nastavení zabere jen pár minut.',
+    sub: 'WestPlay přináší CarPlay na obrazovku vašeho kamionu v American Truck Simulator. Nastavení zabere jen pár minut.',
     start: 'Začít',
   },
   summary: {
@@ -20,19 +20,19 @@ export const words: Words = {
   game: {
     title: 'Vaše hra',
     titleMissing: 'Kde je vaše hra?',
-    found: 'WestPlay našel Euro Truck Simulator 2 na tomto počítači.',
-    foundMany: 'Euro Truck Simulator 2 je nainstalovaný na více místech. Vyberte ten, který hrajete.',
+    found: 'WestPlay našel American Truck Simulator na tomto počítači.',
+    foundMany: 'American Truck Simulator je nainstalovaný na více místech. Vyberte ten, který hrajete.',
     missing:
-      'WestPlay nenašel Euro Truck Simulator 2. Vyberte složku, do které jste hru nainstalovali – tu se souborem base.scs.',
+      'WestPlay nenašel American Truck Simulator. Vyberte složku, do které jste hru nainstalovali – tu se souborem base.scs.',
     chooseAnother: 'Použít jinou složku…',
     chooseFolder: 'Vybrat složku…',
-    picker: 'Vyberte složku Euro Truck Simulator 2',
+    picker: 'Vyberte složku American Truck Simulator',
     bannerMissing: 'Pro pokračování vyberte její složku',
-    notTheGame: 'Tato složka neobsahuje Euro Truck Simulator 2. Vyberte tu se souborem base.scs.',
+    notTheGame: 'Tato složka neobsahuje American Truck Simulator. Vyberte tu se souborem base.scs.',
     gameGone: 'Hra už v této složce není.',
     closeToGoOn: {
       title: 'Zavřete prosím hru.',
-      text: 'WestPlay se může nastavit, jen když Euro Truck Simulator 2 neběží.',
+      text: 'WestPlay se může nastavit, jen když American Truck Simulator neběží.',
     },
   },
   check: {
@@ -92,7 +92,7 @@ export const words: Words = {
     },
     closeToInstall: {
       title: 'Zavřete prosím hru.',
-      text: 'WestPlay nejde nainstalovat, když Euro Truck Simulator 2 běží.',
+      text: 'WestPlay nejde nainstalovat, když American Truck Simulator běží.',
     },
     inUse: {
       title: 'Zavřete prosím hru.',

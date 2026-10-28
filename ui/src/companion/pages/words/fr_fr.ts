@@ -44,7 +44,7 @@ export const words: CompanionWords = {
     subs: {
       starting: 'WestPlay se prépare.',
       stopped: 'Le moteur de WestPlay s’est arrêté. Les détails sont dans À propos.',
-      noGame: 'Lancez Euro Truck Simulator 2, et WestPlay s’y connecte.',
+      noGame: 'Lancez American Truck Simulator, et WestPlay s’y connecte.',
       unsupported:
         'WestPlay ne s’affiche pas sur l’écran de ce camion. Installez la tablette WestPlay dans votre camion, et WestPlay s’affichera dessus.',
       notInCab: 'Le jeu est connecté. Installez-vous dans la cabine, contact mis, et WestPlay apparaît à l’écran.',
@@ -57,7 +57,7 @@ export const words: CompanionWords = {
     engine: 'Moteur WestPlay',
     engineRunning: 'En marche',
     engineStarting: 'Démarrage…',
-    game: 'Euro Truck Simulator 2',
+    game: 'American Truck Simulator',
     gameConnected: 'Connecté',
     gameNotRunning: 'Pas lancé',
     truckScreen: 'Écran du camion',
@@ -71,7 +71,7 @@ export const words: CompanionWords = {
     banners: {
       live: { title: 'Connecté', text: 'WestPlay est sur l’écran de votre camion' },
       original: { title: 'Écran d’origine du camion', text: 'WestPlay est à un clic' },
-      noGame: { title: 'En attente du jeu', text: 'Lancez Euro Truck Simulator 2' },
+      noGame: { title: 'En attente du jeu', text: 'Lancez American Truck Simulator' },
       unsupported: { title: 'Camion non pris en charge', text: 'Installez la tablette WestPlay' },
       notInCab: { title: 'Jeu connecté', text: 'Montez dans votre camion' },
     },

@@ -6,7 +6,7 @@ export const words: Words = {
   continue: '続ける',
   welcome: {
     title: 'キャビンに CarPlay を',
-    sub: 'WestPlay は、Euro Truck Simulator 2 のトラックの画面に CarPlay を表示します。設定は数分で終わります。',
+    sub: 'WestPlay は、American Truck Simulator のトラックの画面に CarPlay を表示します。設定は数分で終わります。',
     start: 'はじめる',
   },
   summary: {
@@ -20,19 +20,20 @@ export const words: Words = {
   game: {
     title: 'あなたのゲーム',
     titleMissing: 'ゲームはどこですか？',
-    found: 'WestPlay がこの PC で Euro Truck Simulator 2 を見つけました。',
-    foundMany: 'Euro Truck Simulator 2 が複数の場所にインストールされています。プレイしているものを選んでください。',
+    found: 'WestPlay がこの PC で American Truck Simulator を見つけました。',
+    foundMany: 'American Truck Simulator が複数の場所にインストールされています。プレイしているものを選んでください。',
     missing:
-      'WestPlay は Euro Truck Simulator 2 を見つけられませんでした。インストールしたフォルダ（base.scs が入っているフォルダ）を選んでください。',
+      'WestPlay は American Truck Simulator を見つけられませんでした。インストールしたフォルダ（base.scs が入っているフォルダ）を選んでください。',
     chooseAnother: '別のフォルダを使う…',
     chooseFolder: 'フォルダを選ぶ…',
-    picker: 'Euro Truck Simulator 2 のフォルダを選んでください',
+    picker: 'American Truck Simulator のフォルダを選んでください',
     bannerMissing: '続けるにはフォルダを選んでください',
-    notTheGame: 'このフォルダには Euro Truck Simulator 2 がありません。base.scs が入っているフォルダを選んでください。',
+    notTheGame:
+      'このフォルダには American Truck Simulator がありません。base.scs が入っているフォルダを選んでください。',
     gameGone: 'ゲームはもうこのフォルダにありません。',
     closeToGoOn: {
       title: 'ゲームを終了してください。',
-      text: 'WestPlay の設定は、Euro Truck Simulator 2 が起動していないときにだけ行えます。',
+      text: 'WestPlay の設定は、American Truck Simulator が起動していないときにだけ行えます。',
     },
   },
   check: {
@@ -88,7 +89,7 @@ export const words: Words = {
     },
     closeToInstall: {
       title: 'ゲームを終了してください。',
-      text: 'Euro Truck Simulator 2 の起動中は WestPlay をインストールできません。',
+      text: 'American Truck Simulator の起動中は WestPlay をインストールできません。',
     },
     inUse: {
       title: 'ゲームを終了してください。',

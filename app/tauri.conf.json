@@ -1,8 +1,8 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
-  "productName": "WestPlay",
+  "productName": "ATS WestPlay",
   "version": "2.1.2",
-  "identifier": "app.westplay",
+  "identifier": "app.westplay.ats",
   "build": {
     "devUrl": "http://localhost:5173",
     "frontendDist": "../ui/dist",
@@ -20,7 +20,7 @@
     "windows": [
       {
         "label": "main",
-        "title": "WestPlay",
+        "title": "ATS WestPlay",
         "width": 900,
         "height": 600,
         "resizable": false,
@@ -33,12 +33,15 @@
     }
   },
   "bundle": {
-    "active": false,
-    "publisher": "WestPlay",
+    "active": true,
+    "useLocalToolsDir": true,
+    "targets": ["nsis"],
+    "createUpdaterArtifacts": false,
+    "publisher": "ATS WestPlay contributors",
     "copyright": "Copyright © 2026 WestPlay. Licensed under the GPL-3.0-or-later.",
     "category": "Game",
-    "shortDescription": "CarPlay for the screens of your trucks in Euro Truck Simulator 2",
-    "longDescription": "WestPlay puts a CarPlay-style screen in your truck in Euro Truck Simulator 2: a map made from your own game, music from Apple Music, Spotify and YouTube Music, YouTube, and your game's route, on the truck's own screen.",
+    "shortDescription": "WestPlay 美国卡车模拟 ATS 适配版",
+    "longDescription": "WestPlay 的 ATS 适配版，保留车载地图、音乐、视频及界面设置，并提供中文启动、连接检查、诊断修复和日志入口。车辆屏幕与地图兼容性以实际测试记录为准。",
     "icon": [
       "icons/32x32.png",
       "icons/128x128.png",
@@ -46,17 +49,21 @@
       "icons/icon.ico"
     ],
     "resources": {
-      "../ui/dist/": "ui/"
-    }
-  },
-  "plugins": {
-    "updater": {
-      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDU2OTc1ODBDNjdDNTc3Q0UKUldUT2Q4Vm5ERmlYVnQvV0dLdVVNUWtlcjlpKzB3MVVNeVJVeHhXNHFGVUNaU2xpVDNNVjhkWmEK",
-      "endpoints": ["https://github.com/enes-less/WestPlay/releases/latest/download/latest.json"],
-      "requireSignedVersion": true,
-      "windows": {
-        "installMode": "passive"
+      "../ui/dist/": "ui/",
+      "../target/release/westplay.dll": "westplay.dll",
+      "../LICENSE": "LICENSE.txt",
+      "../THIRD_PARTY_NOTICES.md": "THIRD_PARTY_NOTICES.md",
+      "../THIRD_PARTY_LICENSES.md": "THIRD_PARTY_LICENSES.md"
+    },
+    "windows": {
+      "nsis": {
+        "installMode": "currentUser",
+        "languages": ["SimpChinese", "English"],
+        "displayLanguageSelector": true,
+        "installerHooks": "../tools/ats-installer-hooks.nsh",
+        "startMenuFolder": "ATS WestPlay"
       }
     }
-  }
+  },
+  "plugins": {}
 }

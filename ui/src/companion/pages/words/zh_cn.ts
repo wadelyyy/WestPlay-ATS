@@ -44,7 +44,7 @@ export const words: CompanionWords = {
     subs: {
       starting: 'WestPlay 正在准备。',
       stopped: 'WestPlay 的引擎已停止。详情见“关于”。',
-      noGame: '启动 Euro Truck Simulator 2，WestPlay 就会连接上它。',
+      noGame: '启动 American Truck Simulator，WestPlay 就会连接上它。',
       unsupported: 'WestPlay 不会显示在这辆卡车的屏幕上。给你的卡车装上 WestPlay 平板，WestPlay 就会显示在平板上。',
       notInCab: '游戏已连接。打开电源坐进驾驶室，WestPlay 就会出现在屏幕上。',
       live: 'WestPlay 此刻正在你的卡车屏幕上。',
@@ -56,7 +56,7 @@ export const words: CompanionWords = {
     engine: 'WestPlay 引擎',
     engineRunning: '运行中',
     engineStarting: '正在启动…',
-    game: 'Euro Truck Simulator 2',
+    game: 'American Truck Simulator',
     gameConnected: '已连接',
     gameNotRunning: '未运行',
     truckScreen: '卡车屏幕',
@@ -70,7 +70,7 @@ export const words: CompanionWords = {
     banners: {
       live: { title: '已连接', text: 'WestPlay 正在你的卡车屏幕上' },
       original: { title: '卡车自带的屏幕', text: '一点即可回到 WestPlay' },
-      noGame: { title: '正在等待游戏', text: '启动 Euro Truck Simulator 2' },
+      noGame: { title: '正在等待游戏', text: '启动 American Truck Simulator' },
       unsupported: { title: '不支持此卡车', text: '装上 WestPlay 平板' },
       notInCab: { title: '游戏已连接', text: '坐进你的卡车' },
     },

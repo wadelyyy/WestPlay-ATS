@@ -44,7 +44,7 @@ export const words: CompanionWords = {
     subs: {
       starting: 'WestPlay valmistub.',
       stopped: 'WestPlay mootor seiskus. Üksikasjad leiad jaotisest Teave.',
-      noGame: 'Käivita Euro Truck Simulator 2 ja WestPlay ühendub sellega.',
+      noGame: 'Käivita American Truck Simulator ja WestPlay ühendub sellega.',
       unsupported:
         'WestPlay ei ilmu selle veoki ekraanile. Paigalda oma veokisse WestPlay tahvelarvuti ja WestPlay ilmub sellele.',
       notInCab: 'Mäng on ühendatud. Istu kabiini, elekter sees, ja WestPlay ilmub ekraanile.',
@@ -57,7 +57,7 @@ export const words: CompanionWords = {
     engine: 'WestPlay mootor',
     engineRunning: 'Töötab',
     engineStarting: 'Käivitub…',
-    game: 'Euro Truck Simulator 2',
+    game: 'American Truck Simulator',
     gameConnected: 'Ühendatud',
     gameNotRunning: 'Ei tööta',
     truckScreen: 'Veoki ekraan',
@@ -71,7 +71,7 @@ export const words: CompanionWords = {
     banners: {
       live: { title: 'Ühendatud', text: 'WestPlay on sinu veoki ekraanil' },
       original: { title: 'Veoki enda ekraan', text: 'WestPlay on ühe puudutuse kaugusel' },
-      noGame: { title: 'Ootab mängu', text: 'Käivita Euro Truck Simulator 2' },
+      noGame: { title: 'Ootab mängu', text: 'Käivita American Truck Simulator' },
       unsupported: { title: 'Veokit ei toetata', text: 'Paigalda WestPlay tahvelarvuti' },
       notInCab: { title: 'Mäng ühendatud', text: 'Istu oma veokisse' },
     },

@@ -44,7 +44,7 @@ export const words: CompanionWords = {
     subs: {
       starting: 'WestPlay를 준비하고 있어요.',
       stopped: 'WestPlay 엔진이 멈췄어요. 자세한 내용은 정보에서 확인하세요.',
-      noGame: 'Euro Truck Simulator 2를 실행하면 WestPlay가 연결돼요.',
+      noGame: 'American Truck Simulator를 실행하면 WestPlay가 연결돼요.',
       unsupported:
         '이 트럭의 화면에는 WestPlay가 표시되지 않습니다. 트럭에 WestPlay 태블릿을 장착하면 태블릿에 WestPlay가 표시됩니다.',
       notInCab: '게임이 연결됐어요. 전원을 켠 채 운전석에 앉으면 화면에 WestPlay가 나타나요.',
@@ -57,7 +57,7 @@ export const words: CompanionWords = {
     engine: 'WestPlay 엔진',
     engineRunning: '실행 중',
     engineStarting: '시작하는 중…',
-    game: 'Euro Truck Simulator 2',
+    game: 'American Truck Simulator',
     gameConnected: '연결됨',
     gameNotRunning: '실행 안 됨',
     truckScreen: '트럭 화면',
@@ -71,7 +71,7 @@ export const words: CompanionWords = {
     banners: {
       live: { title: '연결됨', text: 'WestPlay가 내 트럭 화면에 있어요' },
       original: { title: '트럭 자체 화면', text: '한 번 탭하면 WestPlay로 돌아와요' },
-      noGame: { title: '게임을 기다리는 중', text: 'Euro Truck Simulator 2를 실행하세요' },
+      noGame: { title: '게임을 기다리는 중', text: 'American Truck Simulator를 실행하세요' },
       unsupported: { title: '지원되지 않는 트럭', text: 'WestPlay 태블릿을 장착하세요' },
       notInCab: { title: '게임 연결됨', text: '트럭에 타세요' },
     },

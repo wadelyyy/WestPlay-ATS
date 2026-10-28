@@ -115,6 +115,19 @@ fn remove_from(plugins: &Path) -> Result<(), InstallError> {
 }
 
 fn copy_into(ours: &Path, plugins: &Path) -> Result<PathBuf, InstallError> {
+    copy_into_with_backup(ours, plugins, || {
+        crate::places::westplay_documents()
+            .map(|documents| documents.join("backups").join("plugins"))
+            .ok_or_else(|| io::Error::other("Documents folder is unavailable; refusing an unbacked replacement"))
+    })
+}
+
+/// The same copy, with the backup location supplied lazily so fixtures never write to personal Documents.
+fn copy_into_with_backup(
+    ours: &Path,
+    plugins: &Path,
+    backup_directory: impl FnOnce() -> io::Result<PathBuf>,
+) -> Result<PathBuf, InstallError> {
     let target = plugins.join(FILE_NAME);
     // The game holds the plugin it loaded: tell that apart from a folder needing rights (moving over a
     // loaded file is refused as "access denied" too). Opening it to write, as nobody may while it's loaded,
@@ -124,9 +137,18 @@ fn copy_into(ours: &Path, plugins: &Path) -> Result<PathBuf, InstallError> {
         std::fs::OpenOptions::new().write(true).open(&target)?;
     }
     std::fs::create_dir_all(plugins)?;
+    if target.is_file() && std::fs::read(&target)? != std::fs::read(ours)? {
+        // Keep any previous plugin before replacing it. No other DLL or game configuration is touched.
+        let stamp =
+            std::time::SystemTime::now().duration_since(std::time::UNIX_EPOCH).map_err(io::Error::other)?.as_nanos();
+        let backup = backup_directory()?.join(format!("{stamp}-{}", std::process::id()));
+        std::fs::create_dir_all(&backup)?;
+        std::fs::copy(&target, backup.join(FILE_NAME))?;
+        std::fs::write(backup.join("original-path.txt"), target.to_string_lossy().as_bytes())?;
+    }
     let partial = plugins.join(format!("{FILE_NAME}.partial"));
     std::fs::copy(ours, &partial)?;
-    if let Err(error) = std::fs::rename(&partial, &target) {
+    if let Err(error) = westplay_shared::fs::replace_file(&partial, &target) {
         let _ = std::fs::remove_file(&partial);
         return Err(error.into());
     }
@@ -229,8 +251,12 @@ mod tests {
         // An older one there: replaced whole.
         std::fs::write(&installed, b"the plugin, version 1").unwrap();
         assert_eq!(state(&game, &ours).unwrap(), State::Different);
-        install(&game, &ours).unwrap();
+        let backups = root.join("backups");
+        copy_into_with_backup(&ours, &game.plugins_dir(), || Ok(backups.clone())).unwrap();
         assert_eq!(std::fs::read(&installed).unwrap(), b"the plugin, version 2");
+        let backup = std::fs::read_dir(&backups).unwrap().next().unwrap().unwrap().path();
+        assert_eq!(std::fs::read(backup.join(FILE_NAME)).unwrap(), b"the plugin, version 1");
+        assert_eq!(std::fs::read_to_string(backup.join("original-path.txt")).unwrap(), installed.to_string_lossy());
         assert!(!game.plugins_dir().join(format!("{FILE_NAME}.partial")).exists());
         uninstall(&game).unwrap();
         assert_eq!(state(&game, &ours).unwrap(), State::Missing);
@@ -254,7 +280,7 @@ mod tests {
         assert!(matches!(uninstall(&game), Err(InstallError::InUse) | Err(InstallError::NeedsAdministrator)));
         // SAFETY: the module was loaded above and is freed once.
         unsafe { FreeLibrary(module) }.unwrap();
-        install(&game, &ours).unwrap();
+        copy_into_with_backup(&ours, &game.plugins_dir(), || Ok(root.join("backups"))).unwrap();
         assert_eq!(state(&game, &ours).unwrap(), State::Current);
         let _ = std::fs::remove_dir_all(root);
     }

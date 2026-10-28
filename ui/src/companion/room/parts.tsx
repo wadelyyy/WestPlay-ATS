@@ -293,7 +293,7 @@ export function ProfileRow({
   if (state?.state === 'failed') {
     return <Row title={profile.name} detail={state.error} accessory={<Cross />} />
   }
-  const map = profile.map === 'europe' ? w.baseMap : profile.map
+  const map = profile.map === 'usa' ? w.baseMap : profile.map
   const withMods = profile.mapMods.length ? fill(w.withMods, { map, mods: list(words, profile.mapMods) }) : map
   // Once its map is made, the mods it was made without, by name; before, how many the check couldn't read.
   const unreadable = leftOut.length

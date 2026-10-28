@@ -496,7 +496,7 @@ fn free_wallpaper_name(folder: &Path, name: &str) -> String {
 fn write_new(path: &Path, bytes: &[u8]) -> std::io::Result<()> {
     let partial = path.with_extension("partial");
     std::fs::write(&partial, bytes)?;
-    std::fs::rename(&partial, path)
+    westplay_shared::fs::replace_file(&partial, path)
 }
 
 #[cfg(test)]

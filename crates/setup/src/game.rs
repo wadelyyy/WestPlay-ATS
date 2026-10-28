@@ -1,4 +1,4 @@
-//! Finding the game: every install of Euro Truck Simulator 2 on the PC (Steam's, in any of its libraries, and
+//! Finding the game: every install of American Truck Simulator on the PC (Steam's, in any of its libraries, and
 //! others Windows lists as installed), each with its version (its executable's) and its DLCs.
 
 use std::fmt;
@@ -12,14 +12,14 @@ use windows::core::{HSTRING, w};
 use crate::{places, vdf};
 
 /// The game's app id on Steam (its manifest, its Workshop folder, its Steam Cloud folder).
-pub const STEAM_APP: &str = "227300";
+pub const STEAM_APP: &str = westplay_shared::GAME_STEAM_APP;
 /// The game's executable, in its folder.
-const EXECUTABLE: &str = "bin/win_x64/eurotrucks2.exe";
+pub const EXECUTABLE: &str = "bin/win_x64/amtrucks.exe";
 /// The game's process, as Windows names it (TruckersMP's client runs the same).
-const PROCESS: &str = "eurotrucks2.exe";
+const PROCESS: &str = "amtrucks.exe";
 /// The game versions WestPlay has been tried with. Others may well work (the plugin finds what it needs in
 /// the game by its shape), but haven't been tried.
-pub const TESTED_VERSIONS: &str = "1.61.*";
+pub const TESTED_VERSIONS: &str = "1.61.3.18";
 
 /// An install of the game.
 #[derive(Clone, Debug, PartialEq)]
@@ -81,7 +81,14 @@ impl Game {
             })
             .collect();
         dlcs.sort();
-        Some(Self { dir: dir.to_path_buf(), found_by, version: executable_version(&dir.join(EXECUTABLE)), dlcs })
+        let version = executable_version(&dir.join(EXECUTABLE));
+        if let Some(mounted) = places::game_documents()
+            .and_then(|home| std::fs::read_to_string(home.join("game.log.txt")).ok())
+            .and_then(|text| mounted_dlcs(&text, dir, version))
+        {
+            dlcs.retain(|dlc| mounted.contains(dlc));
+        }
+        Some(Self { dir: dir.to_path_buf(), found_by, version, dlcs })
     }
 
     /// The game in `dir`, found as [`find`] finds it (Steam's, or listed as installed) or else as chosen.
@@ -97,7 +104,7 @@ impl Game {
     /// Where Steam keeps the game's Workshop mods, for an install in a Steam library (however it was found:
     /// a folder chosen there too).
     pub fn workshop(&self) -> Option<PathBuf> {
-        // `<library>/steamapps/common/<game>` → `<library>/steamapps/workshop/content/227300`.
+        // `<library>/steamapps/common/<game>` → `<library>/steamapps/workshop/content/270880`.
         let common = self.dir.parent()?;
         let steamapps = common.parent()?;
         let named = |path: &Path, name: &str| path.file_name().is_some_and(|n| n.eq_ignore_ascii_case(name));
@@ -112,6 +119,35 @@ impl Game {
     pub fn plugins_dir(&self) -> PathBuf {
         self.dir.join("bin").join("win_x64").join("plugins")
     }
+
+    /// Files for this game and its selected DLC set. When a matching completed real-game startup log
+    /// exists, `dlcs` contains exactly what the game mounted, rather than every archive on disk.
+    pub fn files(&self) -> Result<westplay_mapdata::files::GameFiles, westplay_mapdata::files::FileError> {
+        let mut files = westplay_mapdata::files::GameFiles::install(&self.dir)?;
+        files.retain_dlcs(&self.dlcs);
+        Ok(files)
+    }
+}
+
+fn mounted_dlcs(text: &str, dir: &Path, version: Option<Version>) -> Option<Vec<String>> {
+    let version = version?;
+    if !text.contains(&format!("American Truck Simulator init ver.{version}")) || !text.contains("[ufs] scs pool:") {
+        return None;
+    }
+    let root = dir.to_string_lossy().replace('\\', "/").trim_end_matches('/').to_lowercase() + "/";
+    let mut mounted = Vec::new();
+    for line in text.lines() {
+        let Some((_, path)) = line.split_once("[fs] device ") else { continue };
+        let Some(path) = path.strip_suffix(" mounted to scs pool.") else { continue };
+        let path = path.replace('\\', "/").to_lowercase();
+        if let Some(name) = path.strip_prefix(&root).and_then(|name| name.strip_suffix(".scs"))
+            && name.starts_with("dlc_")
+            && !name.contains('/')
+        {
+            mounted.push(name.to_owned());
+        }
+    }
+    (!mounted.is_empty()).then_some(mounted)
 }
 
 /// Every install of the game found on the PC: Steam's first (in each of its libraries), then others Windows
@@ -171,7 +207,7 @@ pub fn running() -> bool {
     found
 }
 
-/// The game's folder name in its Steam library, from its `appmanifest_227300.acf`.
+/// The game's folder name in its Steam library, from its `appmanifest_270880.acf`.
 pub fn steam_install_dir(manifest: &str) -> Option<String> {
     let file = vdf::parse(manifest)?;
     let state = file.get("AppState")?;
@@ -182,7 +218,7 @@ pub fn steam_install_dir(manifest: &str) -> Option<String> {
 /// Whether a program Windows lists is the game (not its demo, nor American Truck Simulator).
 pub fn is_the_game(name: &str) -> bool {
     let name = name.to_lowercase();
-    name.contains("euro truck simulator 2") && !name.contains("demo")
+    name.contains("american truck simulator") && !name.contains("demo")
 }
 
 fn same_folder(a: &Path, b: &Path) -> bool {
@@ -245,24 +281,50 @@ mod tests {
     #[test]
     fn tells_a_tested_version() {
         let game = |version| Game { dir: PathBuf::new(), found_by: FoundBy::Steam, version, dlcs: vec![] };
-        assert!(game(Some(Version([1, 61, 1, 9]))).tested());
+        // Exact local build exercised in a real Ford F-150; see docs/ATS-实测记录.md for tested scope.
+        assert!(game(Some(Version([1, 61, 3, 18]))).tested());
+        assert!(!game(Some(Version([1, 61, 3, 19]))).tested());
+        assert!(!game(Some(Version([1, 61, 1, 9]))).tested());
         assert!(!game(Some(Version([1, 62, 0, 1]))).tested());
         assert!(!game(None).tested());
     }
 
     #[test]
     fn reads_the_folder_steam_installed_the_game_in() {
-        let manifest = "\"AppState\"\n{\n\t\"appid\"\t\t\"227300\"\n\t\"installdir\"\t\t\"Euro Truck Simulator 2\"\n}";
-        assert_eq!(steam_install_dir(manifest).as_deref(), Some("Euro Truck Simulator 2"));
+        let manifest =
+            "\"AppState\"\n{\n\t\"appid\"\t\t\"270880\"\n\t\"installdir\"\t\t\"American Truck Simulator\"\n}";
+        assert_eq!(steam_install_dir(manifest).as_deref(), Some("American Truck Simulator"));
         // Another game's manifest.
-        assert_eq!(steam_install_dir("\"AppState\" { \"appid\" \"270880\" \"installdir\" \"American\" }"), None);
+        assert_eq!(
+            steam_install_dir("\"AppState\" { \"appid\" \"227300\" \"installdir\" \"Euro Truck Simulator 2\" }"),
+            None
+        );
     }
 
     #[test]
     fn knows_the_game_in_windows_list_of_programs() {
-        assert!(is_the_game("Euro Truck Simulator 2"));
-        assert!(!is_the_game("Euro Truck Simulator 2 Demo"));
-        assert!(!is_the_game("American Truck Simulator"));
+        assert!(is_the_game("American Truck Simulator"));
+        assert!(!is_the_game("American Truck Simulator Demo"));
+        assert!(!is_the_game("Euro Truck Simulator 2"));
+    }
+
+    #[test]
+    fn only_accepts_completed_dlc_mounts_from_the_matching_game_and_version() {
+        let log = "American Truck Simulator init ver.1.61.3.18s\n\
+            [fs] device E:/ATS/dlc_rt_ford.scs mounted to scs pool.\n\
+            [hashfs] dlc_texas.scs: Created and validated\n\
+            [fs] device E:/Other/dlc_texas.scs mounted to scs pool.\n\
+            [ufs] scs pool: 53 packs\n";
+        assert_eq!(
+            mounted_dlcs(log, Path::new(r"E:\ATS"), Some(Version([1, 61, 3, 18]))),
+            Some(vec!["dlc_rt_ford".into()])
+        );
+        assert_eq!(mounted_dlcs(log, Path::new(r"E:\ATS"), Some(Version([1, 60, 0, 0]))), None);
+        assert_eq!(mounted_dlcs(log, Path::new(r"E:\Elsewhere"), Some(Version([1, 61, 3, 18]))), None);
+        assert_eq!(
+            mounted_dlcs(log.split("[ufs]").next().unwrap(), Path::new(r"E:\ATS"), Some(Version([1, 61, 3, 18]))),
+            None
+        );
     }
 
     #[test]

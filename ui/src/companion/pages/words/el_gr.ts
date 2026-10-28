@@ -44,7 +44,7 @@ export const words: CompanionWords = {
     subs: {
       starting: 'Το WestPlay ετοιμάζεται.',
       stopped: 'Ο πυρήνας του WestPlay σταμάτησε. Οι λεπτομέρειες είναι στις Πληροφορίες.',
-      noGame: 'Άνοιξε το Euro Truck Simulator 2 και το WestPlay θα συνδεθεί σε αυτό.',
+      noGame: 'Άνοιξε το American Truck Simulator και το WestPlay θα συνδεθεί σε αυτό.',
       unsupported:
         'Το WestPlay δεν εμφανίζεται στην οθόνη αυτού του φορτηγού. Τοποθέτησε το tablet του WestPlay στο φορτηγό σου και το WestPlay θα εμφανιστεί σε αυτό.',
       notInCab:
@@ -58,7 +58,7 @@ export const words: CompanionWords = {
     engine: 'Πυρήνας WestPlay',
     engineRunning: 'Σε λειτουργία',
     engineStarting: 'Εκκίνηση…',
-    game: 'Euro Truck Simulator 2',
+    game: 'American Truck Simulator',
     gameConnected: 'Συνδεδεμένο',
     gameNotRunning: 'Δεν εκτελείται',
     truckScreen: 'Οθόνη φορτηγού',
@@ -72,7 +72,7 @@ export const words: CompanionWords = {
     banners: {
       live: { title: 'Συνδεδεμένο', text: 'Το WestPlay είναι στην οθόνη του φορτηγού σου' },
       original: { title: 'Η οθόνη του ίδιου του φορτηγού', text: 'Το WestPlay είναι ένα πάτημα μακριά' },
-      noGame: { title: 'Αναμονή για το παιχνίδι', text: 'Άνοιξε το Euro Truck Simulator 2' },
+      noGame: { title: 'Αναμονή για το παιχνίδι', text: 'Άνοιξε το American Truck Simulator' },
       unsupported: { title: 'Το φορτηγό δεν υποστηρίζεται', text: 'Τοποθέτησε το tablet του WestPlay' },
       notInCab: { title: 'Το παιχνίδι συνδέθηκε', text: 'Μπες στο φορτηγό σου' },
     },

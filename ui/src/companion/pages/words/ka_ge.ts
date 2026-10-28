@@ -44,7 +44,7 @@ export const words: CompanionWords = {
     subs: {
       starting: 'WestPlay ემზადება.',
       stopped: 'WestPlay-ის ბირთვი გაჩერდა. დეტალები „შესახებ“ განყოფილებაშია.',
-      noGame: 'გაუშვით Euro Truck Simulator 2 და WestPlay მას დაუკავშირდება.',
+      noGame: 'გაუშვით American Truck Simulator და WestPlay მას დაუკავშირდება.',
       unsupported:
         'WestPlay ამ სატვირთოს ეკრანზე არ ჩანს. დაამონტაჟეთ WestPlay-ის პლანშეტი სატვირთოში და WestPlay მასზე გამოჩნდება.',
       notInCab: 'თამაში დაკავშირებულია. დაჯექით კაბინაში ჩართული ელექტროობით და WestPlay ეკრანზე გამოჩნდება.',
@@ -57,7 +57,7 @@ export const words: CompanionWords = {
     engine: 'WestPlay-ის ბირთვი',
     engineRunning: 'მუშაობს',
     engineStarting: 'გაშვება…',
-    game: 'Euro Truck Simulator 2',
+    game: 'American Truck Simulator',
     gameConnected: 'დაკავშირებულია',
     gameNotRunning: 'არ არის გაშვებული',
     truckScreen: 'სატვირთოს ეკრანი',
@@ -71,7 +71,7 @@ export const words: CompanionWords = {
     banners: {
       live: { title: 'დაკავშირებულია', text: 'WestPlay თქვენი სატვირთოს ეკრანზეა' },
       original: { title: 'სატვირთოს საკუთარი ეკრანი', text: 'WestPlay ერთი შეხებითაა' },
-      noGame: { title: 'თამაშის მოლოდინში', text: 'გაუშვით Euro Truck Simulator 2' },
+      noGame: { title: 'თამაშის მოლოდინში', text: 'გაუშვით American Truck Simulator' },
       unsupported: { title: 'სატვირთო არ არის მხარდაჭერილი', text: 'დაამონტაჟეთ WestPlay-ის პლანშეტი' },
       notInCab: { title: 'თამაში დაკავშირებულია', text: 'ჩაჯექით სატვირთოში' },
     },

@@ -44,7 +44,7 @@ export const words: CompanionWords = {
     subs: {
       starting: 'WestPlay prestatzen ari da.',
       stopped: 'WestPlay-ren motorra gelditu da. Xehetasunak Honi buruz atalean daude.',
-      noGame: 'Abiarazi Euro Truck Simulator 2, eta WestPlay hari konektatuko zaio.',
+      noGame: 'Abiarazi American Truck Simulator, eta WestPlay hari konektatuko zaio.',
       unsupported:
         'WestPlay ez da kamioi honen pantailan agertzen. Jarri WestPlay tableta zure kamioian, eta WestPlay bertan agertuko da.',
       notInCab:
@@ -58,7 +58,7 @@ export const words: CompanionWords = {
     engine: 'WestPlay-ren motorra',
     engineRunning: 'Martxan',
     engineStarting: 'Abiarazten…',
-    game: 'Euro Truck Simulator 2',
+    game: 'American Truck Simulator',
     gameConnected: 'Konektatuta',
     gameNotRunning: 'Ez dago martxan',
     truckScreen: 'Kamioiaren pantaila',
@@ -72,7 +72,7 @@ export const words: CompanionWords = {
     banners: {
       live: { title: 'Konektatuta', text: 'WestPlay zure kamioiaren pantailan dago' },
       original: { title: 'Kamioiaren pantaila propioa', text: 'WestPlay ukitu batera dago' },
-      noGame: { title: 'Jokoaren zain', text: 'Abiarazi Euro Truck Simulator 2' },
+      noGame: { title: 'Jokoaren zain', text: 'Abiarazi American Truck Simulator' },
       unsupported: { title: 'Kamioia ez da bateragarria', text: 'Jarri WestPlay tableta' },
       notInCab: { title: 'Jokoa konektatuta', text: 'Igo zure kamioira' },
     },

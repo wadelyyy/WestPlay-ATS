@@ -44,7 +44,7 @@ export const words: CompanionWords = {
     subs: {
       starting: 'WestPlay を準備しています。',
       stopped: 'WestPlay のエンジンが停止しました。詳しくは「情報」をご覧ください。',
-      noGame: 'Euro Truck Simulator 2 を起動すると、WestPlay が接続します。',
+      noGame: 'American Truck Simulator を起動すると、WestPlay が接続します。',
       unsupported:
         'このトラックの画面には WestPlay が表示されません。トラックに WestPlay タブレットを取り付けると、そこに WestPlay が表示されます。',
       notInCab: 'ゲームに接続しました。電源を入れた状態でキャビンに座ると、画面に WestPlay が表示されます。',
@@ -57,7 +57,7 @@ export const words: CompanionWords = {
     engine: 'WestPlay エンジン',
     engineRunning: '実行中',
     engineStarting: '起動中…',
-    game: 'Euro Truck Simulator 2',
+    game: 'American Truck Simulator',
     gameConnected: '接続済み',
     gameNotRunning: '起動していません',
     truckScreen: 'トラックの画面',
@@ -71,7 +71,7 @@ export const words: CompanionWords = {
     banners: {
       live: { title: '接続済み', text: 'WestPlay はトラックの画面に表示中です' },
       original: { title: 'トラック本来の画面', text: 'WestPlay はタップひとつで戻れます' },
-      noGame: { title: 'ゲームを待っています', text: 'Euro Truck Simulator 2 を起動してください' },
+      noGame: { title: 'ゲームを待っています', text: 'American Truck Simulator を起動してください' },
       unsupported: { title: '非対応のトラック', text: 'WestPlay タブレットを取り付けてください' },
       notInCab: { title: 'ゲームに接続しました', text: 'トラックに乗ってください' },
     },

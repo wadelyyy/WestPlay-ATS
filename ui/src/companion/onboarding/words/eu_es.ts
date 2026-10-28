@@ -6,7 +6,7 @@ export const words: Words = {
   continue: 'Jarraitu',
   welcome: {
     title: 'CarPlay zure kabinan',
-    sub: 'WestPlay-k CarPlay zure kamioiaren pantailara eramaten du Euro Truck Simulator 2-n. Konfigurazioak minutu gutxi batzuk besterik ez ditu behar.',
+    sub: 'WestPlay-k CarPlay zure kamioiaren pantailara eramaten du American Truck Simulator-n. Konfigurazioak minutu gutxi batzuk besterik ez ditu behar.',
     start: 'Hasi',
   },
   summary: {
@@ -20,18 +20,18 @@ export const words: Words = {
   game: {
     title: 'Zure jokoa',
     titleMissing: 'Non dago zure jokoa?',
-    found: 'WestPlay-k Euro Truck Simulator 2 aurkitu du ordenagailu honetan.',
-    foundMany: 'Euro Truck Simulator 2 leku batean baino gehiagotan dago instalatuta. Aukeratu jolasten duzuna.',
-    missing: 'WestPlay-k ez du Euro Truck Simulator 2 aurkitu. Aukeratu instalatu zenuen karpeta, base.scs duena.',
+    found: 'WestPlay-k American Truck Simulator aurkitu du ordenagailu honetan.',
+    foundMany: 'American Truck Simulator leku batean baino gehiagotan dago instalatuta. Aukeratu jolasten duzuna.',
+    missing: 'WestPlay-k ez du American Truck Simulator aurkitu. Aukeratu instalatu zenuen karpeta, base.scs duena.',
     chooseAnother: 'Erabili beste karpeta bat…',
     chooseFolder: 'Aukeratu karpeta…',
-    picker: 'Aukeratu Euro Truck Simulator 2-ren karpeta',
+    picker: 'Aukeratu American Truck Simulator-ren karpeta',
     bannerMissing: 'Jarraitzeko, aukeratu haren karpeta',
-    notTheGame: 'Karpeta honetan ez dago Euro Truck Simulator 2. Aukeratu base.scs duena.',
+    notTheGame: 'Karpeta honetan ez dago American Truck Simulator. Aukeratu base.scs duena.',
     gameGone: 'Jokoa ez dago jada karpeta honetan.',
     closeToGoOn: {
       title: 'Itxi jokoa, mesedez.',
-      text: 'WestPlay Euro Truck Simulator 2 martxan ez dagoenean bakarrik konfigura daiteke.',
+      text: 'WestPlay American Truck Simulator martxan ez dagoenean bakarrik konfigura daiteke.',
     },
   },
   check: {
@@ -89,7 +89,7 @@ export const words: Words = {
     },
     closeToInstall: {
       title: 'Itxi jokoa, mesedez.',
-      text: 'Ezin da WestPlay instalatu Euro Truck Simulator 2 martxan dagoen bitartean.',
+      text: 'Ezin da WestPlay instalatu American Truck Simulator martxan dagoen bitartean.',
     },
     inUse: {
       title: 'Itxi jokoa, mesedez.',

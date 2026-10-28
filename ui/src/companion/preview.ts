@@ -25,7 +25,7 @@ const query = new URLSearchParams(location.search)
 const gameState = query.get('game') ?? 'live'
 
 const GAME: GameInfo = {
-  dir: 'C:\\Program Files (x86)\\Steam\\steamapps\\common\\Euro Truck Simulator 2',
+  dir: 'C:\\Program Files (x86)\\Steam\\steamapps\\common\\American Truck Simulator',
   foundBy: 'steam',
   version: '1.61.1.9',
   tested: true,
@@ -202,7 +202,7 @@ const CHECK: GameCheck = {
     {
       name: 'Western',
       dir: 'profiles/57657374',
-      map: 'europe',
+      map: 'usa',
       mapMods: ['ProMods 2.80'],
       unreadable: 0,
       hvtMap: false,
@@ -210,7 +210,7 @@ const CHECK: GameCheck = {
     {
       name: 'Test drive',
       dir: 'profiles/54657374',
-      map: 'europe',
+      map: 'usa',
       mapMods: [],
       unreadable: 0,
       hvtMap: false,
@@ -305,9 +305,6 @@ export function answer(command: string, args?: Record<string, unknown>): Promise
       return later(undefined)
     case 'apple_music_sign_in':
       signIn('appleMusic')
-      return later(undefined)
-    case 'open_support_page':
-      window.open('https://kreosus.com/enes-less', '_blank', 'noopener')
       return later(undefined)
     case 'app_log_place':
       return later('C:\\Users\\Player\\Documents\\WestPlay\\logs\\app.log')

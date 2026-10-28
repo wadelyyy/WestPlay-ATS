@@ -9,6 +9,7 @@
 //!   fields are atomics or plain data guarded by a [`SeqLock`], so either side may start first.
 
 pub mod cityhash;
+pub mod fs;
 
 use std::cell::UnsafeCell;
 use std::sync::LazyLock;
@@ -24,10 +25,13 @@ use windows::core::HSTRING;
 /// bridge is laid out as whichever opened it first; one of another version, still held by a game or an app,
 /// would keep its layout until both are gone). [`BridgeMapping::matches`] still guards it.
 pub fn bridge_name() -> String {
-    format!("Local\\WestPlay.Bridge.v{BRIDGE_VERSION}")
+    format!("Local\\WestPlay.ATS.Bridge.v{BRIDGE_VERSION}")
 }
 pub const BRIDGE_MAGIC: u32 = u32::from_le_bytes(*b"WPB7");
 pub const BRIDGE_VERSION: u32 = 24;
+
+/// ATS's Steam app id, shared by installation, Workshop and Steam Cloud lookups.
+pub const GAME_STEAM_APP: &str = "270880";
 
 /// Size of the app's frames, and the base size of the screen textures in the mod (`westplay_setup::game_mod`
 /// builds them from these).
@@ -78,6 +82,9 @@ pub fn page_height(index: usize) -> u32 {
         Some("setra-516") => 777,
         Some("setra-531") => 761,
         Some("man-lions-coach") => 778,
+        // The F-150's GPS script is 1280 x 800. Keep its 16:10 page shape while
+        // the shared frame remains 1280 x 720; the game maps it onto its own display.
+        Some("ford-f150-2023") => 800,
         _ => SCREEN_HEIGHT,
     }
 }
@@ -150,6 +157,7 @@ const SHARED_LAYOUT_TRUCKS: &[(&str, &[&str])] = &[
     ("generic", &["scania.s_2016", "scania.r_2016", "scania.s_2024e"]),
     // The game's toy GPS (Cabin Accessories), WestPlay's only on Oyuncuyusbis' Setra S 516 HD/2's tablet part.
     ("setra-516", &["setra516hd"]),
+    ("ford-f150-2023", &["ford.f150_23"]),
 ];
 
 /// The trucks WestPlay shows in on the layout `id`, if it's one other trucks share ([`SHARED_LAYOUT_TRUCKS`]); none
@@ -190,7 +198,7 @@ pub const FRAME_KEY: u64 = 0;
 
 /// Name of the shared frame texture. The generation changes whenever the app recreates the texture.
 pub fn frame_texture_name(generation: u32) -> String {
-    format!("Local\\WestPlay.Frame.v8.{generation}")
+    format!("Local\\WestPlay.ATS.Frame.v8.{generation}")
 }
 
 #[repr(C)]
@@ -844,7 +852,8 @@ mod tests {
 
     #[test]
     fn the_bridges_name_carries_its_version() {
-        assert_eq!(super::bridge_name(), format!("Local\\WestPlay.Bridge.v{}", super::BRIDGE_VERSION));
+        assert_eq!(super::bridge_name(), format!("Local\\WestPlay.ATS.Bridge.v{}", super::BRIDGE_VERSION));
+        assert_eq!(super::frame_texture_name(7), "Local\\WestPlay.ATS.Frame.v8.7");
     }
 
     use super::*;
@@ -866,6 +875,21 @@ mod tests {
         }
         assert_eq!(page_height(index("daf-2021")), SCREEN_HEIGHT);
         assert_eq!(page_height(screen_layouts().len()), SCREEN_HEIGHT);
+    }
+
+    #[test]
+    fn the_ford_dlc_layout_is_its_own_surface_and_vehicle() {
+        let index = screen_layouts().iter().position(|layout| layout.id == "ford-f150-2023").unwrap();
+        assert_eq!(screen_layouts()[index].gps_scripts, ["ui/dashboard/ford_f150_gps_23.sii"]);
+        assert_eq!(page_height(index), 800);
+        assert!(screen_supported(index, "vehicle.ford.f150_23"));
+        assert!(screen_supported(index, "ford.f150_23"));
+        for model in ["vehicle.ford.bronco_24", "vehicle.scania.s_2016", "", "ford.f150_2024"] {
+            assert!(!screen_supported(index, model), "{model}");
+        }
+        // In particular, do not take over every ATS vehicle's shared GPS screen.
+        assert!(!screen_supported(0, "vehicle.ford.f150_23"));
+        assert_eq!(screen_layout_for_texture(SCREEN_WIDTH, ScreenLayout::texture_height(index)), Some(index));
     }
 
     #[test]

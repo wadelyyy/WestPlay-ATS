@@ -6,7 +6,7 @@ export const words: Words = {
   continue: 'Ga door',
   welcome: {
     title: 'CarPlay in je cabine',
-    sub: 'WestPlay brengt CarPlay naar het scherm van je truck in Euro Truck Simulator 2. Instellen duurt maar een paar minuten.',
+    sub: 'WestPlay brengt CarPlay naar het scherm van je truck in American Truck Simulator. Instellen duurt maar een paar minuten.',
     start: 'Aan de slag',
   },
   summary: {
@@ -20,19 +20,19 @@ export const words: Words = {
   game: {
     title: 'Je game',
     titleMissing: 'Waar is je game?',
-    found: 'WestPlay heeft Euro Truck Simulator 2 op deze pc gevonden.',
-    foundMany: 'Euro Truck Simulator 2 is op meer dan één plek geïnstalleerd. Kies de versie die je speelt.',
+    found: 'WestPlay heeft American Truck Simulator op deze pc gevonden.',
+    foundMany: 'American Truck Simulator is op meer dan één plek geïnstalleerd. Kies de versie die je speelt.',
     missing:
-      'WestPlay kon Euro Truck Simulator 2 niet vinden. Kies de map waarin je het hebt geïnstalleerd, die met base.scs erin.',
+      'WestPlay kon American Truck Simulator niet vinden. Kies de map waarin je het hebt geïnstalleerd, die met base.scs erin.',
     chooseAnother: 'Andere map gebruiken…',
     chooseFolder: 'Map kiezen…',
-    picker: 'Kies je Euro Truck Simulator 2-map',
+    picker: 'Kies je American Truck Simulator-map',
     bannerMissing: 'Kies de map om door te gaan',
-    notTheGame: 'Deze map bevat Euro Truck Simulator 2 niet. Kies de map met base.scs erin.',
+    notTheGame: 'Deze map bevat American Truck Simulator niet. Kies de map met base.scs erin.',
     gameGone: 'De game staat niet meer in deze map.',
     closeToGoOn: {
       title: 'Sluit de game.',
-      text: 'WestPlay kan zich alleen instellen als Euro Truck Simulator 2 niet draait.',
+      text: 'WestPlay kan zich alleen instellen als American Truck Simulator niet draait.',
     },
   },
   check: {
@@ -90,7 +90,7 @@ export const words: Words = {
     },
     closeToInstall: {
       title: 'Sluit de game.',
-      text: 'WestPlay kan niet worden geïnstalleerd terwijl Euro Truck Simulator 2 draait.',
+      text: 'WestPlay kan niet worden geïnstalleerd terwijl American Truck Simulator draait.',
     },
     inUse: {
       title: 'Sluit de game.',

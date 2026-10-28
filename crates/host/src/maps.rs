@@ -367,7 +367,7 @@ fn basis(game: &Game, documents: &Path, userdata: Option<&Path>) -> Basis {
                 (dir, at)
             })
             .collect(),
-        game_written: written(&game.dir.join("bin").join("win_x64").join("eurotrucks2.exe")),
+        game_written: written(&game.dir.join(westplay_setup::game::EXECUTABLE)),
         truckersmp: truckersmp::installation().map(|installation| {
             let packs = truckersmp::packs(&installation).into_iter().map(|pack| {
                 let at = written(&pack);

@@ -44,7 +44,7 @@ export const words: CompanionWords = {
     subs: {
       starting: 'WestPlay ruošiasi.',
       stopped: 'WestPlay variklis sustojo. Išsamiau – skiltyje Apie.',
-      noGame: 'Paleisk Euro Truck Simulator 2, ir WestPlay prie jo prisijungs.',
+      noGame: 'Paleisk American Truck Simulator, ir WestPlay prie jo prisijungs.',
       unsupported:
         'WestPlay nerodomas šio sunkvežimio ekrane. Įsirenk WestPlay planšetę į savo sunkvežimį, ir WestPlay bus rodomas joje.',
       notInCab: 'Žaidimas prijungtas. Sėsk į kabiną su įjungta elektra, ir WestPlay atsiras ekrane.',
@@ -57,7 +57,7 @@ export const words: CompanionWords = {
     engine: 'WestPlay variklis',
     engineRunning: 'Veikia',
     engineStarting: 'Paleidžiama…',
-    game: 'Euro Truck Simulator 2',
+    game: 'American Truck Simulator',
     gameConnected: 'Prijungtas',
     gameNotRunning: 'Neveikia',
     truckScreen: 'Sunkvežimio ekranas',
@@ -71,7 +71,7 @@ export const words: CompanionWords = {
     banners: {
       live: { title: 'Prijungta', text: 'WestPlay yra tavo sunkvežimio ekrane' },
       original: { title: 'Paties sunkvežimio ekranas', text: 'WestPlay – vienu palietimu' },
-      noGame: { title: 'Laukiama žaidimo', text: 'Paleisk Euro Truck Simulator 2' },
+      noGame: { title: 'Laukiama žaidimo', text: 'Paleisk American Truck Simulator' },
       unsupported: { title: 'Sunkvežimis nepalaikomas', text: 'Įsirenk WestPlay planšetę' },
       notInCab: { title: 'Žaidimas prijungtas', text: 'Sėsk į savo sunkvežimį' },
     },

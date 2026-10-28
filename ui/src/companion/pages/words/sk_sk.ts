@@ -44,7 +44,7 @@ export const words: CompanionWords = {
     subs: {
       starting: 'WestPlay sa pripravuje.',
       stopped: 'Jadro WestPlay sa zastavilo. Podrobnosti nájdete v časti O aplikácii.',
-      noGame: 'Spustite Euro Truck Simulator 2 a WestPlay sa k nemu pripojí.',
+      noGame: 'Spustite American Truck Simulator a WestPlay sa k nemu pripojí.',
       unsupported:
         'WestPlay sa na obrazovke tohto kamióna nezobrazuje. Namontujte do kamióna tablet WestPlay a WestPlay sa zobrazí na ňom.',
       notInCab: 'Hra je pripojená. Sadnite si do kabíny so zapnutou elektrikou a WestPlay sa objaví na obrazovke.',
@@ -57,7 +57,7 @@ export const words: CompanionWords = {
     engine: 'Jadro WestPlay',
     engineRunning: 'Beží',
     engineStarting: 'Spúšťa sa…',
-    game: 'Euro Truck Simulator 2',
+    game: 'American Truck Simulator',
     gameConnected: 'Pripojené',
     gameNotRunning: 'Nebeží',
     truckScreen: 'Obrazovka kamióna',
@@ -71,7 +71,7 @@ export const words: CompanionWords = {
     banners: {
       live: { title: 'Pripojené', text: 'WestPlay je na obrazovke vášho kamióna' },
       original: { title: 'Vlastná obrazovka kamióna', text: 'WestPlay je na jedno ťuknutie' },
-      noGame: { title: 'Čaká sa na hru', text: 'Spustite Euro Truck Simulator 2' },
+      noGame: { title: 'Čaká sa na hru', text: 'Spustite American Truck Simulator' },
       unsupported: { title: 'Kamión nie je podporovaný', text: 'Namontujte tablet WestPlay' },
       notInCab: { title: 'Hra pripojená', text: 'Nasadnite do kamióna' },
     },

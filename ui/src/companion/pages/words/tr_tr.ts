@@ -44,7 +44,7 @@ export const words: CompanionWords = {
     subs: {
       starting: 'WestPlay hazırlanıyor.',
       stopped: 'WestPlay’in motoru durdu. Ayrıntılar Hakkında bölümünde.',
-      noGame: 'Euro Truck Simulator 2’yi başlat, WestPlay ona bağlanır.',
+      noGame: 'American Truck Simulator’yi başlat, WestPlay ona bağlanır.',
       unsupported: 'WestPlay bu kamyonun ekranında görünmez. Kamyonuna WestPlay tabletini tak, WestPlay onda görünür.',
       notInCab: 'Oyun bağlı. Elektrikler açıkken kabine otur, WestPlay ekranda belirir.',
       live: 'WestPlay şu anda kamyonunun ekranında.',
@@ -56,7 +56,7 @@ export const words: CompanionWords = {
     engine: 'WestPlay motoru',
     engineRunning: 'Çalışıyor',
     engineStarting: 'Başlatılıyor…',
-    game: 'Euro Truck Simulator 2',
+    game: 'American Truck Simulator',
     gameConnected: 'Bağlı',
     gameNotRunning: 'Çalışmıyor',
     truckScreen: 'Kamyon ekranı',
@@ -70,7 +70,7 @@ export const words: CompanionWords = {
     banners: {
       live: { title: 'Bağlandı', text: 'WestPlay kamyonunun ekranında' },
       original: { title: 'Kamyonun kendi ekranı', text: 'WestPlay bir dokunuş uzağında' },
-      noGame: { title: 'Oyun bekleniyor', text: 'Euro Truck Simulator 2’yi başlat' },
+      noGame: { title: 'Oyun bekleniyor', text: 'American Truck Simulator’yi başlat' },
       unsupported: { title: 'Kamyon desteklenmiyor', text: 'WestPlay tabletini tak' },
       notInCab: { title: 'Oyun bağlandı', text: 'Kamyonuna bin' },
     },

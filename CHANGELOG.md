@@ -3,6 +3,17 @@
 What changed in each release of WestPlay. The newest release's notes are what the app shows when it offers the
 update.
 
+## ATS v2.1.2-ats.1 (2026-10-28)
+
+- Independent ATS adaptation of [enes-less/WestPlay](https://github.com/enes-less/WestPlay) 2.1.2, based on upstream commit `0edc10bf44ffe57350cdf60c9d42bdc603f06eb3`; upstream credits and GPL-3.0-or-later licensing retained.
+- Integrate the original cabin UI into the official Road Trip Ford 2023 F-150 GPS screen; use ATS game discovery, Steam AppID, profiles, map data, telemetry and navigation.
+- Add a Chinese ATS companion launch page, install diagnostics, repair and log access; shortcuts open only the companion while the player starts ATS manually.
+- Fix ATS cloud-profile and primary-timezone handling, Windows atomic file publication, and shared-texture generations across bounded host/browser recovery.
+- Remove the donation/support UI and the upstream ETS2 auto-update entry; preserve attribution and third-party notices.
+- Add first-download, installation and usage documentation. Tested with ATS 1.61.3.18s / DX11 on Windows x64, including a short real drive, signed-out YouTube playback/audio and browser recovery. Subscription playback, secondary-timezone subregions, long trips and broad map/mod compatibility remain unverified or limited.
+
+The application and plugin retain internal version 2.1.2; this ATS release tag distinguishes the fork from the upstream release. Upstream history follows below.
+
 ## 2.1.2 (2026-10-26)
 - On TruckersMP, your own truck no longer shows on the map as another player's dot following you.
 

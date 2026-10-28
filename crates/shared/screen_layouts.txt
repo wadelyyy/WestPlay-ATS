@@ -37,3 +37,7 @@ travego-16-23     ui/dashboard/westplay_travego_16_23_gps.sii
 setra-516         ui/dashboard/gps.dlc_toys.sii
 setra-531         ui/dashboard/westplay_setra_531_gps.sii
 man-lions-coach   ui/dashboard/westplay_man_lions_coach_gps.sii
+# ATS Road Trip: Ford (local DLC checked 2026-10-27): the 2023 F-150 Lariat's
+# computers.sui names this GPS script; the instrument cluster is a separate script.
+# Append layouts: older layouts' texture sizes must stay stable.
+ford-f150-2023    ui/dashboard/ford_f150_gps_23.sii

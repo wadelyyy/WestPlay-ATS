@@ -6,7 +6,7 @@ export const words: Words = {
   continue: 'Continuer',
   welcome: {
     title: 'CarPlay dans votre cabine',
-    sub: 'WestPlay apporte CarPlay sur l’écran de votre camion dans Euro Truck Simulator 2. La configuration ne prend que quelques minutes.',
+    sub: 'WestPlay apporte CarPlay sur l’écran de votre camion dans American Truck Simulator. La configuration ne prend que quelques minutes.',
     start: 'Commencer',
   },
   summary: {
@@ -20,19 +20,19 @@ export const words: Words = {
   game: {
     title: 'Votre jeu',
     titleMissing: 'Où est votre jeu ?',
-    found: 'WestPlay a trouvé Euro Truck Simulator 2 sur ce PC.',
-    foundMany: 'Euro Truck Simulator 2 est installé à plusieurs endroits. Choisissez celui auquel vous jouez.',
+    found: 'WestPlay a trouvé American Truck Simulator sur ce PC.',
+    foundMany: 'American Truck Simulator est installé à plusieurs endroits. Choisissez celui auquel vous jouez.',
     missing:
-      'WestPlay n’a pas trouvé Euro Truck Simulator 2. Choisissez le dossier où vous l’avez installé, celui qui contient base.scs.',
+      'WestPlay n’a pas trouvé American Truck Simulator. Choisissez le dossier où vous l’avez installé, celui qui contient base.scs.',
     chooseAnother: 'Utiliser un autre dossier…',
     chooseFolder: 'Choisir un dossier…',
-    picker: 'Choisissez votre dossier Euro Truck Simulator 2',
+    picker: 'Choisissez votre dossier American Truck Simulator',
     bannerMissing: 'Choisissez son dossier pour continuer',
-    notTheGame: 'Ce dossier ne contient pas Euro Truck Simulator 2. Choisissez celui qui contient base.scs.',
+    notTheGame: 'Ce dossier ne contient pas American Truck Simulator. Choisissez celui qui contient base.scs.',
     gameGone: 'Le jeu n’est plus dans ce dossier.',
     closeToGoOn: {
       title: 'Veuillez fermer le jeu.',
-      text: 'WestPlay ne peut se configurer que lorsqu’Euro Truck Simulator 2 n’est pas lancé.',
+      text: 'WestPlay ne peut se configurer que lorsqu’American Truck Simulator n’est pas lancé.',
     },
   },
   check: {
@@ -91,7 +91,7 @@ export const words: Words = {
     },
     closeToInstall: {
       title: 'Veuillez fermer le jeu.',
-      text: 'WestPlay ne peut pas être installé pendant qu’Euro Truck Simulator 2 est lancé.',
+      text: 'WestPlay ne peut pas être installé pendant qu’American Truck Simulator est lancé.',
     },
     inUse: {
       title: 'Veuillez fermer le jeu.',

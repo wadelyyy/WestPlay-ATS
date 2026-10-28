@@ -349,7 +349,7 @@ function ChooseGame({
     'dashboard',
     GLOW.dashboard,
     game
-      ? { title: 'Euro Truck Simulator 2', detail: gameSummary(words, game) }
+      ? { title: 'American Truck Simulator', detail: gameSummary(words, game) }
       : { title: w.titleMissing, detail: w.bannerMissing },
   )
 

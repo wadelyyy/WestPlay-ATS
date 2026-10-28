@@ -6,7 +6,7 @@ export const words: Words = {
   continue: 'Continuă',
   welcome: {
     title: 'CarPlay în cabina ta',
-    sub: 'WestPlay aduce CarPlay pe ecranul camionului tău în Euro Truck Simulator 2. Configurarea durează doar câteva minute.',
+    sub: 'WestPlay aduce CarPlay pe ecranul camionului tău în American Truck Simulator. Configurarea durează doar câteva minute.',
     start: 'Să începem',
   },
   summary: {
@@ -20,19 +20,19 @@ export const words: Words = {
   game: {
     title: 'Jocul tău',
     titleMissing: 'Unde este jocul tău?',
-    found: 'WestPlay a găsit Euro Truck Simulator 2 pe acest PC.',
-    foundMany: 'Euro Truck Simulator 2 este instalat în mai multe locuri. Alege-l pe cel cu care joci.',
+    found: 'WestPlay a găsit American Truck Simulator pe acest PC.',
+    foundMany: 'American Truck Simulator este instalat în mai multe locuri. Alege-l pe cel cu care joci.',
     missing:
-      'WestPlay nu a găsit Euro Truck Simulator 2. Alege dosarul în care l-ai instalat, cel care conține base.scs.',
+      'WestPlay nu a găsit American Truck Simulator. Alege dosarul în care l-ai instalat, cel care conține base.scs.',
     chooseAnother: 'Folosește alt dosar…',
     chooseFolder: 'Alege dosarul…',
-    picker: 'Alege dosarul Euro Truck Simulator 2',
+    picker: 'Alege dosarul American Truck Simulator',
     bannerMissing: 'Alege-i dosarul ca să continui',
-    notTheGame: 'Acest dosar nu conține Euro Truck Simulator 2. Alege-l pe cel care conține base.scs.',
+    notTheGame: 'Acest dosar nu conține American Truck Simulator. Alege-l pe cel care conține base.scs.',
     gameGone: 'Jocul nu mai este în acest dosar.',
     closeToGoOn: {
       title: 'Închide jocul.',
-      text: 'WestPlay se poate configura doar cât timp Euro Truck Simulator 2 nu rulează.',
+      text: 'WestPlay se poate configura doar cât timp American Truck Simulator nu rulează.',
     },
   },
   check: {
@@ -92,7 +92,7 @@ export const words: Words = {
     },
     closeToInstall: {
       title: 'Închide jocul.',
-      text: 'WestPlay nu poate fi instalat cât timp rulează Euro Truck Simulator 2.',
+      text: 'WestPlay nu poate fi instalat cât timp rulează American Truck Simulator.',
     },
     inUse: {
       title: 'Închide jocul.',

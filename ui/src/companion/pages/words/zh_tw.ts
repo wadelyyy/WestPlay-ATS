@@ -44,7 +44,7 @@ export const words: CompanionWords = {
     subs: {
       starting: 'WestPlay 正在準備。',
       stopped: 'WestPlay 的引擎已停止。詳細資訊請見「關於」。',
-      noGame: '啟動 Euro Truck Simulator 2，WestPlay 就會連上它。',
+      noGame: '啟動 American Truck Simulator，WestPlay 就會連上它。',
       unsupported: 'WestPlay 不會顯示在這輛卡車的螢幕上。為你的卡車裝上 WestPlay 平板，WestPlay 就會顯示在平板上。',
       notInCab: '遊戲已連線。打開電源坐進駕駛室，WestPlay 就會出現在螢幕上。',
       live: 'WestPlay 此刻正在你的卡車螢幕上。',
@@ -56,7 +56,7 @@ export const words: CompanionWords = {
     engine: 'WestPlay 引擎',
     engineRunning: '執行中',
     engineStarting: '正在啟動…',
-    game: 'Euro Truck Simulator 2',
+    game: 'American Truck Simulator',
     gameConnected: '已連線',
     gameNotRunning: '未執行',
     truckScreen: '卡車螢幕',
@@ -70,7 +70,7 @@ export const words: CompanionWords = {
     banners: {
       live: { title: '已連線', text: 'WestPlay 正在你的卡車螢幕上' },
       original: { title: '卡車本身的螢幕', text: '輕點一下即可回到 WestPlay' },
-      noGame: { title: '正在等待遊戲', text: '啟動 Euro Truck Simulator 2' },
+      noGame: { title: '正在等待遊戲', text: '啟動 American Truck Simulator' },
       unsupported: { title: '不支援此卡車', text: '裝上 WestPlay 平板' },
       notInCab: { title: '遊戲已連線', text: '坐進你的卡車' },
     },

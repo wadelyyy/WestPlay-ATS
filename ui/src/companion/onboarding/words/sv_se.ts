@@ -6,7 +6,7 @@ export const words: Words = {
   continue: 'Fortsätt',
   welcome: {
     title: 'CarPlay i din hytt',
-    sub: 'WestPlay tar CarPlay till skärmen i din lastbil i Euro Truck Simulator 2. Konfigurationen tar bara några minuter.',
+    sub: 'WestPlay tar CarPlay till skärmen i din lastbil i American Truck Simulator. Konfigurationen tar bara några minuter.',
     start: 'Kom igång',
   },
   summary: {
@@ -20,18 +20,18 @@ export const words: Words = {
   game: {
     title: 'Ditt spel',
     titleMissing: 'Var är ditt spel?',
-    found: 'WestPlay hittade Euro Truck Simulator 2 på den här datorn.',
-    foundMany: 'Euro Truck Simulator 2 är installerat på mer än ett ställe. Välj det du spelar.',
-    missing: 'WestPlay hittade inte Euro Truck Simulator 2. Välj mappen där du installerade det, den med base.scs i.',
+    found: 'WestPlay hittade American Truck Simulator på den här datorn.',
+    foundMany: 'American Truck Simulator är installerat på mer än ett ställe. Välj det du spelar.',
+    missing: 'WestPlay hittade inte American Truck Simulator. Välj mappen där du installerade det, den med base.scs i.',
     chooseAnother: 'Använd en annan mapp …',
     chooseFolder: 'Välj mapp …',
-    picker: 'Välj din mapp för Euro Truck Simulator 2',
+    picker: 'Välj din mapp för American Truck Simulator',
     bannerMissing: 'Välj dess mapp för att fortsätta',
-    notTheGame: 'Den här mappen innehåller inte Euro Truck Simulator 2. Välj den med base.scs i.',
+    notTheGame: 'Den här mappen innehåller inte American Truck Simulator. Välj den med base.scs i.',
     gameGone: 'Spelet finns inte längre i den här mappen.',
     closeToGoOn: {
       title: 'Stäng spelet.',
-      text: 'WestPlay kan bara konfigurera sig när Euro Truck Simulator 2 inte körs.',
+      text: 'WestPlay kan bara konfigurera sig när American Truck Simulator inte körs.',
     },
   },
   check: {
@@ -89,7 +89,7 @@ export const words: Words = {
     },
     closeToInstall: {
       title: 'Stäng spelet.',
-      text: 'WestPlay kan inte installeras medan Euro Truck Simulator 2 körs.',
+      text: 'WestPlay kan inte installeras medan American Truck Simulator körs.',
     },
     inUse: {
       title: 'Stäng spelet.',

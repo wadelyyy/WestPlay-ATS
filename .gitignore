@@ -26,3 +26,12 @@ dist/
 
 # Signing keys (the updater's private key stays with its owner, outside the repository)
 *.key
+
+# Local validation caches and absolute build metadata
+__pycache__/
+*.pyc
+/docs/cargo-metadata.json
+/docs/ats-deployment.json
+/docs/package-manifest.json
+/docs/source-package-audit.json
+/docs/ui-preview/

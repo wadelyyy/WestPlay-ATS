@@ -11,6 +11,7 @@ mod camera;
 mod capture;
 pub mod customize;
 pub mod fitted;
+mod frame_generation;
 mod game_settings;
 mod gpu;
 pub mod graphics;
@@ -282,7 +283,6 @@ pub fn run(mut config: Config, stop: Arc<AtomicBool>) -> Result<(), Error> {
     };
 
     let mut pipeline: Option<Pipeline> = None;
-    let mut generation_counter = 0u32;
     let mut last_check = Instant::now() - Duration::from_secs(10);
     let mut last_stats = Instant::now();
     let mut last_telemetry_post = Instant::now();
@@ -525,8 +525,7 @@ pub fn run(mut config: Config, stop: Arc<AtomicBool>) -> Result<(), Error> {
             if needs_rebuild {
                 host.frame_generation.store(0, Ordering::Release);
                 pipeline = None;
-                generation_counter = generation_counter.wrapping_add(1);
-                let generation = ((std::process::id() & 0x00ff_ffff) << 8) | (generation_counter & 0xff);
+                let generation = frame_generation::next()?;
                 match build_pipeline(&config, &stage, &bridge, wanted, generation) {
                     Ok(built) => {
                         startup::mark(if wanted.is_some() {
@@ -537,6 +536,7 @@ pub fn run(mut config: Config, stop: Arc<AtomicBool>) -> Result<(), Error> {
                         host.frame_width.store(config.width, Ordering::Relaxed);
                         host.frame_height.store(config.height, Ordering::Relaxed);
                         host.frame_generation.store(generation, Ordering::Release);
+                        log!("capture: shared texture generation {generation}");
                         status.adapter = Some(built.gpu.adapter_name.clone());
                         status.error = None;
                         pipeline = Some(built);
@@ -1507,7 +1507,7 @@ unsafe impl Send for Instance {}
 impl Instance {
     /// Claims being the one WestPlay, or `None` if another is running.
     pub fn claim() -> Option<Self> {
-        Self::claim_named(windows::core::w!(r"Local\WestPlay.Instance"))
+        Self::claim_named(windows::core::w!(r"Local\WestPlay.ATS.Instance"))
     }
 
     fn claim_named(name: windows::core::PCWSTR) -> Option<Self> {

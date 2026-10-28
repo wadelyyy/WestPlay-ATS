@@ -5,8 +5,8 @@
 //! when it changes. All SDK callbacks arrive on the game's main thread.
 
 use std::ffi::{CStr, CString, c_char, c_void};
-use std::sync::Mutex;
 use std::sync::atomic::{AtomicBool, Ordering};
+use std::sync::{LazyLock, Mutex};
 
 use westplay_shared::{FixedStr, JobInfo, Telemetry, TruckInfo};
 
@@ -79,6 +79,33 @@ static HEAD_DEFAULT: Mutex<[f32; 3]> = Mutex::new([0.0; 3]);
 /// Where the cab turns in the truck (the "truck" configuration's `cabin.position`), published with every
 /// snapshot.
 static CABIN: Mutex<[f32; 3]> = Mutex::new([0.0; 3]);
+
+/// The SDK reports truck and Car Mode jobs independently, including empty
+/// notifications for the inactive kind. Keep both so callback order cannot
+/// erase an active Road Trip job with an empty truck-job notification.
+#[derive(Default)]
+struct Jobs {
+    truck: JobInfo,
+    car: JobInfo,
+}
+
+#[derive(Clone, Copy)]
+enum JobKind {
+    Truck,
+    Car,
+}
+
+impl Jobs {
+    fn update(&mut self, kind: JobKind, job: JobInfo) -> JobInfo {
+        match kind {
+            JobKind::Truck => self.truck = job,
+            JobKind::Car => self.car = job,
+        }
+        if self.car.active { self.car } else { self.truck }
+    }
+}
+
+static JOBS: LazyLock<Mutex<Jobs>> = LazyLock::new(|| Mutex::new(Jobs::default()));
 
 #[derive(Clone, Copy)]
 enum Field {
@@ -262,7 +289,8 @@ unsafe fn on_configuration(configuration: &ConfigurationEvent) {
         }
         match CStr::from_ptr(configuration.id).to_bytes() {
             b"truck" => on_truck(configuration),
-            b"job" => on_job(configuration),
+            b"job" => on_job(configuration, JobKind::Truck),
+            b"car_job" => on_job(configuration, JobKind::Car),
             _ => {}
         }
     }
@@ -320,7 +348,7 @@ unsafe fn on_truck(configuration: &ConfigurationEvent) {
 
 /// # Safety
 /// As [`on_configuration`].
-unsafe fn on_job(configuration: &ConfigurationEvent) {
+unsafe fn on_job(configuration: &ConfigurationEvent, kind: JobKind) {
     // SAFETY: the attributes' names are the SDK's strings, nul-terminated and alive through the call.
     unsafe {
         let mut job = JobInfo::default();
@@ -352,9 +380,39 @@ unsafe fn on_job(configuration: &ConfigurationEvent) {
             job.destination_company.as_str(),
             job.destination_city.as_str()
         );
+        let current = JOBS.lock().unwrap_or_else(|error| error.into_inner()).update(kind, job);
         if let Some(bridge) = bridge::get() {
-            bridge.plugin.job.write(&job);
+            bridge.plugin.job.write(&current);
         }
+    }
+}
+
+#[cfg(test)]
+mod job_tests {
+    use super::*;
+
+    #[test]
+    fn empty_truck_notifications_do_not_clear_an_active_car_job() {
+        let mut jobs = Jobs::default();
+        let car = JobInfo {
+            active: true,
+            cargo: FixedStr::new("Road Trip delivery"),
+            destination_city: FixedStr::new("San Francisco"),
+            ..JobInfo::default()
+        };
+        jobs.update(JobKind::Car, car);
+        assert_eq!(jobs.update(JobKind::Truck, JobInfo::default()), car);
+        assert!(!jobs.update(JobKind::Car, JobInfo::default()).active);
+    }
+
+    #[test]
+    fn truck_jobs_remain_available_after_leaving_car_mode() {
+        let mut jobs = Jobs::default();
+        let truck = JobInfo { active: true, cargo: FixedStr::new("Tomatoes"), ..JobInfo::default() };
+        assert_eq!(jobs.update(JobKind::Truck, truck), truck);
+        let car = JobInfo { active: true, cargo: FixedStr::new("Road Trip"), ..JobInfo::default() };
+        assert_eq!(jobs.update(JobKind::Car, car), car);
+        assert_eq!(jobs.update(JobKind::Car, JobInfo::default()), truck);
     }
 }
 

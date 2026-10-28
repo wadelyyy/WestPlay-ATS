@@ -43,11 +43,12 @@ use crate::profiles::{Mod, Profile};
 /// 14 (after 1.2.0): the tunnels, the roads' `tunnel` (area.rs mark_tunnels). 15 (after 2.0.3): map mods read
 /// that were left out (sectors of 895, environment areas before 901, emptied directories in protected
 /// archives) and older mods' prefabs (from version 22, skipped before); only a map that left a mod out is
-/// built again for it ([`SAME_BUT_LEFT_OUT`]).
-pub const BUILDER_VERSION: u32 = 15;
+/// built again for it ([`SAME_BUT_LEFT_OUT`]). 16: exports the mounted economy's reference time zone so ATS
+/// clocks are not shifted from ETS2's central-European baseline. Older country grids must be rebuilt.
+pub const BUILDER_VERSION: u32 = 16;
 /// The oldest builder whose maps are today's but for the mods they left out: one of those that left none out
 /// is kept (a mod's old prefabs it skipped are drawn once it's built again for another reason).
-const SAME_BUT_LEFT_OUT: u32 = 14;
+const SAME_BUT_LEFT_OUT: u32 = 16;
 
 /// The folder of the map `profile` plays, in `maps` (WestPlay's maps folder): one per map and its map mods.
 pub fn folder(maps: &Path, profile: &Profile) -> PathBuf {
@@ -99,7 +100,7 @@ pub fn mount(game: &Game, profile: &Profile) -> Result<GameFiles, FileError> {
 
 /// [`mount`], leaving out the mods whose files are `left_out`.
 fn mount_without(game: &Game, profile: &Profile, left_out: &[PathBuf]) -> Result<GameFiles, FileError> {
-    let mut files = GameFiles::install(&game.dir)?;
+    let mut files = game.files()?;
     for m in profile.map_mods() {
         if m.files.as_ref().is_some_and(|path| left_out.contains(path)) {
             continue;
@@ -380,7 +381,7 @@ mod tests {
     }
 
     #[test]
-    fn a_map_an_earlier_builder_made_is_built_again_only_if_it_left_a_mod_out() {
+    fn a_map_without_the_economy_clock_is_rebuilt_even_when_it_left_no_mod_out() {
         let profile = profile("europe", vec![a_mod("sud", &["europe"], true)]);
         let source = source(&game(), &profile, Some("en_us"));
         let dir = std::env::temp_dir().join(format!("westplay-map-left-out-{}", std::process::id()));
@@ -390,19 +391,17 @@ mod tests {
             built["builder"] = json!(builder);
             std::fs::write(dir.join("map.json"), json!({ "source": built }).to_string()).unwrap();
         };
-        // By the one before, none left out: kept. Anything else of it changed: built.
-        built_by(SAME_BUT_LEFT_OUT);
-        assert!(!needs_building(&dir, &source));
-        let mut updated = source.clone();
-        updated["game"] = json!("1.62.0.1");
-        assert!(needs_building(&dir, &updated));
-        // A mod left out: built again, to read it now.
+        // Builder 15's grid has state zones but no economy baseline. The old compatibility shortcut
+        // must not retain it just because every map mod was read successfully.
+        built_by(15);
+        assert!(needs_building(&dir, &source));
         std::fs::write(dir.join(LEFT_OUT_FILE), r#"[{"name":"Sud de France","error":"unknown item type"}]"#).unwrap();
         assert!(needs_building(&dir, &source));
         std::fs::remove_file(dir.join(LEFT_OUT_FILE)).unwrap();
-        // Older still: built.
-        built_by(SAME_BUT_LEFT_OUT - 1);
+        built_by(14);
         assert!(needs_building(&dir, &source));
+        built_by(BUILDER_VERSION);
+        assert!(!needs_building(&dir, &source));
         let _ = std::fs::remove_dir_all(dir);
     }
 }

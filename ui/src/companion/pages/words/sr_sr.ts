@@ -44,7 +44,7 @@ export const words: CompanionWords = {
     subs: {
       starting: 'WestPlay се припрема.',
       stopped: 'Језгро WestPlay-а се зауставило. Детаљи су у одељку О програму.',
-      noGame: 'Покрените Euro Truck Simulator 2 и WestPlay ће се повезати са њим.',
+      noGame: 'Покрените American Truck Simulator и WestPlay ће се повезати са њим.',
       unsupported:
         'WestPlay се не приказује на екрану овог камиона. Уградите WestPlay таблет у камион и WestPlay ће се приказати на њему.',
       notInCab: 'Игра је повезана. Седите у кабину са укљученом струјом и WestPlay ће се појавити на екрану.',
@@ -57,7 +57,7 @@ export const words: CompanionWords = {
     engine: 'Језгро WestPlay-а',
     engineRunning: 'Ради',
     engineStarting: 'Покретање…',
-    game: 'Euro Truck Simulator 2',
+    game: 'American Truck Simulator',
     gameConnected: 'Повезана',
     gameNotRunning: 'Није покренута',
     truckScreen: 'Екран камиона',
@@ -71,7 +71,7 @@ export const words: CompanionWords = {
     banners: {
       live: { title: 'Повезано', text: 'WestPlay је на екрану вашег камиона' },
       original: { title: 'Сопствени екран камиона', text: 'WestPlay је на један додир' },
-      noGame: { title: 'Чека се игра', text: 'Покрените Euro Truck Simulator 2' },
+      noGame: { title: 'Чека се игра', text: 'Покрените American Truck Simulator' },
       unsupported: { title: 'Камион није подржан', text: 'Уградите WestPlay таблет' },
       notInCab: { title: 'Игра је повезана', text: 'Уђите у камион' },
     },

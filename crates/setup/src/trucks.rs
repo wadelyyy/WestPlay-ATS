@@ -36,6 +36,12 @@ pub struct Truck {
 }
 
 pub const TRUCKS: &[Truck] = &[
+    Truck {
+        id: "ford-f150-2023",
+        name: "Ford F-150 Lariat (2023) — Road Trip: Ford",
+        source: Source::Game("ford.f150_23"),
+        layout: Some("ford-f150-2023"),
+    },
     Truck { id: "daf-xf-2021", name: "DAF XF 2021", source: Source::Game("daf.2021"), layout: Some("daf-2021") },
     Truck { id: "daf-xg-2021", name: "DAF XG & XG+ 2021", source: Source::Game("daf.2021"), layout: Some("daf-2021") },
     Truck {
@@ -141,7 +147,9 @@ pub fn fit(files: &GameFiles, patched: &[&str], profiles: &[Profile], installed:
         .iter()
         .map(|truck| {
             let in_game = match truck.source {
-                Source::Game(id) => files.read(&format!("def/vehicle/truck/{id}/data.sii")).ok().flatten().is_some(),
+                Source::Game(id) => ["truck", "car"]
+                    .iter()
+                    .any(|kind| files.read(&format!("def/vehicle/{kind}/{id}/data.sii")).ok().flatten().is_some()),
                 Source::Mod(words) => {
                     let has = |named: &str| {
                         let named = named.to_lowercase();
@@ -227,6 +235,20 @@ mod tests {
         assert_eq!(jasper(&["Jaspers_DAF_2021_v1.2".into()]), Fit::Ready);
         // A Workshop item, by its manifest's name.
         assert_eq!(jasper(&["DAF 2021 by Jasper".into()]), Fit::Ready);
+        let _ = std::fs::remove_dir_all(&root);
+    }
+
+    #[test]
+    fn finds_ford_in_the_car_definitions_and_requires_its_own_screen_layout() {
+        let (files, root) = game_with(&[]);
+        let car = root.join("def/vehicle/car/ford.f150_23");
+        std::fs::create_dir_all(&car).unwrap();
+        std::fs::write(car.join("data.sii"), "SiiNunit\n{\n}\n").unwrap();
+        let ford = |layouts: &[&str]| {
+            fit(&files, layouts, &[], &[]).into_iter().find(|(truck, _)| truck.id == "ford-f150-2023").unwrap().1
+        };
+        assert_eq!(ford(&["generic"]), Fit::NotYet);
+        assert_eq!(ford(&["ford-f150-2023"]), Fit::Ready);
         let _ = std::fs::remove_dir_all(&root);
     }
 }

@@ -1,9 +1,9 @@
 //! Which country each part of the map is in, and each country's time zone: for the cab's clock, which shows
 //! the game's time where the truck is (owner 2026-10-21: an hour early in Finland).
 //!
-//! The game's clock adds the time zone of the country the truck is in (its `country_data`'s `time_zone`, in
-//! minutes: 60 the UK and Portugal, 120 central Europe, 180 Finland, the Baltics, Romania, Bulgaria, Greece
-//! and Turkey). The SDK's game time doesn't: it reads as central Europe's.
+//! The game's clock shifts the SDK's game time from the economy's `default_time_zone` to the country's
+//! `time_zone`. Both come from the mounted game's definitions: ATS and ETS2 have different economy clocks,
+//! and a mod may replace either definition. Country secondary timezone rectangles are not exported yet.
 //!
 //! The country: a map node's flags hold the country of the road each side of it, by its `country_id` (bits
 //! 8-15 forward, 16-23 backward; found 2026-10-21 over the whole map: id 23's nodes in Finland, 10's in the
@@ -32,6 +32,8 @@ pub struct Countries {
     pub cells: Vec<u8>,
     /// Each country's time zone, minutes from UTC, by id.
     pub zones: BTreeMap<u8, i32>,
+    /// The economy's default time zone, which the SDK's unshifted game time uses; unknown if not defined.
+    pub base_zone: Option<i32>,
 }
 
 /// The countries of the roads either side of `node` (forward, backward), 0 for none.
@@ -72,7 +74,7 @@ pub fn grid<'a>(nodes: impl IntoIterator<Item = &'a Node>) -> Countries {
             country => country,
         })
         .collect();
-    Countries { x: columns.0 as f32 * CELL, z: rows.0 as f32 * CELL, width, height, cells, zones: BTreeMap::new() }
+    Countries { x: columns.0 as f32 * CELL, z: rows.0 as f32 * CELL, width, height, cells, ..Countries::default() }
 }
 
 /// The country of the nearest square with one within `SEARCH_RINGS` of `column`, `row` (by straight distance,
@@ -129,6 +131,15 @@ pub fn time_zones(files: &GameFiles) -> Result<BTreeMap<u8, i32>, FileError> {
     Ok(zones)
 }
 
+/// The reference zone of absolute game time, from the mounted economy definition and its includes.
+/// No geographic or version-specific fallback is assumed when it is missing or malformed.
+pub fn default_time_zone(files: &GameFiles) -> Result<Option<i32>, FileError> {
+    Ok(crate::sii::read_units(files, "def/economy_data.sii")?
+        .into_iter()
+        .find(|unit| unit.class == "economy_data")
+        .and_then(|unit| unit.get("default_time_zone").and_then(|value| value.parse().ok())))
+}
+
 /// The `country_id` and `time_zone` of each country definition in a file's text.
 fn zones_in(text: &str) -> Vec<(u8, i32)> {
     let value = |line: &str, name: &str| -> Option<i64> {
@@ -175,6 +186,7 @@ impl Countries {
             "height": self.height,
             "cells": cells,
             "zones": self.zones.iter().map(|(id, minutes)| (id.to_string(), minutes)).collect::<BTreeMap<_, _>>(),
+            "baseZone": self.base_zone,
         })
     }
 }
@@ -235,6 +247,7 @@ mod tests {
     fn the_page_reads_the_squares_as_hex() {
         let mut countries = grid(&[node(100.0, 100.0, 23, 23), node(1100.0, 100.0, 5, 5)]);
         countries.zones = BTreeMap::from([(5, 120), (23, 180)]);
+        countries.base_zone = Some(120);
         let json = countries.to_json();
         let (width, height) = (countries.width, countries.height);
         assert_eq!((json["width"].as_u64(), json["height"].as_u64()), (Some(width as u64), Some(height as u64)));
@@ -245,5 +258,52 @@ mod tests {
         let at = (rings * width + rings) * 2;
         assert_eq!(&cells[at..at + 4], "1705");
         assert_eq!(json["zones"]["23"], 180);
+        assert_eq!(json["baseZone"], 120);
+    }
+
+    #[test]
+    fn reads_the_economy_clock_through_its_includes() {
+        let dir = crate::test_dir::TempDir::new();
+        std::fs::create_dir_all(dir.path.join("def/economy")).unwrap();
+        std::fs::write(
+            dir.path.join("def/economy_data.sii"),
+            "SiiNunit\n{\neconomy_data : economy.data\n{\n@include \"economy/clock.sui\"\n}\n}\n",
+        )
+        .unwrap();
+        std::fs::write(dir.path.join("def/economy/clock.sui"), "default_time_zone: -360 # MDT\n").unwrap();
+        let files = GameFiles::new(vec![crate::files::Mount::Folder(dir.path.clone())]);
+        assert_eq!(default_time_zone(&files).unwrap(), Some(-360));
+    }
+
+    #[test]
+    fn a_mounted_mod_can_replace_the_economy_clock_with_utc() {
+        let base = crate::test_dir::TempDir::new();
+        let modified = crate::test_dir::TempDir::new();
+        for (dir, minutes) in [(&base.path, -360), (&modified.path, 0)] {
+            std::fs::create_dir_all(dir.join("def")).unwrap();
+            std::fs::write(
+                dir.join("def/economy_data.sii"),
+                format!("SiiNunit\n{{\neconomy_data : economy.data\n{{\ndefault_time_zone: {minutes}\n}}\n}}\n"),
+            )
+            .unwrap();
+        }
+        let files = GameFiles::new(vec![
+            crate::files::Mount::Folder(base.path.clone()),
+            crate::files::Mount::Folder(modified.path.clone()),
+        ]);
+        assert_eq!(default_time_zone(&files).unwrap(), Some(0));
+    }
+
+    #[test]
+    fn an_unknown_economy_clock_has_no_assumed_zone() {
+        let dir = crate::test_dir::TempDir::new();
+        std::fs::create_dir_all(dir.path.join("def")).unwrap();
+        std::fs::write(
+            dir.path.join("def/economy_data.sii"),
+            "SiiNunit\n{\neconomy_data : economy.data\n{\nmaximum_driving_time: 840\n}\n}\n",
+        )
+        .unwrap();
+        let files = GameFiles::new(vec![crate::files::Mount::Folder(dir.path.clone())]);
+        assert_eq!(default_time_zone(&files).unwrap(), None);
     }
 }

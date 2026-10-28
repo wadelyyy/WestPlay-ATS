@@ -18,7 +18,6 @@ use serde::Serialize;
 use tauri::{AppHandle, Manager, State, WebviewWindow};
 use westplay_host::log;
 use westplay_host::maps::SetUpGame;
-use westplay_mapdata::files::GameFiles;
 use westplay_setup::game::{self, FoundBy, Game};
 use westplay_setup::plugin::{self, InstallError};
 use westplay_setup::record::Record;
@@ -26,6 +25,7 @@ use westplay_setup::trucks::{self, Fit};
 use westplay_setup::{cab_mark, dlc, game_mod, pick, places, profiles, tablet};
 
 /// What setup did, and the game it set up, shared with the host (for the map).
+#[derive(Clone)]
 pub struct SetupStore(Arc<Inner>);
 
 struct Inner {
@@ -40,14 +40,44 @@ struct Inner {
 impl SetupStore {
     /// The record kept in `dir`, and the game it names for the host.
     pub fn load(dir: &Path, app: &AppHandle) -> Self {
-        let record = Record::load(dir);
+        let mut record = Record::load(dir);
+        let plugin_file = plugin_file(app);
+        // An installer launched outside Codex may have a different AppData namespace. Adopt an already
+        // deployed matching plugin and our own screen mod, without touching any player profiles.
+        if record.game.is_none()
+            && places::westplay_documents().is_some_and(|ours| ours.join(game_mod::FILE_NAME).is_file())
+            && let Some(ours) = &plugin_file
+            && let Some(found) =
+                game::find().into_iter().find(|game| matches!(plugin::state(game, ours), Ok(plugin::State::Current)))
+        {
+            record.game = Some(found.dir);
+            record.version = Some(VERSION.into());
+            record.finished = true;
+            if let Err(error) = record.save(dir) {
+                log!("ATS: couldn't keep the detected existing installation: {error}");
+            }
+        }
         let game = Arc::new(SetUpGame::new(record.game.clone()));
-        Self(Arc::new(Inner { dir: dir.to_path_buf(), record: Mutex::new(record), game, plugin: plugin_file(app) }))
+        Self(Arc::new(Inner { dir: dir.to_path_buf(), record: Mutex::new(record), game, plugin: plugin_file }))
     }
 
     /// The game set up, for the host.
     pub fn game(&self) -> Arc<SetUpGame> {
         self.0.game.clone()
+    }
+
+    pub fn ready_to_launch(&self) -> bool {
+        let record = self.0.record();
+        record.finished && record.game.as_deref().and_then(Game::recognise).is_some()
+    }
+
+    /// The plugin supplied by this app, for a read-only check before starting a new game.
+    pub(crate) fn bundled_plugin(&self) -> Option<&Path> {
+        self.0.plugin.as_deref()
+    }
+
+    pub fn lab_root(&self) -> Option<PathBuf> {
+        self.0.record().lab_root
     }
 }
 
@@ -67,7 +97,7 @@ impl Inner {
 
 /// WestPlay's plugin: shipped beside the app (its resources, or the app's own folder in an unbundled release
 /// build); while developing, the release build of it (the one the dev loop builds and installs).
-fn plugin_file(app: &AppHandle) -> Option<PathBuf> {
+pub(crate) fn plugin_file(app: &AppHandle) -> Option<PathBuf> {
     let candidates: Vec<PathBuf> = if cfg!(debug_assertions) {
         vec![PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../target/release").join(plugin::FILE_NAME)]
     } else {
@@ -259,7 +289,7 @@ pub async fn check_game(dir: PathBuf, store: State<'_, SetupStore>) -> Result<Ga
                 }
             })
             .collect();
-        let files = GameFiles::install(&game.dir).map_err(|e| e.to_string())?;
+        let files = game.files().map_err(|e| e.to_string())?;
         let screen_mods = game_mod::mod_screen_mods(&installed_mod_files(&game));
         let (patched, mod_problem) = match game_mod::build(&files, &[], &screen_mods, &cab_mark::Marks::default()) {
             Ok((_, built)) => (built.patched, None),
@@ -301,7 +331,7 @@ pub async fn check_game(dir: PathBuf, store: State<'_, SetupStore>) -> Result<Ga
 /// The mod built for `game` and its installed mods, and the marks of the vehicles its tablet shows nothing in
 /// (`tablet::write_apart`).
 fn build_mod(game: &Game) -> Result<(Vec<u8>, game_mod::Built, Vec<u64>), String> {
-    let files = GameFiles::install(&game.dir).map_err(|e| e.to_string())?;
+    let files = game.files().map_err(|e| e.to_string())?;
     let mods = installed_mod_files(game);
     let (mod_trucks, apart) = tablet::mod_trucks_and_marks(&mods);
     let marks = cab_mark::for_tablet(&files, &mods, &mod_trucks);
@@ -366,7 +396,7 @@ fn look_at_mods(inner: &Inner, looked: &mut Option<ModsStamp>) {
     if looked.as_ref() == Some(&stamp) {
         return;
     }
-    let files = match GameFiles::install(&game.dir) {
+    let files = match game.files() {
         Ok(files) => files,
         Err(error) => return log!("setup: the installed mods: the game can't be read: {error}"),
     };
@@ -443,7 +473,7 @@ pub struct InstallReport {
     /// Why the mod couldn't be built or written, if it couldn't.
     mod_error: Option<String>,
     /// Everything's in: WestPlay is set up in this game (its map is built next).
-    done: bool,
+    pub(crate) done: bool,
 }
 
 /// Installs WestPlay into the game in `dir`: its mod, built from this game, into WestPlay's own folder (the
@@ -488,15 +518,8 @@ fn install_mod(game: &Game) -> Result<(), String> {
     let ours = places::westplay_documents().ok_or("noDocuments")?;
     game_mod::install(&bytes, &ours).map_err(|e| format!("Couldn't write the mod: {e}"))?;
     tablet::write_apart(&apart, &ours).map_err(|e| format!("Couldn't write the mod: {e}"))?;
-    if let Some(documents) = places::game_documents() {
-        westplay_setup::uninstall::remove_mod(&documents)
-            .map_err(|e| format!("Couldn't take the old mod out of the game's mod folder: {e}"))?;
-        let userdata = places::steam().map(|steam| steam.join("userdata"));
-        let profiles = westplay_setup::uninstall::remove_from_profiles(&documents, userdata.as_deref());
-        for (file, error) in &profiles.failed {
-            log!("setup: WestPlay's old mod left in {}: {error}", file.display());
-        }
-    }
+    // The ATS fork has its own directory. Never migrate/delete an original mod or rewrite personal
+    // profiles automatically; a legacy copy is diagnosed rather than silently removed.
     Ok(())
 }
 
@@ -561,16 +584,14 @@ pub async fn uninstall_from_game(administrator: bool, store: State<'_, SetupStor
         if game::running() {
             return Err("gameRunning".into());
         }
-        let documents = places::game_documents().ok_or("noDocuments")?;
-        let userdata = places::steam().map(|steam| steam.join("userdata"));
-        let profiles = westplay_setup::uninstall::remove_from_profiles(&documents, userdata.as_deref());
-        let mod_error = westplay_setup::uninstall::remove_mod(&documents)
-            .and_then(|()| match places::westplay_documents() {
-                Some(ours) => westplay_setup::uninstall::remove_mod_from(&ours),
-                None => Ok(()),
-            })
-            .err()
-            .map(|e| e.to_string());
+        // This fork mounts its mod from its own folder. Personal profiles and manually installed mods
+        // never need rewriting, either during installation or uninstallation.
+        let mod_error = match places::westplay_documents() {
+            Some(ours) => westplay_setup::uninstall::remove_mod_from(&ours),
+            None => Ok(()),
+        }
+        .err()
+        .map(|e| e.to_string());
         let plugin = match inner.record().game.as_deref().and_then(Game::recognise) {
             // No game set up (or it's gone): no plugin of WestPlay's anywhere to take out.
             None => PluginOutcome::Installed,
@@ -587,13 +608,7 @@ pub async fn uninstall_from_game(administrator: bool, store: State<'_, SetupStor
             }
         };
         let done = mod_error.is_none() && matches!(plugin, PluginOutcome::Installed);
-        Ok(UninstallReport {
-            plugin,
-            mod_error,
-            profiles_changed: profiles.changed,
-            profiles_failed: profiles.failed.len(),
-            done,
-        })
+        Ok(UninstallReport { plugin, mod_error, profiles_changed: 0, profiles_failed: 0, done })
     })
     .await
 }
@@ -675,8 +690,8 @@ pub fn leave_pc(keep: bool, app: AppHandle, store: State<SetupStore>) -> Result<
     } else {
         vec![data, config]
     };
-    if let Some(documents) = places::documents() {
-        paths.push(documents.join("WestPlay"));
+    if let Some(documents) = places::westplay_documents() {
+        paths.push(documents);
     }
     let uninstaller = std::env::current_exe().ok().and_then(|exe| Some(exe.parent()?.join("uninstall.exe")));
     after_exit(&paths, uninstaller.filter(|path| path.is_file()).as_deref())?;

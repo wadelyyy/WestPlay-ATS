@@ -44,7 +44,7 @@ export const words: CompanionWords = {
     subs: {
       starting: 'A WestPlay készülődik.',
       stopped: 'A WestPlay motorja leállt. A részleteket a Névjegyben találod.',
-      noGame: 'Indítsd el az Euro Truck Simulator 2-t, és a WestPlay csatlakozik hozzá.',
+      noGame: 'Indítsd el az American Truck Simulator-t, és a WestPlay csatlakozik hozzá.',
       unsupported:
         'A WestPlay nem jelenik meg ennek a kamionnak a képernyőjén. Szereld be a WestPlay tabletet a kamionodba, és a WestPlay azon jelenik meg.',
       notInCab:
@@ -58,7 +58,7 @@ export const words: CompanionWords = {
     engine: 'WestPlay-motor',
     engineRunning: 'Fut',
     engineStarting: 'Indul…',
-    game: 'Euro Truck Simulator 2',
+    game: 'American Truck Simulator',
     gameConnected: 'Csatlakozva',
     gameNotRunning: 'Nem fut',
     truckScreen: 'Kamion képernyője',
@@ -72,7 +72,7 @@ export const words: CompanionWords = {
     banners: {
       live: { title: 'Csatlakozva', text: 'A WestPlay a kamionod képernyőjén van' },
       original: { title: 'A kamion saját képernyője', text: 'A WestPlay egy érintésnyire van' },
-      noGame: { title: 'Várakozás a játékra', text: 'Indítsd el az Euro Truck Simulator 2-t' },
+      noGame: { title: 'Várakozás a játékra', text: 'Indítsd el az American Truck Simulator-t' },
       unsupported: { title: 'A kamion nem támogatott', text: 'Szereld be a WestPlay tabletet' },
       notInCab: { title: 'A játék csatlakozott', text: 'Ülj be a kamionodba' },
     },

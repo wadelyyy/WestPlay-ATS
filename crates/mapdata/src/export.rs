@@ -173,13 +173,15 @@ pub fn export(
     // Which country each part of the map is in, and their time zones: the cab's clock (countries.rs). Countries
     // that can't be read leave the zones out (the clock then the game's time): never the map for the clock.
     let mut countries = countries::grid(map.nodes.values());
-    let time_zones_unread = match countries::time_zones(files) {
-        Ok(zones) => {
-            countries.zones = zones;
-            None
-        }
-        Err(error) => Some(error.to_string()),
-    };
+    let time_zones_unread =
+        match countries::time_zones(files).and_then(|zones| Ok((zones, countries::default_time_zone(files)?))) {
+            Ok((zones, base_zone)) => {
+                countries.zones = zones;
+                countries.base_zone = base_zone;
+                base_zone.is_none().then(|| "the game economy's default time zone is unavailable".to_owned())
+            }
+            Err(error) => Some(error.to_string()),
+        };
     let strings = match &options.language {
         Some(language) => Strings::load(files, language)?,
         None => Strings::default(),
@@ -363,7 +365,7 @@ pub fn export(
     // The manifest last, written whole: a map loading meanwhile finds the previous one.
     let partial = out.join("map.json.partial");
     std::fs::write(&partial, serde_json::to_vec(&manifest).map_err(std::io::Error::other)?)?;
-    std::fs::rename(&partial, out.join("map.json"))?;
+    westplay_shared::fs::replace_file(&partial, out.join("map.json"))?;
     // Older tile sets go, but not the previous one or any from the last day: a map still running from one
     // (exports made one after another while it runs) keeps its tiles.
     for entry in std::fs::read_dir(out).into_iter().flatten().flatten() {

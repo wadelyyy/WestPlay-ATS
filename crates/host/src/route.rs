@@ -396,7 +396,7 @@ impl JunctionFiles {
         });
         let (map, mods) = match &played {
             Some((_, profile)) => (profile.map.clone(), profile.map_mods().filter_map(|m| m.files.clone()).collect()),
-            None => ("europe".to_owned(), Vec::new()),
+            None => (westplay_setup::profiles::BASE_MAP.to_owned(), Vec::new()),
         };
         Self { install: install.to_owned(), map, mods, played }
     }
@@ -849,7 +849,7 @@ mod tests {
 
         // Not worked out yet: the base game's map alone.
         let base = JunctionFiles::of(running, None);
-        assert_eq!((base.map.as_str(), base.mods.len()), ("europe", 0));
+        assert_eq!((base.map.as_str(), base.mods.len()), ("usa", 0));
         assert_ne!(base, files);
 
         // A save changes nothing read (the files stay open); other map mods do.

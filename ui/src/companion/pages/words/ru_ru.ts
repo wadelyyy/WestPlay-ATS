@@ -44,7 +44,7 @@ export const words: CompanionWords = {
     subs: {
       starting: 'WestPlay готовится.',
       stopped: 'Движок WestPlay остановился. Подробности — в разделе «О программе».',
-      noGame: 'Запустите Euro Truck Simulator 2, и WestPlay подключится к нему.',
+      noGame: 'Запустите American Truck Simulator, и WestPlay подключится к нему.',
       unsupported:
         'WestPlay не отображается на экране этого грузовика. Установите в грузовик планшет WestPlay — WestPlay появится на нём.',
       notInCab: 'Игра подключена. Сядьте в кабину с включённой электрикой, и WestPlay появится на экране.',
@@ -57,7 +57,7 @@ export const words: CompanionWords = {
     engine: 'Движок WestPlay',
     engineRunning: 'Работает',
     engineStarting: 'Запуск…',
-    game: 'Euro Truck Simulator 2',
+    game: 'American Truck Simulator',
     gameConnected: 'Подключена',
     gameNotRunning: 'Не запущена',
     truckScreen: 'Экран грузовика',
@@ -71,7 +71,7 @@ export const words: CompanionWords = {
     banners: {
       live: { title: 'Подключено', text: 'WestPlay на экране вашего грузовика' },
       original: { title: 'Собственный экран грузовика', text: 'WestPlay в одном касании' },
-      noGame: { title: 'Ожидание игры', text: 'Запустите Euro Truck Simulator 2' },
+      noGame: { title: 'Ожидание игры', text: 'Запустите American Truck Simulator' },
       unsupported: { title: 'Грузовик не поддерживается', text: 'Установите планшет WestPlay' },
       notInCab: { title: 'Игра подключена', text: 'Садитесь в грузовик' },
     },

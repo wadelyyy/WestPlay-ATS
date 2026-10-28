@@ -44,7 +44,7 @@ export const words: CompanionWords = {
     subs: {
       starting: 'WestPlay gatavojas.',
       stopped: 'WestPlay dzinējs apstājās. Sīkāka informācija ir sadaļā Par.',
-      noGame: 'Palaid Euro Truck Simulator 2, un WestPlay ar to savienosies.',
+      noGame: 'Palaid American Truck Simulator, un WestPlay ar to savienosies.',
       unsupported:
         'WestPlay netiek rādīts šī kravas auto ekrānā. Uzstādi WestPlay planšeti savā kravas auto, un WestPlay tiks rādīts tajā.',
       notInCab: 'Spēle ir savienota. Sēdies kabīnē ar ieslēgtu elektrību, un WestPlay parādīsies ekrānā.',
@@ -57,7 +57,7 @@ export const words: CompanionWords = {
     engine: 'WestPlay dzinējs',
     engineRunning: 'Darbojas',
     engineStarting: 'Startē…',
-    game: 'Euro Truck Simulator 2',
+    game: 'American Truck Simulator',
     gameConnected: 'Savienota',
     gameNotRunning: 'Nedarbojas',
     truckScreen: 'Kravas auto ekrāns',
@@ -71,7 +71,7 @@ export const words: CompanionWords = {
     banners: {
       live: { title: 'Savienots', text: 'WestPlay ir tava kravas auto ekrānā' },
       original: { title: 'Kravas auto paša ekrāns', text: 'WestPlay ir viena pieskāriena attālumā' },
-      noGame: { title: 'Gaida spēli', text: 'Palaid Euro Truck Simulator 2' },
+      noGame: { title: 'Gaida spēli', text: 'Palaid American Truck Simulator' },
       unsupported: { title: 'Kravas auto netiek atbalstīts', text: 'Uzstādi WestPlay planšeti' },
       notInCab: { title: 'Spēle savienota', text: 'Kāp savā kravas auto' },
     },

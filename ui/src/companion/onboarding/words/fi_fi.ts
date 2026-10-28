@@ -6,7 +6,7 @@ export const words: Words = {
   continue: 'Jatka',
   welcome: {
     title: 'CarPlay ohjaamossasi',
-    sub: 'WestPlay tuo CarPlayn rekkasi näytölle Euro Truck Simulator 2:ssa. Käyttöönotto vie vain muutaman minuutin.',
+    sub: 'WestPlay tuo CarPlayn rekkasi näytölle American Truck Simulator:ssa. Käyttöönotto vie vain muutaman minuutin.',
     start: 'Aloitetaan',
   },
   summary: {
@@ -20,19 +20,19 @@ export const words: Words = {
   game: {
     title: 'Pelisi',
     titleMissing: 'Missä pelisi on?',
-    found: 'WestPlay löysi Euro Truck Simulator 2:n tältä tietokoneelta.',
-    foundMany: 'Euro Truck Simulator 2 on asennettu useaan paikkaan. Valitse se, jota pelaat.',
+    found: 'WestPlay löysi American Truck Simulator:n tältä tietokoneelta.',
+    foundMany: 'American Truck Simulator on asennettu useaan paikkaan. Valitse se, jota pelaat.',
     missing:
-      'WestPlay ei löytänyt Euro Truck Simulator 2:ta. Valitse kansio, johon asensit sen – se, jossa on base.scs.',
+      'WestPlay ei löytänyt American Truck Simulator:ta. Valitse kansio, johon asensit sen – se, jossa on base.scs.',
     chooseAnother: 'Käytä toista kansiota…',
     chooseFolder: 'Valitse kansio…',
-    picker: 'Valitse Euro Truck Simulator 2:n kansio',
+    picker: 'Valitse American Truck Simulator:n kansio',
     bannerMissing: 'Jatka valitsemalla sen kansio',
-    notTheGame: 'Tässä kansiossa ei ole Euro Truck Simulator 2:ta. Valitse se, jossa on base.scs.',
+    notTheGame: 'Tässä kansiossa ei ole American Truck Simulator:ta. Valitse se, jossa on base.scs.',
     gameGone: 'Peli ei ole enää tässä kansiossa.',
     closeToGoOn: {
       title: 'Sulje peli.',
-      text: 'WestPlay voi ottaa itsensä käyttöön vain, kun Euro Truck Simulator 2 ei ole käynnissä.',
+      text: 'WestPlay voi ottaa itsensä käyttöön vain, kun American Truck Simulator ei ole käynnissä.',
     },
   },
   check: {
@@ -90,7 +90,7 @@ export const words: Words = {
     },
     closeToInstall: {
       title: 'Sulje peli.',
-      text: 'WestPlayta ei voi asentaa, kun Euro Truck Simulator 2 on käynnissä.',
+      text: 'WestPlayta ei voi asentaa, kun American Truck Simulator on käynnissä.',
     },
     inUse: {
       title: 'Sulje peli.',

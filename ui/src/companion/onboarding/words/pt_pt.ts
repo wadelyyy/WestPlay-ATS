@@ -6,7 +6,7 @@ export const words: Words = {
   continue: 'Continuar',
   welcome: {
     title: 'CarPlay na sua cabina',
-    sub: 'O WestPlay leva o CarPlay para o ecrã do seu camião no Euro Truck Simulator 2. A configuração demora só alguns minutos.',
+    sub: 'O WestPlay leva o CarPlay para o ecrã do seu camião no American Truck Simulator. A configuração demora só alguns minutos.',
     start: 'Começar',
   },
   summary: {
@@ -20,19 +20,19 @@ export const words: Words = {
   game: {
     title: 'O seu jogo',
     titleMissing: 'Onde está o seu jogo?',
-    found: 'O WestPlay encontrou o Euro Truck Simulator 2 neste PC.',
-    foundMany: 'O Euro Truck Simulator 2 está instalado em mais de um local. Escolha aquele com que joga.',
+    found: 'O WestPlay encontrou o American Truck Simulator neste PC.',
+    foundMany: 'O American Truck Simulator está instalado em mais de um local. Escolha aquele com que joga.',
     missing:
-      'O WestPlay não encontrou o Euro Truck Simulator 2. Escolha a pasta onde o instalou, a que contém o base.scs.',
+      'O WestPlay não encontrou o American Truck Simulator. Escolha a pasta onde o instalou, a que contém o base.scs.',
     chooseAnother: 'Usar outra pasta…',
     chooseFolder: 'Escolher pasta…',
-    picker: 'Escolha a sua pasta do Euro Truck Simulator 2',
+    picker: 'Escolha a sua pasta do American Truck Simulator',
     bannerMissing: 'Escolha a pasta para continuar',
-    notTheGame: 'Esta pasta não contém o Euro Truck Simulator 2. Escolha a que contém o base.scs.',
+    notTheGame: 'Esta pasta não contém o American Truck Simulator. Escolha a que contém o base.scs.',
     gameGone: 'O jogo já não está nesta pasta.',
     closeToGoOn: {
       title: 'Feche o jogo.',
-      text: 'O WestPlay só se consegue configurar enquanto o Euro Truck Simulator 2 não está aberto.',
+      text: 'O WestPlay só se consegue configurar enquanto o American Truck Simulator não está aberto.',
     },
   },
   check: {
@@ -91,7 +91,7 @@ export const words: Words = {
     },
     closeToInstall: {
       title: 'Feche o jogo.',
-      text: 'O WestPlay não pode ser instalado enquanto o Euro Truck Simulator 2 está aberto.',
+      text: 'O WestPlay não pode ser instalado enquanto o American Truck Simulator está aberto.',
     },
     inUse: {
       title: 'Feche o jogo.',

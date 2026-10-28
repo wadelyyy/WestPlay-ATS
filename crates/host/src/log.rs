@@ -18,7 +18,7 @@ static PLACE: OnceLock<PathBuf> = OnceLock::new();
 
 /// Where the log is kept: `Documents\WestPlay\logs`, none if Documents can't be found.
 pub fn dir() -> Option<PathBuf> {
-    Some(westplay_setup::places::documents()?.join("WestPlay").join("logs"))
+    Some(westplay_setup::places::westplay_documents()?.join("logs"))
 }
 
 /// Where the log is kept when Documents refuses it: WestPlay's own data folder (`%LOCALAPPDATA%\app.westplay`,
@@ -26,7 +26,7 @@ pub fn dir() -> Option<PathBuf> {
 /// player's ransomware protection (Windows Security's Controlled folder access, 2026-10-24) let the game write
 /// its `plugin.log` in Documents but not WestPlay: there was no `app.log`, and nothing said why.
 fn fallback_dir() -> Option<PathBuf> {
-    Some(PathBuf::from(std::env::var_os("LOCALAPPDATA")?).join("app.westplay").join("logs"))
+    Some(PathBuf::from(std::env::var_os("LOCALAPPDATA")?).join("app.westplay.ats").join("logs"))
 }
 
 /// Where this run's `app.log` is (the companion's About shows it); `None` if it couldn't be made anywhere.

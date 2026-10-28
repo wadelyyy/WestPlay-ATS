@@ -346,7 +346,7 @@ pub fn write_apart(marks: &[u64], dir: &Path) -> std::io::Result<()> {
     let path = dir.join(westplay_shared::TABLET_APART_FILE);
     let partial = dir.join(format!("{}.partial", westplay_shared::TABLET_APART_FILE));
     std::fs::write(&partial, westplay_shared::write_marks(marks))?;
-    std::fs::rename(&partial, &path)
+    westplay_shared::fs::replace_file(&partial, &path)
 }
 
 /// Words that set a mod apart, by their hashes (`cityhash::city_hash64` of the word, in lower case): a mod is

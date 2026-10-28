@@ -54,6 +54,75 @@ button {
     sans-serif;
 }
 
+/* ATS controls retain the companion's grouped glass surfaces and stay within its scrollable page. */
+.ats-launch-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.ats-launch-actions > .ob-button {
+  width: 100%;
+}
+
+.ats-launch-note,
+.ats-diagnostics {
+  font-size: 12px;
+  line-height: 1.55;
+  color: var(--text-dim);
+}
+
+.ats-tools {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-top: 14px;
+}
+
+.ats-tools .ob-button {
+  min-height: 36px;
+  padding-inline: 11px;
+}
+
+.ats-feedback:empty {
+  display: none;
+}
+
+.ats-diagnostics {
+  margin-top: 16px;
+  padding: 12px;
+  border: 1px solid rgb(255 255 255 / 0.08);
+  border-radius: 12px;
+  background: rgb(28 28 31 / 0.88);
+}
+
+.ats-diagnostics summary {
+  cursor: pointer;
+  color: var(--text);
+}
+
+.ats-diagnostics dl {
+  display: grid;
+  grid-template-columns: 76px minmax(0, 1fr);
+  gap: 6px 8px;
+  margin-block: 12px;
+}
+
+.ats-diagnostics dd {
+  overflow-wrap: anywhere;
+}
+
+.ats-diagnostics p + p {
+  margin-top: 8px;
+}
+
+.ats-tools button:focus-visible,
+.ats-launch-actions button:focus-visible,
+.ats-diagnostics summary:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 3px;
+}
+
 /* ---------- The screen, turned aside at the right ---------- */
 
 /* Smaller than in the onboarding's steps, and turned further towards the page: it's what each section is

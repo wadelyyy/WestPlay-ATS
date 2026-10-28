@@ -6,7 +6,7 @@ export const words: Words = {
   continue: 'Pokračovať',
   welcome: {
     title: 'CarPlay vo vašej kabíne',
-    sub: 'WestPlay prináša CarPlay na obrazovku vášho kamióna v Euro Truck Simulator 2. Nastavenie zaberie len pár minút.',
+    sub: 'WestPlay prináša CarPlay na obrazovku vášho kamióna v American Truck Simulator. Nastavenie zaberie len pár minút.',
     start: 'Začať',
   },
   summary: {
@@ -20,19 +20,19 @@ export const words: Words = {
   game: {
     title: 'Vaša hra',
     titleMissing: 'Kde je vaša hra?',
-    found: 'WestPlay našiel Euro Truck Simulator 2 na tomto počítači.',
-    foundMany: 'Euro Truck Simulator 2 je nainštalovaný na viacerých miestach. Vyberte ten, ktorý hráte.',
+    found: 'WestPlay našiel American Truck Simulator na tomto počítači.',
+    foundMany: 'American Truck Simulator je nainštalovaný na viacerých miestach. Vyberte ten, ktorý hráte.',
     missing:
-      'WestPlay nenašiel Euro Truck Simulator 2. Vyberte priečinok, do ktorého ste hru nainštalovali – ten so súborom base.scs.',
+      'WestPlay nenašiel American Truck Simulator. Vyberte priečinok, do ktorého ste hru nainštalovali – ten so súborom base.scs.',
     chooseAnother: 'Použiť iný priečinok…',
     chooseFolder: 'Vybrať priečinok…',
-    picker: 'Vyberte priečinok Euro Truck Simulator 2',
+    picker: 'Vyberte priečinok American Truck Simulator',
     bannerMissing: 'Ak chcete pokračovať, vyberte jej priečinok',
-    notTheGame: 'Tento priečinok neobsahuje Euro Truck Simulator 2. Vyberte ten so súborom base.scs.',
+    notTheGame: 'Tento priečinok neobsahuje American Truck Simulator. Vyberte ten so súborom base.scs.',
     gameGone: 'Hra už v tomto priečinku nie je.',
     closeToGoOn: {
       title: 'Zatvorte, prosím, hru.',
-      text: 'WestPlay sa môže nastaviť, len keď Euro Truck Simulator 2 nebeží.',
+      text: 'WestPlay sa môže nastaviť, len keď American Truck Simulator nebeží.',
     },
   },
   check: {
@@ -92,7 +92,7 @@ export const words: Words = {
     },
     closeToInstall: {
       title: 'Zatvorte, prosím, hru.',
-      text: 'WestPlay sa nedá nainštalovať, keď Euro Truck Simulator 2 beží.',
+      text: 'WestPlay sa nedá nainštalovať, keď American Truck Simulator beží.',
     },
     inUse: {
       title: 'Zatvorte, prosím, hru.',

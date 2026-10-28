@@ -7,7 +7,7 @@ export const words: Words = {
   continue: 'გაგრძელება',
   welcome: {
     title: 'CarPlay თქვენს კაბინაში',
-    sub: 'WestPlay CarPlay-ს თქვენი სატვირთოს ეკრანზე გამოიტანს Euro Truck Simulator 2-ში. დაყენებას მხოლოდ რამდენიმე წუთი სჭირდება.',
+    sub: 'WestPlay CarPlay-ს თქვენი სატვირთოს ეკრანზე გამოიტანს American Truck Simulator-ში. დაყენებას მხოლოდ რამდენიმე წუთი სჭირდება.',
     start: 'დაწყება',
   },
   summary: {
@@ -21,19 +21,19 @@ export const words: Words = {
   game: {
     title: 'თქვენი თამაში',
     titleMissing: 'სად არის თქვენი თამაში?',
-    found: 'WestPlay-მ ამ კომპიუტერზე იპოვა Euro Truck Simulator 2.',
-    foundMany: 'Euro Truck Simulator 2 რამდენიმე ადგილას არის დაყენებული. აირჩიეთ ის, რომელსაც თამაშობთ.',
+    found: 'WestPlay-მ ამ კომპიუტერზე იპოვა American Truck Simulator.',
+    foundMany: 'American Truck Simulator რამდენიმე ადგილას არის დაყენებული. აირჩიეთ ის, რომელსაც თამაშობთ.',
     missing:
-      'WestPlay-მ ვერ იპოვა Euro Truck Simulator 2. აირჩიეთ საქაღალდე, სადაც ის დააყენეთ – ის, რომელშიც base.scs არის.',
+      'WestPlay-მ ვერ იპოვა American Truck Simulator. აირჩიეთ საქაღალდე, სადაც ის დააყენეთ – ის, რომელშიც base.scs არის.',
     chooseAnother: 'სხვა საქაღალდის გამოყენება…',
     chooseFolder: 'საქაღალდის არჩევა…',
-    picker: 'აირჩიეთ Euro Truck Simulator 2-ის საქაღალდე',
+    picker: 'აირჩიეთ American Truck Simulator-ის საქაღალდე',
     bannerMissing: 'გასაგრძელებლად აირჩიეთ მისი საქაღალდე',
-    notTheGame: 'ამ საქაღალდეში Euro Truck Simulator 2 არ არის. აირჩიეთ ის, რომელშიც base.scs არის.',
+    notTheGame: 'ამ საქაღალდეში American Truck Simulator არ არის. აირჩიეთ ის, რომელშიც base.scs არის.',
     gameGone: 'თამაში ამ საქაღალდეში აღარ არის.',
     closeToGoOn: {
       title: 'გთხოვთ, დახუროთ თამაში.',
-      text: 'WestPlay-ის დაყენება მხოლოდ მაშინ შეიძლება, როცა Euro Truck Simulator 2 გაშვებული არ არის.',
+      text: 'WestPlay-ის დაყენება მხოლოდ მაშინ შეიძლება, როცა American Truck Simulator გაშვებული არ არის.',
     },
   },
   check: {
@@ -92,7 +92,7 @@ export const words: Words = {
     },
     closeToInstall: {
       title: 'გთხოვთ, დახუროთ თამაში.',
-      text: 'WestPlay-ს ვერ დააყენებთ, სანამ Euro Truck Simulator 2 გაშვებულია.',
+      text: 'WestPlay-ს ვერ დააყენებთ, სანამ American Truck Simulator გაშვებულია.',
     },
     inUse: {
       title: 'გთხოვთ, დახუროთ თამაში.',

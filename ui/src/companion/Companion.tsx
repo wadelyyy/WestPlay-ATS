@@ -4,6 +4,7 @@ import { appVersion, call, PREVIEW_TUTORIAL } from './bridge'
 import { Onboarding } from './onboarding/Onboarding'
 import { languageOf, percent, type Words, wordsFor } from './onboarding/words'
 import { About } from './pages/About'
+import { AtsPage } from './pages/AtsPage'
 import { useHeldKey } from './pages/heldKey'
 import { Lesson, TouchLayer } from './pages/Lesson'
 import { Launch, TourCard } from './pages/Tour'
@@ -15,7 +16,6 @@ import { MapPage } from './pages/MapPage'
 import { screenState } from './pages/page'
 import { ScreenPage } from './pages/ScreenPage'
 import { Setup } from './pages/Setup'
-import { Support } from './pages/Support'
 import { UninstallSheet } from './pages/UninstallSheet'
 import { FinishUpdate, UpdateSheet } from './pages/UpdateSheet'
 import { type CompanionWords, companionWords, type SectionId } from './pages/words'
@@ -77,14 +77,15 @@ export function Companion() {
   )
 }
 
-const SECTIONS: SectionId[][] = [
-  ['screen', 'controls', 'customize'],
+type CompanionSection = Exclude<SectionId, 'support'> | 'ats'
+
+const SECTIONS: CompanionSection[][] = [
+  ['ats', 'screen', 'controls', 'customize'],
   ['accounts', 'map'],
   ['setup', 'about'],
-  ['support'],
 ]
 /** The sections in order: the tutorial's tour goes through them. */
-const TOUR = SECTIONS.flat()
+const TOUR = SECTIONS.flat().filter((section) => section !== 'ats')
 
 /** The room as it is: the tutorial's lesson (the screen full size), its tour of the sections, its end
  * (what to do in the game), or the companion. */
@@ -94,7 +95,8 @@ type Phase = 'lesson' | 'tour' | 'launch' | 'room'
 const POSE: Record<Phase, Pose> = { lesson: 'full', tour: 'aside', launch: 'final', room: 'aside' }
 
 /** The light the screen casts while each section is up. */
-const SECTION_GLOW: Record<SectionId, string> = {
+const SECTION_GLOW: Record<CompanionSection, string> = {
+  ats: GLOW.home,
   screen: GLOW.home,
   controls: GLOW.home,
   customize: GLOW.home,
@@ -102,7 +104,6 @@ const SECTION_GLOW: Record<SectionId, string> = {
   map: GLOW.maps,
   setup: GLOW.scan,
   about: GLOW.dashboard,
-  support: GLOW.home,
 }
 
 /** How long a page's words take to leave before the next one's arrive. */
@@ -127,7 +128,7 @@ function Room({
   const [code] = useState(() => setup.language ?? languageOf(navigator.languages))
   const words = wordsFor(code)
   const cw = companionWords(code)
-  const [section, setSection] = useState<SectionId>('screen')
+  const [section, setSection] = useState<CompanionSection>(tutorial ? 'screen' : 'ats')
   const [leaving, setLeaving] = useState(false)
   const [phase, setPhase] = useState<Phase>(tutorial ?? 'room')
   // The screen comes out of the dive the onboarding ended in, to where the phase has it.
@@ -224,7 +225,7 @@ function Room({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [mapKey, demo.ready, send])
 
-  const open = (next: SectionId) => {
+  const open = (next: CompanionSection) => {
     if (next === section || leaving) return
     setLeaving(true)
     window.setTimeout(() => {
@@ -241,7 +242,7 @@ function Room({
   }
 
   const nextInTour = () => {
-    const at = TOUR.indexOf(section)
+    const at = section === 'ats' ? -1 : TOUR.indexOf(section)
     if (at === TOUR.length - 1) setPhase('launch')
     else open(TOUR[at + 1])
   }
@@ -308,6 +309,7 @@ function Room({
             {phase === 'launch' && (
               <Launch
                 done={() => {
+                  setSection('ats')
                   setPhase('room')
                   tutorialDone?.()
                 }}
@@ -327,6 +329,14 @@ function Room({
                 mapProgress={mapProgress}
               />
             )}
+            {roomShown && section === 'ats' && (
+              <AtsPage
+                status={status}
+                openSettings={() => open('setup')}
+                openAccounts={() => open('accounts')}
+                uninstall={page.uninstall}
+              />
+            )}
             {roomShown && section === 'screen' && <ScreenPage {...page} />}
             {roomShown && section === 'controls' && <Controls {...page} />}
             {roomShown && section === 'customize' && <Customize {...page} />}
@@ -334,8 +344,7 @@ function Room({
             {roomShown && section === 'map' && <MapPage {...page} />}
             {roomShown && section === 'setup' && <Setup {...page} />}
             {roomShown && section === 'about' && <About {...page} />}
-            {roomShown && section === 'support' && <Support {...page} />}
-            {phase === 'tour' && (
+            {phase === 'tour' && section !== 'ats' && (
               <TourCard cw={cw} section={section} last={section === TOUR[TOUR.length - 1]} next={nextInTour} />
             )}
             {uninstalling && (
@@ -369,8 +378,8 @@ function SectionList({
   update,
   mapProgress,
 }: {
-  section: SectionId
-  open(section: SectionId): void
+  section: CompanionSection
+  open(section: CompanionSection): void
   cw: CompanionWords
   words: Words
   status: HostStatus | null
@@ -391,7 +400,8 @@ function SectionList({
     if (row) setLit({ top: row.offsetTop, height: row.offsetHeight })
   }, [section])
 
-  const value: Record<SectionId, string> = {
+  const value: Record<CompanionSection, string> = {
+    ats: status?.gameConnected ? '已连接' : '启动与诊断',
     screen:
       state === 'live'
         ? cw.values.on
@@ -413,7 +423,6 @@ function SectionList({
     map: mapValue(status, mapProgress, cw, words),
     setup: setup.game?.version ?? '',
     about: update ? cw.update.badge : version,
-    support: '',
   }
 
   let place = 2
@@ -422,7 +431,7 @@ function SectionList({
       <header className="cp-brand ob-in" style={n(0)}>
         <img src="/westplay.png" alt="" />
         <span>
-          <b>WestPlay</b>
+          <b>ATS WestPlay</b>
           <span className="cp-state" data-state={state}>
             <i />
             {cw.state[state]}
@@ -442,7 +451,7 @@ function SectionList({
               data-here={id === section || undefined}
               onClick={() => open(id)}
             >
-              <b>{cw.sections[id]}</b>
+              <b>{id === 'ats' ? 'ATS 启动台' : cw.sections[id]}</b>
               <span>{value[id]}</span>
             </button>
           ))}

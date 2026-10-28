@@ -8,7 +8,7 @@ export const words: Words = {
   continue: 'Turpināt',
   welcome: {
     title: 'CarPlay tavā kabīnē',
-    sub: 'WestPlay ienes CarPlay tava kravas auto ekrānā spēlē Euro Truck Simulator 2. Iestatīšana aizņem tikai dažas minūtes.',
+    sub: 'WestPlay ienes CarPlay tava kravas auto ekrānā spēlē American Truck Simulator. Iestatīšana aizņem tikai dažas minūtes.',
     start: 'Sākt',
   },
   summary: {
@@ -22,18 +22,18 @@ export const words: Words = {
   game: {
     title: 'Tava spēle',
     titleMissing: 'Kur ir tava spēle?',
-    found: 'WestPlay atrada Euro Truck Simulator 2 šajā datorā.',
-    foundMany: 'Euro Truck Simulator 2 ir instalēta vairākās vietās. Izvēlies to, kuru spēlē.',
-    missing: 'WestPlay neatrada Euro Truck Simulator 2. Izvēlies mapi, kurā to instalēji, – to, kurā ir base.scs.',
+    found: 'WestPlay atrada American Truck Simulator šajā datorā.',
+    foundMany: 'American Truck Simulator ir instalēta vairākās vietās. Izvēlies to, kuru spēlē.',
+    missing: 'WestPlay neatrada American Truck Simulator. Izvēlies mapi, kurā to instalēji, – to, kurā ir base.scs.',
     chooseAnother: 'Izmantot citu mapi…',
     chooseFolder: 'Izvēlēties mapi…',
-    picker: 'Izvēlies Euro Truck Simulator 2 mapi',
+    picker: 'Izvēlies American Truck Simulator mapi',
     bannerMissing: 'Lai turpinātu, izvēlies tās mapi',
-    notTheGame: 'Šajā mapē nav Euro Truck Simulator 2. Izvēlies to, kurā ir base.scs.',
+    notTheGame: 'Šajā mapē nav American Truck Simulator. Izvēlies to, kurā ir base.scs.',
     gameGone: 'Spēle vairs nav šajā mapē.',
     closeToGoOn: {
       title: 'Aizver spēli.',
-      text: 'WestPlay var iestatīties tikai tad, kad Euro Truck Simulator 2 nedarbojas.',
+      text: 'WestPlay var iestatīties tikai tad, kad American Truck Simulator nedarbojas.',
     },
   },
   check: {
@@ -92,7 +92,7 @@ export const words: Words = {
     },
     closeToInstall: {
       title: 'Aizver spēli.',
-      text: 'WestPlay nevar instalēt, kamēr darbojas Euro Truck Simulator 2.',
+      text: 'WestPlay nevar instalēt, kamēr darbojas American Truck Simulator.',
     },
     inUse: {
       title: 'Aizver spēli.',

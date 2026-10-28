@@ -6,7 +6,7 @@ export const words: Words = {
   continue: '繼續',
   welcome: {
     title: '把 CarPlay 帶進駕駛室',
-    sub: 'WestPlay 會把 CarPlay 顯示在 Euro Truck Simulator 2 中卡車的螢幕上。設定只需要幾分鐘。',
+    sub: 'WestPlay 會把 CarPlay 顯示在 American Truck Simulator 中卡車的螢幕上。設定只需要幾分鐘。',
     start: '開始',
   },
   summary: {
@@ -20,18 +20,18 @@ export const words: Words = {
   game: {
     title: '你的遊戲',
     titleMissing: '你的遊戲在哪裡？',
-    found: 'WestPlay 在這台電腦上找到了 Euro Truck Simulator 2。',
-    foundMany: 'Euro Truck Simulator 2 安裝在多個位置。請選擇你玩的那一個。',
-    missing: 'WestPlay 找不到 Euro Truck Simulator 2。請選擇你安裝它的資料夾，也就是含有 base.scs 的那個。',
+    found: 'WestPlay 在這台電腦上找到了 American Truck Simulator。',
+    foundMany: 'American Truck Simulator 安裝在多個位置。請選擇你玩的那一個。',
+    missing: 'WestPlay 找不到 American Truck Simulator。請選擇你安裝它的資料夾，也就是含有 base.scs 的那個。',
     chooseAnother: '使用其他資料夾…',
     chooseFolder: '選擇資料夾…',
-    picker: '選擇 Euro Truck Simulator 2 的資料夾',
+    picker: '選擇 American Truck Simulator 的資料夾',
     bannerMissing: '選擇它的資料夾以繼續',
-    notTheGame: '這個資料夾裡沒有 Euro Truck Simulator 2。請選擇含有 base.scs 的資料夾。',
+    notTheGame: '這個資料夾裡沒有 American Truck Simulator。請選擇含有 base.scs 的資料夾。',
     gameGone: '遊戲已不在這個資料夾中。',
     closeToGoOn: {
       title: '請關閉遊戲。',
-      text: '只有在 Euro Truck Simulator 2 未執行時，WestPlay 才能完成設定。',
+      text: '只有在 American Truck Simulator 未執行時，WestPlay 才能完成設定。',
     },
   },
   check: {
@@ -85,7 +85,7 @@ export const words: Words = {
     },
     closeToInstall: {
       title: '請關閉遊戲。',
-      text: 'Euro Truck Simulator 2 執行時無法安裝 WestPlay。',
+      text: 'American Truck Simulator 執行時無法安裝 WestPlay。',
     },
     inUse: {
       title: '請關閉遊戲。',

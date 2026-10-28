@@ -13,6 +13,10 @@ pub const FILE_NAME: &str = "setup.json";
 pub struct Record {
     /// The game's folder WestPlay is set up in (its plugin, its mod, its map), once it is.
     pub game: Option<PathBuf>,
+    /// Optional separate home used for a verified local test career. No personal profile is migrated.
+    pub game_home: Option<PathBuf>,
+    /// The parent supplied to ATS's -homedir option, if an isolated home is selected.
+    pub lab_root: Option<PathBuf>,
     /// The version of WestPlay that put its plugin and mod into that game: another one's (an update since)
     /// are put in again.
     pub version: Option<String>,
@@ -34,7 +38,7 @@ impl Record {
         std::fs::create_dir_all(dir)?;
         let partial = dir.join(format!("{FILE_NAME}.partial"));
         std::fs::write(&partial, serde_json::to_string_pretty(self).map_err(io::Error::other)?)?;
-        std::fs::rename(&partial, dir.join(FILE_NAME))
+        westplay_shared::fs::replace_file(&partial, dir.join(FILE_NAME))
     }
 }
 
@@ -52,6 +56,8 @@ mod tests {
             game: Some(PathBuf::from(r"D:\SteamLibrary\steamapps\common\ETS2")),
             version: Some("1.0.0".into()),
             finished: true,
+            game_home: None,
+            lab_root: None,
         };
         record.save(&dir).unwrap();
         assert_eq!(Record::load(&dir), record);

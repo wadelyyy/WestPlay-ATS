@@ -1,209 +1,86 @@
-<p align="center"><img src="ui/public/westplay.png" width="112" alt="WestPlay"></p>
+# ATS WestPlay · Ford F-150 改版
 
-<h1 align="center">WestPlay</h1>
+将地图、导航和媒体界面显示在《美国卡车模拟》（American Truck Simulator，ATS）官方 **2023 Ford F-150 的原车中控屏**中。
 
-<p align="center">
-  <b>A CarPlay-style screen for the trucks of Euro Truck Simulator 2.</b><br>
-  Your map, your music and YouTube, on your truck's own dashboard screen.
-</p>
+本项目由 [enes-less/WestPlay](https://github.com/enes-less/WestPlay) **修改移植而来**，原项目面向《欧洲卡车模拟 2》。本分支基于上游 **2.1.2**、提交 [`0edc10bf44ffe57350cdf60c9d42bdc603f06eb3`](https://github.com/enes-less/WestPlay/commit/0edc10bf44ffe57350cdf60c9d42bdc603f06eb3)，保留原作者、贡献者及第三方的版权与许可声明，继续使用 **GPL-3.0-or-later**。上游介绍原文保存在 [README.upstream.md](README.upstream.md)。
 
-<p align="center">
-  <a href="https://github.com/enes-less/WestPlay/releases/latest"><img alt="Download for Windows" src="https://img.shields.io/badge/download-for%20Windows-409c42?style=for-the-badge"></a>
-  <img alt="Windows 10 and 11" src="https://img.shields.io/badge/Windows-10%20%7C%2011-2b2b2b?style=for-the-badge">
-  <img alt="Euro Truck Simulator 2 1.61" src="https://img.shields.io/badge/ETS2-1.61-2b2b2b?style=for-the-badge">
-  <a href="LICENSE"><img alt="Licence: GPL-3.0-or-later" src="https://img.shields.io/badge/licence-GPL--3.0-2b2b2b?style=for-the-badge"></a>
-</p>
+**[下载安装包](https://github.com/wadelyyy/WestPlay-ATS/releases/latest) · [第一次下载、安装与使用](docs/ATS-下载安装与使用.md) · [功能与测试范围](docs/ATS-功能对照表.md)**
 
-<p align="center">
-  <a href="#features">Features</a> ·
-  <a href="#trucks">Trucks</a> ·
-  <a href="#install">Install</a> ·
-  <a href="#privacy">Privacy</a> ·
-  <a href="#support">Support</a>
-</p>
+这是独立社区改版，与 SCS Software、Ford、Apple、Spotify 或 Google 没有关联或官方背书。
 
-<br>
+## 适用环境
 
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="docs/images/home-dark.png">
-  <source media="(prefers-color-scheme: light)" srcset="docs/images/home-light.png">
-  <img alt="WestPlay's Home screen: Maps, Music, Spotify, YouTube and YouTube Music on the truck's screen" src="docs/images/home-dark.png" width="100%">
-</picture>
+- Windows 10 / 11，64 位；Microsoft Edge WebView2 Runtime。
+- 已安装并可正常运行的 Steam 版 ATS，以及合法拥有并启用的官方 **Road Trip: Ford DLC**。
+- 使用 DLC 中的 **2023 Ford F-150**，游戏以 **DirectX 11** 模式运行。
+- 已实际测试的组合为 **ATS 1.61.3.18s / DX11 / Windows x64 / 2023 Ford F-150**；其他游戏版本、车辆和地图 MOD 尚需分别验证。
 
-WestPlay puts a phone-style car screen on your truck's own dashboard display, inside the game. Your route on a
-map made from your own game, your music, YouTube, the weather on your drive: right where a real truck has its
-screen, used with the mouse while you hold a key.
+安装包不包含 ATS、Ford DLC、用户存档或游戏地图归档。中控资源和地图数据在首次设置时从用户本机游戏生成。
 
-## Features
+## 第一次安装
 
-<table>
-  <tr>
-    <td width="50%" valign="top">
-      <picture>
-        <source media="(prefers-color-scheme: dark)" srcset="docs/images/maps-dark.png">
-        <source media="(prefers-color-scheme: light)" srcset="docs/images/maps-light.png">
-        <img alt="Maps, around Frankfurt am Main" src="docs/images/maps-dark.png" width="100%">
-      </picture>
-      <h3>Maps from your own game</h3>
-      Drawn from your game's map, map mods included (ProMods and others), with your route, turn-by-turn
-      guidance, and search that adds stops to the game's own GPS.
-    </td>
-    <td width="50%" valign="top">
-      <picture>
-        <source media="(prefers-color-scheme: dark)" srcset="docs/images/dashboard-dark.png">
-        <source media="(prefers-color-scheme: light)" srcset="docs/images/dashboard-light.png">
-        <img alt="The Dashboard: the map beside what's playing" src="docs/images/dashboard-dark.png" width="100%">
-      </picture>
-      <h3>A Dashboard for the drive</h3>
-      The map beside what's playing and where you're going, the weather on your drive, all on one screen.
-    </td>
-  </tr>
-  <tr>
-    <td width="50%" valign="top">
-      <img alt="YouTube Music's Now Playing" src="docs/images/youtube-music.png" width="100%">
-      <h3>Your music</h3>
-      Apple Music, Spotify and YouTube Music, with Now Playing and lyrics. A song's music video plays right in
-      Now Playing, and YouTube has its channels, playlists, captions and quality.
-    </td>
-    <td width="50%" valign="top">
-      <picture>
-        <source media="(prefers-color-scheme: dark)" srcset="docs/images/looks-light.png">
-        <source media="(prefers-color-scheme: light)" srcset="docs/images/looks-dark.png">
-        <img alt="Home in its other look" src="docs/images/looks-light.png" width="100%">
-      </picture>
-      <h3>Light and dark, and your own look</h3>
-      It turns dark at night or when you switch your headlights on, like a car's light sensor. Bring your own
-      wallpapers and app icons.
-    </td>
-  </tr>
-</table>
+1. 在本仓库的 [Releases](https://github.com/wadelyyy/WestPlay-ATS/releases/latest) 页面展开 **Assets**，下载 `ATS WestPlay_2.1.2_x64-setup.exe` 或后续版本的同名安装程序。GitHub 的 `Source code (zip)` / `Source code (tar.gz)` 是源码，不是安装包。
+2. **正常退出 ATS**，运行安装程序，选择安装位置和需要的快捷方式。
+3. 打开 **ATS WestPlay**，按向导确认 ATS 游戏目录、部署插件和屏幕资源，等待地图准备完成，再完成操作教程。插件复制需要权限时按提示授权。
+4. 保持 WestPlay 运行，从 **Steam 手动启动 ATS，选择 DirectX 11**，载入自己的存档并进入官方 2023 Ford F-150 的驾驶室。
+5. 打开车辆电源，切到原车 **GPS / 导航页面**，等待 WestPlay 中控出现。
 
-**The companion app** on your PC sets everything up: it finds the game, installs WestPlay into it, builds your
-map, and keeps WestPlay up to date.
+**桌面和开始菜单快捷方式只打开 WestPlay，不会自动启动美卡。** 两个程序都运行后自动连接，先开哪个均可；需要时仍可主动点击 WestPlay 内的「启动 ATS 游戏」。
 
-## How it works
+完整步骤、按键、媒体登录和故障排查见 [下载安装与使用指南](docs/ATS-下载安装与使用.md)。
 
-```mermaid
-flowchart LR
-  game["Euro Truck Simulator 2"] -- "the truck, its route" --> plugin["WestPlay's plugin<br/>(in the game)"]
-  plugin <--> app["WestPlay<br/>(on your PC)"]
-  app -- "the screen, drawn in WestPlay's own browser" --> plugin
-  plugin -- "draws it on" --> screen["The truck's own screen"]
+## 日常操作
+
+在 WestPlay 电脑端的「控制」页确认交互键与模式。默认交互键是 **左 Alt**：长按模式下按住它操作中控、松开退出；开启「按一次，无需按住」后，按一下进入、再按一下退出。进入中控操作后可用鼠标点击和滚轮缩放地图。
+
+默认媒体键为主键盘 **1 降低音量、2 播放/暂停、3 提高音量**。长按模式下需同时按住交互键；按一次模式下先进入中控操作。以「控制」页实际绑定为准。
+
+地图中可搜索地点、查看附近设施并把路线交给游戏导航。已验证无需登录的 YouTube 公开视频播放、暂停、返回和非零音频输出。Apple Music、Spotify、YouTube Music 等沿用服务官方登录；账户和订阅按各服务要求授权。
+
+## 相对原项目的主要修改
+
+| 范围 | 本分支的改动 |
+| --- | --- |
+| 游戏与车辆 | ATS 游戏识别、Steam AppID、存档与地图路径；适配官方 2023 Ford F-150 原车 GPS 屏材质 |
+| 地图与导航 | 从本机 ATS `usa` 地图及已挂载 DLC 生成数据，对接 ATS 遥测与游戏导航 |
+| 时间 | 修复 ATS 云存档读取，从游戏定义读取基础时区，并处理当前地点的主时区 |
+| 电脑端 | 中文 ATS 启动台、连接状态、安装检查、日志、诊断修复和安全卸载入口 |
+| 启动方式 | 默认只打开伴侣程序，用户手动从 Steam 启动 ATS；保留显式启动按钮 |
+| 后台恢复 | 对内部宿主 / 浏览器故障进行有限重试，使用跨重启唯一纹理代号恢复车屏连接 |
+| 项目标识 | 独立 ATS 应用标识、数据目录与 IPC 名称，避免混用原 ETS2 分支 |
+| 更新与界面 | 关闭原 ETS2 自动更新入口；移除「支持我」页面和跳转命令，保留版权和许可 |
+
+原版 React 车载界面、WebView2 媒体实现、D3D11 共享纹理、输入与账户授权流程继续沿用。
+
+## 真实游戏验证与限制
+
+已在上述 ATS 版本中实际验证 Ford 原车屏幕、地图和鼠标操作、目的地与导航同步、公共道路短途驾驶、YouTube 播放和声音输出、日夜主题、已有游戏连接及受控浏览器故障后的自动恢复。安装版文件与桌面、开始菜单快捷方式也已核对。
+
+当前验证范围包括以下限制：
+
+- 未完成长途全程、全地图 DLC、全部地图 MOD、全部分辨率或长期压力测试。
+- Spotify、Apple Music 订阅播放、YouTube Music、歌词和完整账户流程尚未完成端到端验证。
+- `secondary timezone` 子区域矩形尚未实现；涉及这些边界的地区可能出现一小时时差。
+- 内部宿主 / 浏览器有有限次数的自动恢复；整个 WestPlay 进程退出后需重新打开程序。
+- 检测到 Ford DLC 文件或遥测连接，不能单独证明 DLC 已授权或中控显示正常。
+
+逐项结果与边界见 [功能对照表](docs/ATS-功能对照表.md)、[实测记录](docs/ATS-实测记录.md)、[时区验证](docs/ATS-时区验证.md) 和 [后台恢复验证](docs/ATS-后台恢复验证.md)。
+
+## 从源码构建
+
+需要 Windows x64、Rust MSVC 工具链、Visual Studio C++ Build Tools 与 Windows SDK、Node.js 24 / npm。
+
+```powershell
+npm ci
+npm --prefix ui ci
+npm --prefix ui test
+powershell -NoProfile -ExecutionPolicy Bypass -File tools/package-ats.ps1
 ```
 
-WestPlay draws its screen in a browser of its own on your PC, and its plugin puts each frame on your truck's
-display, inside the game. The trucks' own screens and their information bars stay theirs: WestPlay takes the
-GPS's place, and its Vehicle Bar setting says whether the truck's bar stays beside it.
+脚本构建原生插件、界面、Tauri 程序和 NSIS 安装器；安装包输出到 `target/release/bundle/nsis`。构建成功不能代替真实游戏验证。
 
-## Trucks
+## 来源与许可
 
-WestPlay shows up in two ways: on the truck's own screen, or on the WestPlay tablet.
+感谢 [enes-less](https://github.com/enes-less) 及 [WestPlay 上游项目](https://github.com/enes-less/WestPlay) 的原始实现。本仓库是其 ATS 适配改版，原作者与第三方保留各自权利。
 
-**On the truck's own screen.** In the trucks that have CarPlay in real life, WestPlay takes the GPS's place on
-the dashboard screen, shaped to it. There's nothing to buy or fit: get in and it's there.
-
-- **DAF** XF and XG/XG+ 2021, XF Electric and XD (and Jasper's DAF 2021)
-- **Scania** S and R, with the 7" screen or the Smart Dash, and the S BEV
-- **Iveco** S-Way
-- **Renault** T (2024)
-- **Volvo** FH (2021 and 2024)
-- **Oyuncuyusbis' coaches:** the Mercedes-Benz Travego 16 SHD, the MAN Lion's Coach and the Setra S 531 DT on their
-  dashboard screens
-- **Setra S 516 HD/2** (Oyuncuyusbis'): on the coach's own GPS screen, its "Gps" part, which you fit in the truck
-  shop: the coach's own screen, as its players asked, but one you add
-
-**On the WestPlay tablet.** Every other truck, the game's and mod trucks alike, gets WestPlay on a tablet you fit
-in the truck shop: under Accessories, in Hanging Items or as a dashboard set. The truck's own screen keeps the
-game's navigation. The tablet is in every truck with hanging items, including truck mods you install later (they
-get it the next time you start the game).
-
-|  | Truck's own screen | WestPlay tablet |
-|---|---|---|
-| Trucks | The ones above | Every other truck |
-| To get it | Nothing: it's there | Fit it in the truck shop |
-| The game's navigation | Replaced by WestPlay | Stays on the truck's screen |
-
-### Sound
-
-Music plays from the truck's own speakers, each where it sits in the cab. Other trucks play plain stereo.
-
-- **Scania S and R (2016), S BEV** — door woofers, A-pillar tweeters, roof bass
-- **Scania R (2009), Streamline** — door woofers, A-pillar tweeters
-- **DAF XF (105)** — A-pillar tweeters; two pairs on the overhead shelf in the Super Space Cab, one overhead unit in the others
-- **DAF XF Euro 6** — door woofers, A-pillar tweeters; two pairs on the overhead shelf in the Super Space Cab, one overhead unit in the others
-- **DAF XF, XG, XG+ (2021), XF Electric and XD** — door woofers, A-pillar tweeters, an overhead pair, a centre
-- **MAN TGX** — door woofers; in the XXL, two small units high in each side wall too
-- **MAN TGX Euro 6** — door woofers; in the XL, a small unit in each roof corner too
-- **MAN TGX (2020)** — a woofer and a midrange in each door, A-pillar tweeters
-- **Mercedes-Benz Actros (2014)** — door woofers, an overhead pair, A-pillar tweeters
-- **Mercedes-Benz Actros (2009)** — door woofers, a pair at the overhead shelf's front corners
-- **Volvo FH (2021, 2024), FH16 (2012)** — door woofers, back-wall bass
-- **Volvo FH16 (2009)** — a unit in each door
-- **Iveco Stralis** — a unit in each end of the overhead console, and in the high roofs a small one on the passenger's side
-- **Iveco Hi-Way** — a unit in each end of the overhead console, and one high on each side
-- **Iveco S-Way** — a woofer and a tweeter in each door
-- **Renault Magnum** — a unit in each roof corner, tweeters on the overhead console
-- **Renault Premium** — a unit in each side of the roof, lower in the low roof
-- **Renault T** — A-pillar tweeters, a back-wall pair; door woofers in the 2024 interiors
-- **Renault E-Tech T** — door woofers, A-pillar tweeters, a back-wall pair
-- **JuseeTV's Scania PGR** — the speakers of the parts you fit: doors, A-pillars, top console, rear wall
-
-## Install
-
-1. Download the installer from the [latest release](https://github.com/enes-less/WestPlay/releases/latest) and run it.
-2. The companion opens and walks you through the rest: it finds your game, installs WestPlay's plugin and its
-   screens mod, and builds your map.
-3. Start the game and get in a truck.
-
-WestPlay looks for updates on its own and asks before installing one.
-
-**Requirements:** Windows 10 or 11 (64-bit), Euro Truck Simulator 2 version 1.61 (other versions may work; the
-companion says when one is untested), and Microsoft Edge WebView2 (part of Windows 11; the installer adds it
-where it's missing).
-
-## Privacy
-
-WestPlay has no servers, no accounts of its own and no analytics. It doesn't collect or send anything about you.
-
-- You sign in to Apple Music, Spotify and YouTube on their own pages, in WestPlay's own browser profile on your PC,
-  as you would in a browser. WestPlay keeps no account data of its own.
-- Your map is built from your game on your PC and stays there.
-- WestPlay talks to the services you use, to GitHub to look for updates, and to Kreosus only if you open
-  "Support me".
-
-## Support
-
-WestPlay is free. If it makes your drives better, you can support its development:
-
-<p>
-  <a href="https://kreosus.com/enes-less"><img alt="Support WestPlay on Kreosus" src="https://img.shields.io/badge/support%20on-Kreosus-409c42?style=for-the-badge"></a>
-</p>
-
-<details>
-<summary><b>Building from source</b></summary>
-<br>
-
-You need [Rust](https://rustup.rs) (stable) and [Node.js](https://nodejs.org) 24, on Windows.
-
-```sh
-npm install      # the companion's tools and the UI's packages
-npm run dev      # WestPlay, with the UI served live
-```
-
-`cargo test --workspace` and `npm test --prefix ui` run the tests. The game plugin is built with
-`cargo build --release -p westplay-plugin`.
-
-</details>
-
-## Licence
-
-WestPlay is free software: you can redistribute it and modify it under the terms of the GNU General Public
-License, version 3 or (at your option) any later version. See [LICENSE](LICENSE).
-
-The libraries WestPlay ships keep their own licences: see [THIRD_PARTY_LICENSES.md](THIRD_PARTY_LICENSES.md), and
-[THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) for the work it follows.
-
-<sub>WestPlay is an independent project, not affiliated with or endorsed by Apple, SCS Software, Spotify, Google or
-the truck makers. CarPlay, Apple Music, Spotify, YouTube, YouTube Music and the truck makers' names and logos are
-trademarks of their owners, used to name what WestPlay works with. The screenshots show WestPlay's preview with
-made-up songs.</sub>
+项目使用 [GNU GPL v3 或更新版本](LICENSE)。第三方来源与许可见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)、[THIRD_PARTY_LICENSES.md](THIRD_PARTY_LICENSES.md)。游戏、车辆和媒体服务名称及标志属于其各自权利人。

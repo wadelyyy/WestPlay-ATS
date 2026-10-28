@@ -384,7 +384,7 @@ impl SettingsFile {
         }
         let partial = self.path.with_extension("json.partial");
         std::fs::write(&partial, to_json(settings))?;
-        std::fs::rename(partial, &self.path)
+        westplay_shared::fs::replace_file(partial, &self.path)
     }
 }
 

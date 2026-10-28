@@ -74,7 +74,7 @@ pub fn remove_from_profile(file: &Path) -> Result<bool, String> {
     check(&data, &changed)?;
     let partial = file.with_extension("sii.westplay-partial");
     std::fs::write(&partial, &changed).map_err(|e| e.to_string())?;
-    if let Err(error) = std::fs::rename(&partial, file) {
+    if let Err(error) = westplay_shared::fs::replace_file(&partial, file) {
         let _ = std::fs::remove_file(&partial);
         return Err(error.to_string());
     }

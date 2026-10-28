@@ -7,7 +7,7 @@ export const words: Words = {
   continue: 'Настави',
   welcome: {
     title: 'CarPlay у вашој кабини',
-    sub: 'WestPlay доноси CarPlay на екран вашег камиона у игри Euro Truck Simulator 2. Подешавање траје само неколико минута.',
+    sub: 'WestPlay доноси CarPlay на екран вашег камиона у игри American Truck Simulator. Подешавање траје само неколико минута.',
     start: 'Почни',
   },
   summary: {
@@ -21,19 +21,19 @@ export const words: Words = {
   game: {
     title: 'Ваша игра',
     titleMissing: 'Где је ваша игра?',
-    found: 'WestPlay је пронашао Euro Truck Simulator 2 на овом рачунару.',
-    foundMany: 'Euro Truck Simulator 2 је инсталиран на више места. Изаберите онај који играте.',
+    found: 'WestPlay је пронашао American Truck Simulator на овом рачунару.',
+    foundMany: 'American Truck Simulator је инсталиран на више места. Изаберите онај који играте.',
     missing:
-      'WestPlay није пронашао Euro Truck Simulator 2. Изаберите фасциклу у коју сте га инсталирали – ону са датотеком base.scs.',
+      'WestPlay није пронашао American Truck Simulator. Изаберите фасциклу у коју сте га инсталирали – ону са датотеком base.scs.',
     chooseAnother: 'Користи другу фасциклу…',
     chooseFolder: 'Изабери фасциклу…',
-    picker: 'Изаберите фасциклу игре Euro Truck Simulator 2',
+    picker: 'Изаберите фасциклу игре American Truck Simulator',
     bannerMissing: 'Да бисте наставили, изаберите њену фасциклу',
-    notTheGame: 'Ова фасцикла не садржи Euro Truck Simulator 2. Изаберите ону са датотеком base.scs.',
+    notTheGame: 'Ова фасцикла не садржи American Truck Simulator. Изаберите ону са датотеком base.scs.',
     gameGone: 'Игра више није у овој фасцикли.',
     closeToGoOn: {
       title: 'Затворите игру.',
-      text: 'WestPlay може да се подеси само док Euro Truck Simulator 2 није покренут.',
+      text: 'WestPlay може да се подеси само док American Truck Simulator није покренут.',
     },
   },
   check: {
@@ -92,7 +92,7 @@ export const words: Words = {
     },
     closeToInstall: {
       title: 'Затворите игру.',
-      text: 'WestPlay не може да се инсталира док је Euro Truck Simulator 2 покренут.',
+      text: 'WestPlay не може да се инсталира док је American Truck Simulator покренут.',
     },
     inUse: {
       title: 'Затворите игру.',

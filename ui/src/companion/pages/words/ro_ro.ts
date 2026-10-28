@@ -44,7 +44,7 @@ export const words: CompanionWords = {
     subs: {
       starting: 'WestPlay se pregătește.',
       stopped: 'Motorul WestPlay s-a oprit. Detaliile sunt în Despre.',
-      noGame: 'Pornește Euro Truck Simulator 2, iar WestPlay se conectează la el.',
+      noGame: 'Pornește American Truck Simulator, iar WestPlay se conectează la el.',
       unsupported:
         'WestPlay nu apare pe ecranul acestui camion. Montează tableta WestPlay în camionul tău și WestPlay va apărea pe ea.',
       notInCab: 'Jocul este conectat. Așază-te în cabină cu instalația electrică pornită, iar WestPlay apare pe ecran.',
@@ -57,7 +57,7 @@ export const words: CompanionWords = {
     engine: 'Motorul WestPlay',
     engineRunning: 'Rulează',
     engineStarting: 'Pornește…',
-    game: 'Euro Truck Simulator 2',
+    game: 'American Truck Simulator',
     gameConnected: 'Conectat',
     gameNotRunning: 'Nu rulează',
     truckScreen: 'Ecranul camionului',
@@ -71,7 +71,7 @@ export const words: CompanionWords = {
     banners: {
       live: { title: 'Conectat', text: 'WestPlay este pe ecranul camionului tău' },
       original: { title: 'Ecranul propriu al camionului', text: 'WestPlay e la o atingere distanță' },
-      noGame: { title: 'Se așteaptă jocul', text: 'Pornește Euro Truck Simulator 2' },
+      noGame: { title: 'Se așteaptă jocul', text: 'Pornește American Truck Simulator' },
       unsupported: { title: 'Camion incompatibil', text: 'Montează tableta WestPlay' },
       notInCab: { title: 'Joc conectat', text: 'Urcă în camionul tău' },
     },

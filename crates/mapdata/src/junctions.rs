@@ -109,7 +109,9 @@ pub struct Junctions {
 impl Junctions {
     /// Opens the game installed in `dir` (the folder with `base.scs`), for the base game's map.
     pub fn open(dir: &Path) -> Result<Self, FileError> {
-        Self::new(GameFiles::open(dir)?, "europe")
+        let files = GameFiles::open(dir)?;
+        let map = files.base_map();
+        Self::new(files, map)
     }
 
     /// The map `map` (`europe`, or a standalone map mod's) as `files` have it: the game with the map mods the

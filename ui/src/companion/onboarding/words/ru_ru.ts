@@ -6,7 +6,7 @@ export const words: Words = {
   continue: 'Продолжить',
   welcome: {
     title: 'CarPlay в вашей кабине',
-    sub: 'WestPlay выводит CarPlay на экран вашего грузовика в Euro Truck Simulator 2. Настройка займёт всего несколько минут.',
+    sub: 'WestPlay выводит CarPlay на экран вашего грузовика в American Truck Simulator. Настройка займёт всего несколько минут.',
     start: 'Начать',
   },
   summary: {
@@ -20,19 +20,19 @@ export const words: Words = {
   game: {
     title: 'Ваша игра',
     titleMissing: 'Где ваша игра?',
-    found: 'WestPlay нашёл Euro Truck Simulator 2 на этом компьютере.',
-    foundMany: 'Euro Truck Simulator 2 установлена в нескольких местах. Выберите ту, в которую вы играете.',
+    found: 'WestPlay нашёл American Truck Simulator на этом компьютере.',
+    foundMany: 'American Truck Simulator установлена в нескольких местах. Выберите ту, в которую вы играете.',
     missing:
-      'WestPlay не нашёл Euro Truck Simulator 2. Выберите папку, в которую вы установили игру, — ту, где лежит base.scs.',
+      'WestPlay не нашёл American Truck Simulator. Выберите папку, в которую вы установили игру, — ту, где лежит base.scs.',
     chooseAnother: 'Выбрать другую папку…',
     chooseFolder: 'Выбрать папку…',
-    picker: 'Выберите папку Euro Truck Simulator 2',
+    picker: 'Выберите папку American Truck Simulator',
     bannerMissing: 'Выберите её папку, чтобы продолжить',
-    notTheGame: 'В этой папке нет Euro Truck Simulator 2. Выберите ту, где лежит base.scs.',
+    notTheGame: 'В этой папке нет American Truck Simulator. Выберите ту, где лежит base.scs.',
     gameGone: 'Игры больше нет в этой папке.',
     closeToGoOn: {
       title: 'Закройте игру.',
-      text: 'WestPlay может настроиться, только пока Euro Truck Simulator 2 не запущена.',
+      text: 'WestPlay может настроиться, только пока American Truck Simulator не запущена.',
     },
   },
   check: {
@@ -92,7 +92,7 @@ export const words: Words = {
     },
     closeToInstall: {
       title: 'Закройте игру.',
-      text: 'WestPlay нельзя установить, пока запущена Euro Truck Simulator 2.',
+      text: 'WestPlay нельзя установить, пока запущена American Truck Simulator.',
     },
     inUse: {
       title: 'Закройте игру.',
