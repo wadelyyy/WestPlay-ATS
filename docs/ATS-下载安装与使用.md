@@ -16,7 +16,7 @@
 
 | 文件 | 用途 |
 | --- | --- |
-| `ATS WestPlay_2.1.2_x64-setup.exe` 或后续版本的同名安装程序 | 普通用户下载安装的入口 |
+| 名字以 `_x64-setup.exe` 结尾的程序，例如 `ATS-WestPlay_2.1.2_x64-setup.exe` | 普通用户下载安装的入口 |
 | 本分支源码 ZIP | 完整源码，供阅读、修改及自行构建 |
 | GitHub 自动生成的 `Source code (zip)` / `Source code (tar.gz)` | 同样是源码归档，不能直接安装或双击运行 |
 | SHA256 校验文件 | 用于核对下载文件是否完整 |

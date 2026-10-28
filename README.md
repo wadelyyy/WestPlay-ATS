@@ -19,7 +19,7 @@
 
 ## 第一次安装
 
-1. 在本仓库的 [Releases](https://github.com/wadelyyy/WestPlay-ATS/releases/latest) 页面展开 **Assets**，下载 `ATS WestPlay_2.1.2_x64-setup.exe` 或后续版本的同名安装程序。GitHub 的 `Source code (zip)` / `Source code (tar.gz)` 是源码，不是安装包。
+1. 在本仓库的 [Releases](https://github.com/wadelyyy/WestPlay-ATS/releases/latest) 页面展开 **Assets**，下载名字以 **`_x64-setup.exe`** 结尾的 Windows 安装程序，例如 `ATS-WestPlay_2.1.2_x64-setup.exe`。GitHub 的 `Source code (zip)` / `Source code (tar.gz)` 是源码，不是安装包。
 2. **正常退出 ATS**，运行安装程序，选择安装位置和需要的快捷方式。
 3. 打开 **ATS WestPlay**，按向导确认 ATS 游戏目录、部署插件和屏幕资源，等待地图准备完成，再完成操作教程。插件复制需要权限时按提示授权。
 4. 保持 WestPlay 运行，从 **Steam 手动启动 ATS，选择 DirectX 11**，载入自己的存档并进入官方 2023 Ford F-150 的驾驶室。
