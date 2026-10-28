@@ -1,3 +1,5 @@
+**简体中文** | [English](README.en.md)
+
 # ATS WestPlay · Ford F-150 改版
 
 将地图、导航和媒体界面显示在《美国卡车模拟》（American Truck Simulator，ATS）官方 **2023 Ford F-150 的原车中控屏**中。

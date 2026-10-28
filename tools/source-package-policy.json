@@ -8,6 +8,7 @@
     "package.json",
     "package-lock.json",
     "README.md",
+    "README.en.md",
     "README.upstream.md",
     "README-ATS.md",
     "CHANGELOG.md",
